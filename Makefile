@@ -1,7 +1,9 @@
 NAME		:= push_swap
 
 SRCSDIR		:= ./srcs/
-SRCS		:= push_swap.c
+SRCS		:= push_swap.c \
+				utils.c \
+				validator.c
 SRCS		:= $(addprefix $(SRCSDIR), $(SRCS))
 OBJS		:= $(SRCS:.c=.o)
 
