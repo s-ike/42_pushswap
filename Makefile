@@ -1,7 +1,11 @@
 NAME		:= push_swap
 
+SRCSDIR		:= ./srcs/
 SRCS		:= push_swap.c
+SRCS		:= $(addprefix $(SRCSDIR), $(SRCS))
 OBJS		:= $(SRCS:.c=.o)
+
+INCLUDE		:= -I./includes/ -I./libft/
 
 LIBDIR		:= ./libft
 LIBPATH		:= $(LIBDIR)/libft.a
@@ -9,12 +13,16 @@ LFLAGS		:= -L${LIBDIR} -lft -lcurses
 
 CC			:= gcc
 CFLAGS		:= -Wall -Wextra -Werror
-DEBUG		:=
+DEBUG		:= -g -fsanitize=address
 
 RM			:= rm -f
 C_GREEN		:= "\x1b[32m"
 C_DEFAULT	:= "\x1b[39m"
 C_RESET		:= "\x1b[0m"
+
+
+.c.o:
+			$(CC) $(CFLAGS) $(DEBUG) $(INCLUDE) -c $< -o $@
 
 all:		$(NAME)
 

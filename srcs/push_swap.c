@@ -1,4 +1,4 @@
-#include "libft/libft.h"
+#include "push_swap.h"
 
 int main()
 {
