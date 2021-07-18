@@ -18,11 +18,11 @@ C_RESET		:= "\x1b[0m"
 
 all:		$(NAME)
 
-$(NAME):	init $(OBJS) $(LIBPATH)
+$(NAME):	$(OBJS) $(LIBPATH)
 			$(CC) $(CFLAGS) $(DEBUG) $(OBJS) $(LFLAGS) -o $@
 			@echo $(C_GREEN)"=== Make Done ==="$(C_DEFAULT)$(C_REST)
 
-$(LIBPATH):
+$(LIBPATH):	init
 			$(MAKE) -C $(LIBDIR)
 
 init:		## git clone --recursive https://this_repository
