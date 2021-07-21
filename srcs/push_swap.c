@@ -19,13 +19,13 @@ int
 	i = 1;
 	while (i < argc)
 	{
-		if (!ft_append_stack(&a, ft_atoi(argv[i++])))
+		if (!ft_append_stack_while_check_dup(&a, ft_atoi(argv[i++])))
 		{
+			// ft_terminate_stack(&a);
 			ft_putendl_fd(MSG_ERR, STDERR_FILENO);
 			exit(EXIT_FAILURE);
 		}
 	}
-	// TODO: 重複
 	cdl_print_dlist(&a);
 	ft_terminate_stack(&a);
 	// system("leaks push_swap");

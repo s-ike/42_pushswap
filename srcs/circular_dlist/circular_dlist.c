@@ -58,6 +58,24 @@ int
 	return (insert_after(dlist, dlist->head->prev, n));
 }
 
+t_dnode
+	*cdl_search(t_dlist *dlist, int x, int compare(int x, int y))
+{
+	t_dnode	*ptr;
+
+	ptr = dlist->head->next;
+	while (ptr != dlist->head)
+	{
+		if (compare(ptr->n, x) == 0)
+		{
+			dlist->crnt = ptr;
+			return (ptr);
+		}
+		ptr = ptr->next;
+	}
+	return (NULL);
+}
+
 #include <stdio.h>
 #include <string.h>
 void
