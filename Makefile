@@ -2,8 +2,10 @@ NAME		:= push_swap
 
 SRCSDIR		:= ./srcs/
 SRCS		:= push_swap.c \
+				stack.c \
 				utils.c \
-				validator.c
+				validator.c \
+				circular_dlist/circular_dlist.c
 SRCS		:= $(addprefix $(SRCSDIR), $(SRCS))
 OBJS		:= $(SRCS:.c=.o)
 
@@ -11,11 +13,11 @@ INCLUDE		:= -I./includes/ -I./libft/
 
 LIBDIR		:= ./libft
 LIBPATH		:= $(LIBDIR)/libft.a
-LFLAGS		:= -L${LIBDIR} -lft -lcurses
+LFLAGS		:= -L${LIBDIR} -lft
 
 CC			:= gcc
 CFLAGS		:= -Wall -Wextra -Werror
-DEBUG		:= -g -fsanitize=address
+DEBUG		:=
 
 RM			:= rm -f
 C_GREEN		:= "\x1b[32m"
