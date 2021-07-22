@@ -42,7 +42,7 @@ int
 		exit(EXIT_FAILURE);
 	}
 	make_stack_a(&a, argc, argv);
-	printf("size: %zu\n", cdl_size(&a));
+	ft_sort(&a);
 	cdl_print_dlist(&a);
 	ft_terminate_stack(&a);
 	// system("leaks push_swap");

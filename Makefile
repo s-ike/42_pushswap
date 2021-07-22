@@ -2,6 +2,9 @@ NAME		:= push_swap
 
 SRCSDIR		:= ./srcs/
 SRCS		:= push_swap.c \
+				op_swap.c \
+				sort_2.c \
+				sort.c \
 				stack.c \
 				utils.c \
 				validator.c \
