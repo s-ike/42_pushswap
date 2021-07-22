@@ -21,6 +21,7 @@ int		cdl_init_dlist(t_dlist *dlist);
 int		cdl_add_front_dlist(t_dlist *dlist, int n);
 int		cdl_add_back_dlist(t_dlist *dlist, int n);
 t_dnode	*cdl_search(t_dlist *dlist, int x, int compare(int x, int y));
+size_t	cdl_size(const t_dlist *dlist);
 void	cdl_print_dlist(const t_dlist *dlist);
 void	cdl_remove_front(t_dlist *dlist);
 void	cdl_clear(t_dlist *dlist);

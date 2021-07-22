@@ -76,6 +76,24 @@ t_dnode
 	return (NULL);
 }
 
+size_t
+	cdl_size(const t_dlist *dlist)
+{
+	t_dnode	*ptr;
+	size_t	cnt;
+
+	cnt = 0;
+	if (is_empty(dlist))
+		return (cnt);
+	ptr = dlist->head->next;
+	while (ptr != dlist->head)
+	{
+		ptr = ptr->next;
+		cnt++;
+	}
+	return (cnt);
+}
+
 #include <stdio.h>
 #include <string.h>
 void

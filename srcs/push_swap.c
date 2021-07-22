@@ -3,10 +3,10 @@
 static void
 	make_stack_a(t_dlist *a, int argc, char **argv)
 {
-	int		is_sorted;
-	int		prev_n;
-	int		crnt_n;
-	int		i;
+	int	is_sorted;
+	int	prev_n;
+	int	crnt_n;
+	int	i;
 
 	is_sorted = true;
 	prev_n = INT32_MIN;
@@ -30,7 +30,7 @@ static void
 		exit(EXIT_SUCCESS);
 	}
 }
-
+#include <stdio.h>
 int
 	main(int argc, char **argv)
 {
@@ -42,6 +42,7 @@ int
 		exit(EXIT_FAILURE);
 	}
 	make_stack_a(&a, argc, argv);
+	printf("size: %zu\n", cdl_size(&a));
 	cdl_print_dlist(&a);
 	ft_terminate_stack(&a);
 	// system("leaks push_swap");
