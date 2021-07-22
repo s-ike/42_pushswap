@@ -18,6 +18,8 @@ void	ft_rrr(t_dlist *a, t_dlist *b);
 void	ft_ss(t_dlist *a, t_dlist *b);
 /* sort_2.c */
 void	ft_sort_2(t_dlist *a);
+/* sort_3.c */
+void	ft_sort_3(t_dlist *a);
 /* sort.c */
 void	ft_sort(t_dlist *a);
 /* stack.c */
