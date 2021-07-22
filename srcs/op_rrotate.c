@@ -24,16 +24,16 @@ void
 	if (b == NULL)
 	{
 		rra_or_rrb(a);
-		ft_putendl_fd("ra", STDOUT_FILENO);
+		ft_putendl_fd("rra", STDOUT_FILENO);
 	}
 	else if (a == NULL)
 	{
 		rra_or_rrb(b);
-		ft_putendl_fd("rb", STDOUT_FILENO);
+		ft_putendl_fd("rrb", STDOUT_FILENO);
 	}
 	else
 	{
 		rrr(a, b);
-		ft_putendl_fd("rr", STDOUT_FILENO);
+		ft_putendl_fd("rrr", STDOUT_FILENO);
 	}
 }
