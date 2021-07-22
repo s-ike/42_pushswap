@@ -12,6 +12,8 @@
 
 /* op_rotate.c */
 void	ft_rr(t_dlist *a, t_dlist *b);
+/* op_rrotate.c */
+void	ft_rrr(t_dlist *a, t_dlist *b);
 /* op_swap.c */
 void	ft_ss(t_dlist *a, t_dlist *b);
 /* sort_2.c */
