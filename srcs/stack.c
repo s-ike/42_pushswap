@@ -15,14 +15,17 @@ int
 }
 
 int
-	ft_init_stack(t_dlist *dlist)
+	ft_init_stacks(t_stacks *stacks)
 {
-	return (cdl_init_dlist(dlist));
+	if (cdl_init_dlist(&stacks->a))
+		return (cdl_init_dlist(&stacks->b));
+	return (0);
 }
 
 void
-	ft_terminate_stack(t_dlist *dlist)
+	ft_terminate_stacks(t_stacks *stacks)
 {
-	cdl_terminate(dlist);
+	cdl_terminate(&stacks->a);
+	cdl_terminate(&stacks->b);
 	return ;
 }

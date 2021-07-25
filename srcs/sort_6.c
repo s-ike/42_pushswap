@@ -46,12 +46,12 @@ static int
 }
 
 static int
-	push_max(t_dlist *a, t_dlist *b)
+	push_max(t_stacks *stacks)
 {
 	size_t	max_node_idx;
 	int		ret;
 
-	max_node_idx = cdl_get_max_node_idx(a);
+	max_node_idx = cdl_get_max_node_idx(&stacks->a);
 	if (max_node_idx == 0)
 		return (0);
 	while (max_node_idx != 1)
@@ -59,36 +59,36 @@ static int
 		size_t	proximity;
 		size_t	size;
 
-		size = cdl_size(a);
+		size = cdl_size(&stacks->a);
 		proximity = size / 2;
 		if (proximity < (size + 1) / 2)
 			proximity = (size + 1) / 2;
 		if (proximity < max_node_idx)
-			ft_rrr(a, NULL);
+			ft_rrr(&stacks->a, NULL);
 		else
-			ft_rr(a, NULL);
-		max_node_idx = cdl_get_max_node_idx(a);
+			ft_rr(&stacks->a, NULL);
+		max_node_idx = cdl_get_max_node_idx(&stacks->a);
 		if (max_node_idx == 0)
 			return (0);
 	}
-	ret = ft_pb(a, b, a->head->next->n);
+	ret = ft_pb(&stacks->a, &stacks->b, stacks->a.head->next->n);
 	return (ret);
 }
 
 static int
-	push_min(t_dlist *a, t_dlist *b)
+	push_min(t_stacks *stacks)
 {
 	size_t	min_node_idx;
 	int		ret;
 
-	min_node_idx = cdl_get_min_node_idx(a);
+	min_node_idx = cdl_get_min_node_idx(&stacks->a);
 	if (min_node_idx == 0)
 		return (0);
-	if (!rotate_until_min(a, 'a'))
+	if (!rotate_until_min(&stacks->a, 'a'))
 		return (0);
-	if (!cdl_is_sorted(a->head, a->head->next, is_ascending_order))
+	if (!cdl_is_sorted(stacks->a.head, stacks->a.head->next, is_ascending_order))
 	{
-		ret = ft_pb(a, b, a->head->next->n);
+		ret = ft_pb(&stacks->a, &stacks->b, stacks->a.head->next->n);
 		return (ret);
 	}
 	return (-1);
@@ -117,66 +117,42 @@ static int
 }
 
 void
-	ft_sort_6(t_dlist *a)
+	ft_sort_6(t_stacks *stacks)
 {
-	t_dlist	b;
 	size_t	size;
 	int		ret;
 
-	if (!ft_init_stack(&b))
-	{
-		ft_terminate_stack(a);
-		ft_putendl_fd(MSG_ERR, STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
 	ret = 1;
-	size = cdl_size(a);
-	if (4 < size && !cdl_is_sorted(a->head, a->head->next, is_ascending_order)
-		&& cdl_is_sorted(a->head, a->head->next->next, is_ascending_order))
-		ft_ss(a, NULL);
-	if (4 < size && !check_circular_sorted(a, NULL)
-		&& check_circular_sorted(a, cdl_get_max_node(a))) // 最大値以外が循環ソートされている
+	size = cdl_size(&stacks->a);
+	if (4 < size && !cdl_is_sorted(stacks->a.head, stacks->a.head->next, is_ascending_order)
+		&& cdl_is_sorted(stacks->a.head, stacks->a.head->next->next, is_ascending_order))
+		ft_ss(&stacks->a, NULL);
+	if (4 < size && !check_circular_sorted(&stacks->a, NULL)
+		&& check_circular_sorted(&stacks->a, cdl_get_max_node(&stacks->a)))
 	{
-		// puts("special");
-		ret = push_max(a, &b);
+		ret = push_max(stacks);
 		if (!ret)
-		{
-			ft_terminate_stack(a);
-			ft_terminate_stack(&b);
-			ft_putendl_fd(MSG_ERR, STDERR_FILENO);
-			exit(EXIT_FAILURE);
-		}
-		ret = rotate_until_min(a, 'a');
+			ft_exit_failure(stacks);
+		ret = rotate_until_min(&stacks->a, 'a');
 	}
 	else
-	{	// 最適化処理できないとき
+	{
 		while (0 < ret)
 		{
-			size = cdl_size(a);
+			size = cdl_size(&stacks->a);
 			if (size <= 3)
 				break ;
 			if (size == 4)
-				ft_sort_4(a);
-			ret = push_min(a, &b);
+				ft_sort_4(&stacks->a);
+			ret = push_min(stacks);
 			if (!ret)
-			{
-				ft_terminate_stack(a);
-				ft_terminate_stack(&b);
-				ft_putendl_fd(MSG_ERR, STDERR_FILENO);
-				exit(EXIT_FAILURE);
-			}
+				ft_exit_failure(stacks);
 		}
 		if (0 < ret)
-			ft_sort_3(a);
+			ft_sort_3(&stacks->a);
 	}
-	while (ret && b.head->next != b.head)
-		ret = ft_pa(a, &b, b.head->next->n);
-	if (!ret || !rotate_until_min(a, 'a'))
-	{
-		ft_terminate_stack(a);
-		ft_terminate_stack(&b);
-		ft_putendl_fd(MSG_ERR, STDERR_FILENO);
-		exit(EXIT_FAILURE);
-	}
-	ft_terminate_stack(&b);
+	while (ret && stacks->b.head->next != stacks->b.head)
+		ret = ft_pa(&stacks->a, &stacks->b, stacks->b.head->next->n);
+	if (!ret || !rotate_until_min(&stacks->a, 'a'))
+		ft_exit_failure(stacks);
 }

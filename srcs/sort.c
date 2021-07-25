@@ -1,17 +1,17 @@
 #include "push_swap.h"
 
 void
-	ft_sort(t_dlist *a)
+	ft_sort(t_stacks *stacks)
 {
 	size_t	size;
 
-	size = cdl_size(a);
+	size = cdl_size(&stacks->a);
 	if (size <= 1)
 		return ;
 	if (size == 2)
-		ft_sort_2(a);
+		ft_sort_2(&stacks->a);
 	else if (size == 3)
-		ft_sort_3(a);
+		ft_sort_3(&stacks->a);
 	else
-		ft_sort_6(a);
+		ft_sort_6(stacks);
 }

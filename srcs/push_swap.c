@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
 static void
-	make_stack_a(t_dlist *a, int argc, char **argv)
+	make_stack_a(t_stacks *stacks, int argc, char **argv)
 {
 	int	is_sorted;
 	int	prev_n;
@@ -16,35 +16,28 @@ static void
 		crnt_n = ft_atoi(argv[i++]);
 		if (is_sorted && crnt_n < prev_n)
 			is_sorted = false;
-		if (!ft_append_stack_while_check_dup(a, crnt_n))
-		{
-			ft_terminate_stack(a);
-			ft_putendl_fd(MSG_ERR, STDERR_FILENO);
-			exit(EXIT_FAILURE);
-		}
+		if (!ft_append_stack_while_check_dup(&stacks->a, crnt_n))
+			ft_exit_failure(stacks);
 		prev_n = crnt_n;
 	}
 	if (is_sorted)
-	{
-		ft_terminate_stack(a);
-		exit(EXIT_SUCCESS);
-	}
+		ft_exit_success(stacks);
 }
-#include <stdio.h>
+
 int
 	main(int argc, char **argv)
 {
-	t_dlist	a;
+	t_stacks	stacks;
 
-	if (ft_is_valid_args(argc, argv) == false || !ft_init_stack(&a))
+	if (ft_is_valid_args(argc, argv) == false || !ft_init_stacks(&stacks))
 	{
 		ft_putendl_fd(MSG_ERR, STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
-	make_stack_a(&a, argc, argv);
-	ft_sort(&a);
-	// cdl_print_dlist(&a);
-	ft_terminate_stack(&a);
-	// system("leaks push_swap");
-	exit(EXIT_SUCCESS);
+	make_stack_a(&stacks, argc, argv);
+	ft_sort(&stacks);
+	// cdl_print_dlist(&stacks.a);
+	if (0) // debug
+		ft_exit_success_with_leaks(&stacks);
+	ft_exit_success(&stacks);
 }
