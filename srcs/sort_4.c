@@ -1,26 +1,34 @@
 #include "push_swap.h"
 
+/*
+if (n[2] < n[3] && n[3] < n[1])      // 1,4,2,3
+else if (n[3] < n[1] && n[1] < n[2]) // 1,3,4,2
+*/
 static void
 	sort_4_minidx1(t_dlist *a, int *n)
 {
-	if (n[2] < n[3] && n[3] < n[1]) // 1,4,2,3
+	if (n[2] < n[3] && n[3] < n[1])
 	{
 		ft_ss(a, NULL);
 		ft_rr(a, NULL);
 	}
-	else if (n[3] < n[1] && n[1] < n[2]) // 1,3,4,2
+	else if (n[3] < n[1] && n[1] < n[2])
 	{
 		ft_rrr(a, NULL);
 		ft_ss(a, NULL);
 	}
 }
 
+/*
+if (n[0] < n[2] && n[2] < n[3])      // 2,1,3,4
+else if (n[3] < n[0] && n[0] < n[2]) // 3,1,4,2
+*/
 static void
 	sort_4_minidx2(t_dlist *a, int *n)
 {
-	if (n[0] < n[2] && n[2] < n[3]) // 2,1,3,4
+	if (n[0] < n[2] && n[2] < n[3])
 		ft_ss(a, NULL);
-	else if (n[3] < n[0] && n[0] < n[2]) // 3,1,4,2
+	else if (n[3] < n[0] && n[0] < n[2])
 	{
 		ft_rr(a, NULL);
 		ft_ss(a, NULL);
@@ -28,33 +36,41 @@ static void
 	}
 }
 
+/*
+if (n[0] < n[1] && n[1] < n[3])      // 2,3,1,4
+else if (n[1] < n[3] && n[3] < n[0]) // 4,2,1,3
+*/
 static void
 	sort_4_minidx3(t_dlist *a, int *n)
 {
-	if (n[0] < n[1] && n[1] < n[3]) // 2,3,1,4
+	if (n[0] < n[1] && n[1] < n[3])
 	{
 		ft_rrr(a, NULL);
 		ft_rrr(a, NULL);
 		ft_ss(a, NULL);
 		ft_rr(a, NULL);
 	}
-	else if (n[1] < n[3] && n[3] < n[0]) // 4,2,1,3
+	else if (n[1] < n[3] && n[3] < n[0])
 	{
 		ft_rr(a, NULL);
 		ft_ss(a, NULL);
 	}
 }
 
+/*
+if (n[2] < n[0] && n[0] < n[1])      // 3,4,2,1
+else if (n[1] < n[2] && n[2] < n[0]) // 4,2,3,1
+*/
 static void
 	sort_4_minidx4(t_dlist *a, int *n)
 {
-	if (n[2] < n[0] && n[0] < n[1]) // 3,4,2,1
+	if (n[2] < n[0] && n[0] < n[1])
 	{
 		ft_rrr(a, NULL);
 		ft_rrr(a, NULL);
 		ft_ss(a, NULL);
 	}
-	else if (n[1] < n[2] && n[2] < n[0]) // 4,2,3,1
+	else if (n[1] < n[2] && n[2] < n[0])
 	{
 		ft_rrr(a, NULL);
 		ft_ss(a, NULL);

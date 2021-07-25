@@ -14,7 +14,12 @@ SRCS		:= push_swap.c \
 				stack.c \
 				utils.c \
 				validator.c \
-				circular_dlist/circular_dlist.c
+				circular_dlist/add.c \
+				circular_dlist/info.c \
+				circular_dlist/init.c \
+				circular_dlist/print.c \
+				circular_dlist/remove.c \
+				circular_dlist/search.c
 SRCS		:= $(addprefix $(SRCSDIR), $(SRCS))
 OBJS		:= $(SRCS:.c=.o)
 
