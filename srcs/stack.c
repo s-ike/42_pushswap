@@ -1,16 +1,5 @@
 #include "push_swap.h"
 
-int
-	ft_push(t_dlist *dlist, int n, const char *op)
-{
-	int	ret;
-
-	ret = cdl_add_front_dlist(dlist, n);
-	if (ret)
-		ft_putendl_fd((char *)op, STDOUT_FILENO);
-	return (ret);
-}
-
 static int
 	comp(int x, int y)
 {

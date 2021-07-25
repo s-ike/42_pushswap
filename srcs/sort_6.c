@@ -71,9 +71,7 @@ static int
 		if (max_node_idx == 0)
 			return (0);
 	}
-	ret = ft_push(b, a->head->next->n, "pb");
-	if (ret)
-		cdl_remove_front(a);
+	ret = ft_pb(a, b, a->head->next->n);
 	return (ret);
 }
 
@@ -90,9 +88,7 @@ static int
 		return (0);
 	if (!cdl_is_sorted(a->head, a->head->next, is_ascending_order))
 	{
-		ret = ft_push(b, a->head->next->n, "pb");
-		if (ret)
-			cdl_remove_front(a);
+		ret = ft_pb(a, b, a->head->next->n);
 		return (ret);
 	}
 	return (-1);
@@ -195,10 +191,7 @@ void
 			ft_sort_3(a);
 	}
 	while (ret && b.head->next != b.head)
-	{
-		ret = ft_push(a, b.head->next->n, "pa");
-		cdl_remove_front(&b);
-	}
+		ret = ft_pa(a, &b, b.head->next->n);
 	if (!ret || !rotate_until_min(a, 'a'))
 	{
 		ft_terminate_stack(a);

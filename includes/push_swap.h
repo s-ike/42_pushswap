@@ -10,6 +10,9 @@
 
 # define MSG_ERR "Error"
 
+/* op_push.c */
+int		ft_pa(t_dlist *a, t_dlist *b, int n);
+int		ft_pb(t_dlist *a, t_dlist *b, int n);
 /* op_rotate.c */
 void	ft_rr(t_dlist *a, t_dlist *b);
 /* op_rrotate.c */
