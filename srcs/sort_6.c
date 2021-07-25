@@ -91,7 +91,7 @@ static int
 		ret = ft_pb(&stacks->a, &stacks->b, stacks->a.head->next->n);
 		return (ret);
 	}
-	return (-1);
+	return (SORTED);
 }
 
 static int
@@ -137,7 +137,7 @@ void
 	}
 	else
 	{
-		while (0 < ret)
+		while (ret != SORTED && !ret)
 		{
 			size = cdl_size(&stacks->a);
 			if (size <= 3)
@@ -148,7 +148,7 @@ void
 			if (!ret)
 				ft_exit_failure(stacks);
 		}
-		if (0 < ret)
+		if (ret != SORTED && !ret)
 			ft_sort_3(&stacks->a);
 	}
 	while (ret && stacks->b.head->next != stacks->b.head)

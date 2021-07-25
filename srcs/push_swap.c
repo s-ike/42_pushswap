@@ -3,25 +3,19 @@
 static void
 	make_stack_a(t_stacks *stacks, int argc, char **argv)
 {
-	int	is_sorted;
 	int	prev_n;
 	int	crnt_n;
 	int	i;
 
-	is_sorted = true;
 	prev_n = INT32_MIN;
 	i = 1;
 	while (i < argc)
 	{
 		crnt_n = ft_atoi(argv[i++]);
-		if (is_sorted && crnt_n < prev_n)
-			is_sorted = false;
 		if (!ft_append_stack_while_check_dup(&stacks->a, crnt_n))
 			ft_exit_failure(stacks);
 		prev_n = crnt_n;
 	}
-	if (is_sorted)
-		ft_exit_success(stacks);
 }
 
 int

@@ -10,6 +10,8 @@
 
 # define MSG_ERR "Error"
 
+# define SORTED -1
+
 typedef struct s_stacks
 {
 	t_dlist	a;
