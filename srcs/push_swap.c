@@ -43,7 +43,7 @@ int
 	}
 	make_stack_a(&a, argc, argv);
 	ft_sort(&a);
-	cdl_print_dlist(&a);
+	// cdl_print_dlist(&a);
 	ft_terminate_stack(&a);
 	// system("leaks push_swap");
 	exit(EXIT_SUCCESS);

@@ -3,9 +3,9 @@
 void
 	ft_sort_3(t_dlist *a)
 {
-	int		x;
-	int		y;
-	int		z;
+	int	x;
+	int	y;
+	int	z;
 
 	x = a->head->next->n;
 	y = a->head->next->next->n;

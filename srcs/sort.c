@@ -12,6 +12,6 @@ void
 		ft_sort_2(a);
 	else if (size == 3)
 		ft_sort_3(a);
-	// else
-	// 	ft_sort_4(a);
+	else
+		ft_sort_6(a);
 }

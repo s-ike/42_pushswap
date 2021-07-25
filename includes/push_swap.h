@@ -20,10 +20,14 @@ void	ft_ss(t_dlist *a, t_dlist *b);
 void	ft_sort_2(t_dlist *a);
 /* sort_3.c */
 void	ft_sort_3(t_dlist *a);
+/* sort_3.c */
+void	ft_sort_4(t_dlist *a);
+/* sort_6.c */
+void	ft_sort_6(t_dlist *a);
 /* sort.c */
 void	ft_sort(t_dlist *a);
 /* stack.c */
-int		ft_push(t_dlist *dlist, int n);
+int		ft_push(t_dlist *dlist, int n, const char *op);
 int		ft_append_stack_while_check_dup(t_dlist *dlist, int n);
 int		ft_init_stack(t_dlist *dlist);
 void	ft_terminate_stack(t_dlist *dlist);
