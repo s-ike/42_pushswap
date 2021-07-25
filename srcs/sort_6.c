@@ -93,7 +93,7 @@ static int
 	}
 	return (-1);
 }
-#include <stdio.h>
+
 static int
 	check_circular_sorted(t_dlist *dlist, t_dnode *skip)
 {
@@ -116,25 +116,6 @@ static int
 	return (1);
 }
 
-static int
-	is_circular_sorted(t_dlist *a)
-{
-	if (cdl_size(a) <= 3)
-		return (0);
-	return (check_circular_sorted(a, NULL));
-}
-
-static int
-	is_circular_sorted_witout_max(t_dlist *a)
-{
-	t_dnode	*max;
-
-	if (cdl_size(a) <= 3)
-		return (0);
-	max = cdl_get_max_node(a);
-	return (check_circular_sorted(a, max));
-}
-
 void
 	ft_sort_6(t_dlist *a)
 {
@@ -152,11 +133,9 @@ void
 	size = cdl_size(a);
 	if (4 < size && !cdl_is_sorted(a->head, a->head->next, is_ascending_order)
 		&& cdl_is_sorted(a->head, a->head->next->next, is_ascending_order))
-	{
-		// puts("debug");
 		ft_ss(a, NULL);
-	}
-	if (4 < size && !is_circular_sorted(a) && is_circular_sorted_witout_max(a)) // 最大値以外が循環ソートされている
+	if (4 < size && !check_circular_sorted(a, NULL)
+		&& check_circular_sorted(a, cdl_get_max_node(a))) // 最大値以外が循環ソートされている
 	{
 		// puts("special");
 		ret = push_max(a, &b);
