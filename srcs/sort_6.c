@@ -8,37 +8,34 @@ static int
 	return (0);
 }
 
-static int
-	rotate_until_min(t_dlist *blist, const char name)
+static void
+	rotate_a(t_dlist *a, size_t target_node_idx)
 {
-	size_t	min_node_idx;
 	size_t	proximity;
 	size_t	size;
 
-	min_node_idx = cdl_get_min_node_idx(blist);
+	size = cdl_size(a);
+	proximity = size / 2;
+	if (proximity < (size + 1) / 2)
+		proximity = (size + 1) / 2;
+	if (proximity < target_node_idx)
+		ft_rrr(a, NULL);
+	else
+		ft_rr(a, NULL);
+}
+
+static int
+	rotate_a_until_min(t_dlist *a)
+{
+	size_t	min_node_idx;
+
+	min_node_idx = cdl_get_min_node_idx(a);
 	if (min_node_idx == 0)
 		return (0);
 	while (min_node_idx != 1)
 	{
-		size = cdl_size(blist);
-		proximity = size / 2;
-		if (proximity < (size + 1) / 2)
-			proximity = (size + 1) / 2;
-		if (proximity < min_node_idx)
-		{
-			if (name == 'a')
-				ft_rrr(blist, NULL);
-			else
-				ft_rrr(NULL, blist);
-		}
-		else
-		{
-			if (name == 'a')
-				ft_rr(blist, NULL);
-			else
-				ft_rr(NULL, blist);
-		}
-		min_node_idx = cdl_get_min_node_idx(blist);
+		rotate_a(a, min_node_idx);
+		min_node_idx = cdl_get_min_node_idx(a);
 		if (min_node_idx == 0)
 			return (0);
 	}
@@ -56,17 +53,7 @@ static int
 		return (0);
 	while (max_node_idx != 1)
 	{
-		size_t	proximity;
-		size_t	size;
-
-		size = cdl_size(&stacks->a);
-		proximity = size / 2;
-		if (proximity < (size + 1) / 2)
-			proximity = (size + 1) / 2;
-		if (proximity < max_node_idx)
-			ft_rrr(&stacks->a, NULL);
-		else
-			ft_rr(&stacks->a, NULL);
+		rotate_a(&stacks->a, max_node_idx);
 		max_node_idx = cdl_get_max_node_idx(&stacks->a);
 		if (max_node_idx == 0)
 			return (0);
@@ -84,7 +71,7 @@ static int
 	min_node_idx = cdl_get_min_node_idx(&stacks->a);
 	if (min_node_idx == 0)
 		return (0);
-	if (!rotate_until_min(&stacks->a, 'a'))
+	if (!rotate_a_until_min(&stacks->a))
 		return (0);
 	if (!cdl_is_sorted(stacks->a.head, stacks->a.head->next, is_ascending_order))
 	{
@@ -133,11 +120,11 @@ void
 		ret = push_max(stacks);
 		if (!ret)
 			ft_exit_failure(stacks);
-		ret = rotate_until_min(&stacks->a, 'a');
+		ret = rotate_a_until_min(&stacks->a);
 	}
 	else
 	{
-		while (ret != SORTED && !ret)
+		while (ret != SORTED && ret)
 		{
 			size = cdl_size(&stacks->a);
 			if (size <= 3)
@@ -148,11 +135,11 @@ void
 			if (!ret)
 				ft_exit_failure(stacks);
 		}
-		if (ret != SORTED && !ret)
+		if (ret != SORTED && ret)
 			ft_sort_3(&stacks->a);
 	}
 	while (ret && stacks->b.head->next != stacks->b.head)
 		ret = ft_pa(&stacks->a, &stacks->b, stacks->b.head->next->n);
-	if (!ret || !rotate_until_min(&stacks->a, 'a'))
+	if (!ret || !rotate_a_until_min(&stacks->a))
 		ft_exit_failure(stacks);
 }
