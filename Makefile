@@ -7,10 +7,12 @@ SRCS		:= push_swap.c \
 				op_rotate.c \
 				op_rrotate.c \
 				op_swap.c \
+				order.c \
 				sort_2.c \
 				sort_3.c \
 				sort_4.c \
 				sort_6.c \
+				sort_6_utils.c \
 				sort.c \
 				stack.c \
 				utils.c \

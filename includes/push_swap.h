@@ -31,6 +31,8 @@ void	ft_rr(t_dlist *a, t_dlist *b);
 void	ft_rrr(t_dlist *a, t_dlist *b);
 /* op_swap.c */
 void	ft_ss(t_dlist *a, t_dlist *b);
+/* order.c */
+int		ft_is_ascending_order(int x, int y);
 /* sort_2.c */
 void	ft_sort_2(t_dlist *a);
 /* sort_3.c */
@@ -39,6 +41,11 @@ void	ft_sort_3(t_dlist *a);
 void	ft_sort_4(t_dlist *a);
 /* sort_6.c */
 void	ft_sort_6(t_stacks *stacks);
+/* sort_6_utils.c */
+int		ft_check_circular_sorted(t_dlist *dlist, t_dnode *skip);
+int		ft_rotate_a_until_min(t_dlist *a);
+int		ft_push_max(t_stacks *stacks);
+int		ft_push_min(t_stacks *stacks);
 /* sort.c */
 void	ft_sort(t_stacks *stacks);
 /* stack.c */
