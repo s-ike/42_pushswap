@@ -1,11 +1,11 @@
 #include "push_swap.h"
 
 int
-	ft_pa(t_dlist *a, t_dlist *b, int n)
+	ft_pa(t_dlist *a, t_dlist *b)
 {
 	int	ret;
 
-	ret = cdl_add_front_dlist(a, n);
+	ret = cdl_add_front_dlist(a, b->head->next->n);
 	if (ret)
 	{
 		ft_putendl_fd("pa", STDOUT_FILENO);
@@ -15,11 +15,11 @@ int
 }
 
 int
-	ft_pb(t_dlist *a, t_dlist *b, int n)
+	ft_pb(t_dlist *a, t_dlist *b)
 {
 	int	ret;
 
-	ret = cdl_add_front_dlist(b, n);
+	ret = cdl_add_front_dlist(b, a->head->next->n);
 	if (ret)
 	{
 		ft_putendl_fd("pb", STDOUT_FILENO);

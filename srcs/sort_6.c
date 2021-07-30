@@ -52,7 +52,7 @@ void
 	swap_firt_value(stacks, size);
 	ret = push_to_b_and_rotate(stacks, size);
 	while (ret && stacks->b.head->next != stacks->b.head)
-		ret = ft_pa(&stacks->a, &stacks->b, stacks->b.head->next->n);
+		ret = ft_pa(&stacks->a, &stacks->b);
 	if (!ret || !ft_rotate_a_until_min(&stacks->a))
 		ft_exit_failure(stacks);
 }

@@ -72,7 +72,7 @@ int
 		if (max_node_idx == 0)
 			return (0);
 	}
-	ret = ft_pb(&stacks->a, &stacks->b, stacks->a.head->next->n);
+	ret = ft_pb(&stacks->a, &stacks->b);
 	return (ret);
 }
 
@@ -90,7 +90,7 @@ int
 	if (!cdl_is_sorted(
 			stacks->a.head, stacks->a.head->next, ft_is_ascending_order))
 	{
-		ret = ft_pb(&stacks->a, &stacks->b, stacks->a.head->next->n);
+		ret = ft_pb(&stacks->a, &stacks->b);
 		return (ret);
 	}
 	return (SORTED);

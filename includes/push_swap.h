@@ -23,8 +23,8 @@ void	ft_exit_failure(t_stacks *stacks);
 void	ft_exit_success(t_stacks *stacks);
 void	ft_exit_success_with_leaks(t_stacks *stacks);
 /* op_push.c */
-int		ft_pa(t_dlist *a, t_dlist *b, int n);
-int		ft_pb(t_dlist *a, t_dlist *b, int n);
+int		ft_pa(t_dlist *a, t_dlist *b);
+int		ft_pb(t_dlist *a, t_dlist *b);
 /* op_rotate.c */
 void	ft_rr(t_dlist *a, t_dlist *b);
 /* op_rrotate.c */
@@ -33,11 +33,9 @@ void	ft_rrr(t_dlist *a, t_dlist *b);
 void	ft_ss(t_dlist *a, t_dlist *b);
 /* order.c */
 int		ft_is_ascending_order(int x, int y);
-/* sort_2.c */
-void	ft_sort_2(t_dlist *a);
 /* sort_3.c */
 void	ft_sort_3(t_dlist *a);
-/* sort_3.c */
+/* sort_4.c */
 void	ft_sort_4(t_dlist *a);
 /* sort_6.c */
 void	ft_sort_6(t_stacks *stacks);

@@ -8,7 +8,6 @@ SRCS		:= push_swap.c \
 				op_rrotate.c \
 				op_swap.c \
 				order.c \
-				sort_2.c \
 				sort_3.c \
 				sort_4.c \
 				sort_6.c \
@@ -34,7 +33,7 @@ LFLAGS		:= -L${LIBDIR} -lft
 
 CC			:= gcc
 CFLAGS		:= -Wall -Wextra -Werror
-DEBUG		:=
+DEBUG		:= -g
 
 RM			:= rm -f
 C_GREEN		:= "\x1b[32m"
