@@ -3,7 +3,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdbool.h>
 # include <stdint.h>
 # include "libft.h"
 # include "circular_dlist.h"
@@ -17,6 +16,13 @@ typedef struct s_stacks
 	t_dlist	a;
 	t_dlist	b;
 }	t_stacks;
+
+typedef struct s_sort
+{
+	int	id;
+	int	org_idx;
+	int	n;
+}	t_sort;
 
 /* exit.c */
 void	ft_exit_failure(t_stacks *stacks);
@@ -33,6 +39,8 @@ void	ft_rrr(t_dlist *a, t_dlist *b);
 void	ft_ss(t_dlist *a, t_dlist *b);
 /* order.c */
 int		ft_is_ascending_order(int x, int y);
+/* presort_list.c */
+int		ft_make_sort_list(t_list **sort_list, int argc, char **argv);
 /* sort_3.c */
 void	ft_sort_3(t_dlist *a);
 /* sort_4.c */
@@ -48,12 +56,14 @@ int		ft_push_min(t_stacks *stacks);
 void	ft_sort(t_stacks *stacks);
 /* stack.c */
 int		ft_push(t_dlist *dlist, int n, const char *op);
-int		ft_append_stack_while_check_dup(t_dlist *dlist, int n);
 int		ft_init_stacks(t_stacks *stacks);
 void	ft_terminate_stacks(t_stacks *stacks);
-/* utils.c */
-int		ft_isspace(char c);
 /* validator.c */
-bool	ft_is_valid_args(int argc, char **argv);
+int		ft_check_dup_n();
+int		ft_is_valid_args(int argc, char **argv);
+/* utils/tlist_sort.c */
+void	ft_sort_list(t_list **lst, int f(t_list *left, t_list *right));
+/* utils/utils.c */
+int		ft_isspace(char c);
 
 #endif

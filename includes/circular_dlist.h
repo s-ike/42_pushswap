@@ -5,6 +5,7 @@
 
 typedef struct s_dnode
 {
+	int				id;
 	int				n;
 	struct s_dnode	*prev;
 	struct s_dnode	*next;
@@ -17,8 +18,8 @@ typedef struct s_dlist
 }	t_dlist;
 
 /* add.c */
-int		cdl_add_front_dlist(t_dlist *dlist, int n);
-int		cdl_add_back_dlist(t_dlist *dlist, int n);
+int		cdl_add_front_dlist(t_dlist *dlist, int n, int id);
+int		cdl_add_back_dlist(t_dlist *dlist, int n, int id);
 /* info.c */
 int		cdl_is_empty(const t_dlist *dlist);
 size_t	cdl_size(const t_dlist *dlist);

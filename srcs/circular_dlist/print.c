@@ -13,6 +13,9 @@ void
 		ptr = dlist->head->next;
 		while (ptr != dlist->head)
 		{
+			ft_putchar_fd('[', STDOUT_FILENO);
+			ft_putnbr_fd(ptr->id, STDOUT_FILENO);
+			ft_putstr_fd("] ", STDOUT_FILENO);
 			ft_putnbr_fd(ptr->n, STDOUT_FILENO);
 			ft_putchar_fd('\n', STDOUT_FILENO);
 			ptr = ptr->next;

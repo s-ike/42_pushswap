@@ -3,11 +3,15 @@
 static void
 	sa_or_sb(t_dlist *dlist)
 {
-	int	tmp;
+	int	tmp_id;
+	int	tmp_n;
 
-	tmp = dlist->head->next->n;
+	tmp_id = dlist->head->next->id;
+	tmp_n = dlist->head->next->n;
+	dlist->head->next->id = dlist->head->next->next->id;
 	dlist->head->next->n = dlist->head->next->next->n;
-	dlist->head->next->next->n = tmp;
+	dlist->head->next->next->id = tmp_id;
+	dlist->head->next->next->n = tmp_n;
 }
 
 static void

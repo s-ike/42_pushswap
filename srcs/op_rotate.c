@@ -3,10 +3,14 @@
 static void
 	ra_or_rb(t_dlist *dlist)
 {
+	int	next_id;
 	int	next_n;
 
+	next_id = dlist->head->next->id;
 	next_n = dlist->head->next->n;
+	dlist->head->id = next_id;
 	dlist->head->n = next_n;
+	dlist->head->next->id = -1;
 	dlist->head->next->n = 0;
 	dlist->head = dlist->head->next;
 }

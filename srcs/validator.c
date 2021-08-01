@@ -1,6 +1,27 @@
 #include "push_swap.h"
 
 int
+	ft_check_dup_n(t_list **sort_list)
+{
+	t_list	*ptr;
+	t_sort	*sort_info;
+	int		pre_n;
+
+	sort_info = (*sort_list)->content;
+	pre_n = sort_info->n;
+	ptr = (*sort_list)->next;
+	while (ptr)
+	{
+		sort_info = ptr->content;
+		if (pre_n == sort_info->n)
+			return (0);
+		pre_n = sort_info->n;
+		ptr = ptr->next;
+	}
+	return (1);
+}
+
+static int
 	isover_intrange(char *s)
 {
 	uint64_t	num;
@@ -26,7 +47,7 @@ int
 	return (0);
 }
 
-int
+static int
 	isnumeric(char *s)
 {
 	if (!s || *s == '\0')
@@ -43,7 +64,7 @@ int
 	return (1);
 }
 
-bool
+int
 	ft_is_valid_args(int argc, char **argv)
 {
 	int	i;
@@ -52,8 +73,8 @@ bool
 	while (i < argc)
 	{
 		if (!isnumeric(argv[i]) || isover_intrange(argv[i]))
-			return (false);
+			return (0);
 		i++;
 	}
-	return (true);
+	return (1);
 }

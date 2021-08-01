@@ -8,20 +8,22 @@ SRCS		:= push_swap.c \
 				op_rrotate.c \
 				op_swap.c \
 				order.c \
+				presort_list.c \
 				sort_3.c \
 				sort_4.c \
 				sort_6.c \
 				sort_6_utils.c \
 				sort.c \
 				stack.c \
-				utils.c \
 				validator.c \
 				circular_dlist/add.c \
 				circular_dlist/info.c \
 				circular_dlist/init.c \
 				circular_dlist/print.c \
 				circular_dlist/remove.c \
-				circular_dlist/search.c
+				circular_dlist/search.c \
+				utils/tlist_sort.c \
+				utils/utils.c
 SRCS		:= $(addprefix $(SRCSDIR), $(SRCS))
 OBJS		:= $(SRCS:.c=.o)
 
@@ -34,6 +36,7 @@ LFLAGS		:= -L${LIBDIR} -lft
 CC			:= gcc
 CFLAGS		:= -Wall -Wextra -Werror
 DEBUG		:= -g
+DEBUG2		:= -fsanitize=address
 
 RM			:= rm -f
 C_GREEN		:= "\x1b[32m"
@@ -42,16 +45,16 @@ C_RESET		:= "\x1b[0m"
 
 
 .c.o:
-			$(CC) $(CFLAGS) $(DEBUG) $(INCLUDE) -c $< -o $@
+			$(CC) $(CFLAGS) $(DEBUG) $(DEBUG2) $(INCLUDE) -c $< -o $@
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS) $(LIBPATH)
-			$(CC) $(CFLAGS) $(DEBUG) $(OBJS) $(LFLAGS) -o $@
+			$(CC) $(CFLAGS) $(DEBUG) $(DEBUG2) $(OBJS) $(LFLAGS) -o $@
 			@echo $(C_GREEN)"=== Make Done ==="$(C_DEFAULT)$(C_REST)
 
 $(LIBPATH):	init
-			$(MAKE) -C $(LIBDIR)
+			$(MAKE) bonus -C $(LIBDIR)
 
 init:		## git clone --recursive https://this_repository
 			git submodule update --init

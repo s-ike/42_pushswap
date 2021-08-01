@@ -79,12 +79,8 @@ int
 int
 	ft_push_min(t_stacks *stacks)
 {
-	size_t	min_node_idx;
-	int		ret;
+	int	ret;
 
-	min_node_idx = cdl_get_min_node_idx(&stacks->a);
-	if (min_node_idx == 0)
-		return (0);
 	if (!ft_rotate_a_until_min(&stacks->a))
 		return (0);
 	if (!cdl_is_sorted(

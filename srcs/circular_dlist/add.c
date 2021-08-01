@@ -1,15 +1,7 @@
 #include "circular_dlist.h"
 
-static void
-	set_dnode(t_dnode *node, int n, t_dnode *prev, t_dnode *next)
-{
-	node->n = n;
-	node->prev = prev;
-	node->next = next;
-}
-
 static int
-	insert_after(t_dlist *dlist, t_dnode *prev, int n)
+	insert_after(t_dlist *dlist, t_dnode *prev, int n, int id)
 {
 	t_dnode	*new_node;
 	t_dnode	*next;
@@ -20,19 +12,22 @@ static int
 	next = prev->next;
 	prev->next->prev = new_node;
 	prev->next = new_node;
-	set_dnode(new_node, n, prev, next);
+	new_node->id = id;
+	new_node->n = n;
+	new_node->prev = prev;
+	new_node->next = next;
 	dlist->crnt = new_node;
 	return (1);
 }
 
 int
-	cdl_add_front_dlist(t_dlist *dlist, int n)
+	cdl_add_front_dlist(t_dlist *dlist, int n, int id)
 {
-	return (insert_after(dlist, dlist->head, n));
+	return (insert_after(dlist, dlist->head, n, id));
 }
 
 int
-	cdl_add_back_dlist(t_dlist *dlist, int n)
+	cdl_add_back_dlist(t_dlist *dlist, int n, int id)
 {
-	return (insert_after(dlist, dlist->head->prev, n));
+	return (insert_after(dlist, dlist->head->prev, n, id));
 }

@@ -5,7 +5,7 @@ int
 {
 	int	ret;
 
-	ret = cdl_add_front_dlist(a, b->head->next->n);
+	ret = cdl_add_front_dlist(a, b->head->next->n, b->head->next->id);
 	if (ret)
 	{
 		ft_putendl_fd("pa", STDOUT_FILENO);
@@ -19,7 +19,7 @@ int
 {
 	int	ret;
 
-	ret = cdl_add_front_dlist(b, a->head->next->n);
+	ret = cdl_add_front_dlist(b, a->head->next->n, a->head->next->id);
 	if (ret)
 	{
 		ft_putendl_fd("pb", STDOUT_FILENO);
