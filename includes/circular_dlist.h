@@ -34,11 +34,12 @@ void	cdl_remove_front(t_dlist *dlist);
 void	cdl_clear(t_dlist *dlist);
 void	cdl_terminate(t_dlist *dlist);
 /* search.c */
-size_t	cdl_get_idx_by_id(t_dlist *dlist, int id);
 t_dnode	*cdl_get_node_by_idx(t_dlist *dlist, size_t idx);
-t_dnode	*cdl_search(t_dlist *dlist, int x, int compare(int x, int y));
+t_dnode	*cdl_search(t_dlist *dlist, int id, int compare(int x, int y));
 t_dnode	*cdl_get_max_node(t_dlist *dlist);
 t_dnode	*cdl_get_min_node(t_dlist *dlist);
+/* search_idx.c */
+size_t	cdl_get_idx_by_id(t_dlist *dlist, int id);
 size_t	cdl_get_max_node_idx(t_dlist *dlist);
 size_t	cdl_get_min_node_idx(t_dlist *dlist);
 

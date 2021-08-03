@@ -1,7 +1,11 @@
 #include "push_swap.h"
 
 static void
-	merge_loop(t_list **left, t_list **right, t_list **next, int f(t_list *left, t_list *right))
+	merge_loop(
+		t_list **left,
+		t_list **right,
+		t_list **next,
+		int f(t_list *left, t_list *right))
 {
 	int	comp;
 
@@ -21,7 +25,10 @@ static void
 }
 
 static t_list
-	*merge(t_list *left, t_list *right, int f(t_list *left, t_list *right))
+	*merge(
+		t_list *left,
+		t_list *right,
+		int f(t_list *left, t_list *right))
 {
 	t_list	head;
 	t_list	*next;
@@ -37,7 +44,9 @@ static t_list
 }
 
 static t_list
-	*merge_sort_rec(t_list *lst, int f(t_list *left, t_list *right))
+	*merge_sort_rec(
+		t_list *lst,
+		int f(t_list *left, t_list *right))
 {
 	t_list	*left;
 	t_list	*right;
@@ -62,7 +71,9 @@ static t_list
 }
 
 void
-	ft_sort_list(t_list **lst, int f(t_list *left, t_list *right))
+	ft_sort_list(
+		t_list **lst,
+		int f(t_list *left, t_list *right))
 {
 	if (!lst)
 		return ;
