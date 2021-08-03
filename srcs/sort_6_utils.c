@@ -22,22 +22,6 @@ int
 	return (1);
 }
 
-static void
-	rotate_a(t_dlist *a, size_t target_node_idx)
-{
-	size_t	proximity;
-	size_t	size;
-
-	size = cdl_size(a);
-	proximity = size / 2;
-	if (proximity < (size + 1) / 2)
-		proximity = (size + 1) / 2;
-	if (proximity < target_node_idx)
-		ft_rrr(a, NULL);
-	else
-		ft_rr(a, NULL);
-}
-
 int
 	ft_rotate_a_until_min(t_dlist *a)
 {
@@ -48,7 +32,7 @@ int
 		return (0);
 	while (min_node_idx != 1)
 	{
-		rotate_a(a, min_node_idx);
+		ft_rotate_a(a, min_node_idx);
 		min_node_idx = cdl_get_min_node_idx(a);
 		if (min_node_idx == 0)
 			return (0);
@@ -67,7 +51,7 @@ int
 		return (0);
 	while (max_node_idx != 1)
 	{
-		rotate_a(&stacks->a, max_node_idx);
+		ft_rotate_a(&stacks->a, max_node_idx);
 		max_node_idx = cdl_get_max_node_idx(&stacks->a);
 		if (max_node_idx == 0)
 			return (0);

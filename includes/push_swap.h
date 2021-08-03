@@ -41,12 +41,18 @@ void	ft_ss(t_dlist *a, t_dlist *b);
 int		ft_is_ascending_order(int x, int y);
 /* presort_list.c */
 int		ft_make_sort_list(t_list **sort_list, int argc, char **argv);
+/* sort_2.c */
+void	ft_sort_2(t_dlist *a);
 /* sort_3.c */
 void	ft_sort_3(t_dlist *a);
+/* sort_3_b.c */
+void	ft_sort_3_b(t_dlist *a);
 /* sort_4.c */
 void	ft_sort_4(t_dlist *a);
 /* sort_6.c */
 void	ft_sort_6(t_stacks *stacks);
+/* sort_7.c */
+void	ft_sort_7(t_stacks *stacks);
 /* sort_6_utils.c */
 int		ft_check_circular_sorted(t_dlist *dlist, t_dnode *skip);
 int		ft_rotate_a_until_min(t_dlist *a);
@@ -55,9 +61,9 @@ int		ft_push_min(t_stacks *stacks);
 /* sort.c */
 void	ft_sort(t_stacks *stacks);
 /* stack.c */
-int		ft_push(t_dlist *dlist, int n, const char *op);
 int		ft_init_stacks(t_stacks *stacks);
 void	ft_terminate_stacks(t_stacks *stacks);
+void	ft_rotate_a(t_dlist *a, size_t target_node_idx);
 /* validator.c */
 int		ft_check_dup_n();
 int		ft_is_valid_args(int argc, char **argv);

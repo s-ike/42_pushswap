@@ -15,3 +15,19 @@ void
 	cdl_terminate(&stacks->b);
 	return ;
 }
+
+void
+	ft_rotate_a(t_dlist *a, size_t target_node_idx)
+{
+	size_t	proximity;
+	size_t	size;
+
+	size = cdl_size(a);
+	proximity = size / 2;
+	if (proximity < (size + 1) / 2)
+		proximity = (size + 1) / 2;
+	if (proximity < target_node_idx)
+		ft_rrr(a, NULL);
+	else
+		ft_rr(a, NULL);
+}

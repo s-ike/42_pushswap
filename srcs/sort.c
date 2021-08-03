@@ -10,6 +10,8 @@ void
 		return ;
 	if (size <= 3)
 		ft_sort_3(&stacks->a);
-	else
+	else if (size <= 6)
 		ft_sort_6(stacks);
+	else
+		ft_sort_7(stacks);
 }

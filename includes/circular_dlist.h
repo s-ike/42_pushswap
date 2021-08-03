@@ -24,6 +24,7 @@ int		cdl_add_back_dlist(t_dlist *dlist, int n, int id);
 int		cdl_is_empty(const t_dlist *dlist);
 size_t	cdl_size(const t_dlist *dlist);
 int		cdl_is_sorted(t_dnode *head, t_dnode *start, int compare(int x, int y));
+int		cdl_is_range_sorted_asc_order(t_dlist *dlist, int start_id, int end_id);
 /* init.c */
 int		cdl_init_dlist(t_dlist *dlist);
 /* print.c */
@@ -33,6 +34,7 @@ void	cdl_remove_front(t_dlist *dlist);
 void	cdl_clear(t_dlist *dlist);
 void	cdl_terminate(t_dlist *dlist);
 /* search.c */
+size_t	cdl_get_idx_by_id(t_dlist *dlist, int id);
 t_dnode	*cdl_get_node_by_idx(t_dlist *dlist, size_t idx);
 t_dnode	*cdl_search(t_dlist *dlist, int x, int compare(int x, int y));
 t_dnode	*cdl_get_max_node(t_dlist *dlist);

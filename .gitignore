@@ -4,7 +4,10 @@ checker
 checker_Mac
 checker_linux
 push_swap_tester*
+
+# Dev
 *_test.c
+*_old.c
 
 # General
 .DS_Store

@@ -38,3 +38,38 @@ int
 	}
 	return (1);
 }
+
+int
+	cdl_is_range_sorted_asc_order(t_dlist *dlist, int start_id, int end_id)
+{
+	t_dnode	*ptr;
+	t_dnode	*prev;
+	size_t	size;
+
+	size = cdl_size(dlist);
+	ptr = dlist->head->next;
+	if (ptr == dlist->head)
+		return (0);
+	prev = ptr->prev;
+	while (ptr->id != start_id)
+	{
+		prev = ptr;
+		ptr = ptr->next;
+		if (ptr == dlist->head)
+			ptr = ptr->next;
+	}
+	if (prev == dlist->head)
+		prev = prev->prev;
+	while (size--)
+	{
+		if (ptr->id != start_id && prev->id + 1 != ptr->id)
+			return (0);
+		if (ptr->id == end_id)
+			return (1);
+		prev = ptr;
+		ptr = ptr->next;
+		if (ptr == dlist->head)
+			ptr = ptr->next;
+	}
+	return (1);
+}

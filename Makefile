@@ -9,10 +9,13 @@ SRCS		:= push_swap.c \
 				op_swap.c \
 				order.c \
 				presort_list.c \
+				sort_2.c \
 				sort_3.c \
+				sort_3_b.c \
 				sort_4.c \
 				sort_6.c \
 				sort_6_utils.c \
+				sort_7.c \
 				sort.c \
 				stack.c \
 				validator.c \
