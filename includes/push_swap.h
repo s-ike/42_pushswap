@@ -64,6 +64,7 @@ void	ft_sort(t_stacks *stacks);
 int		ft_init_stacks(t_stacks *stacks);
 void	ft_terminate_stacks(t_stacks *stacks);
 void	ft_rotate_a(t_dlist *a, size_t target_node_idx);
+void	ft_rotate_a_less_than_p_in_range(t_dlist *a, int p, int l, int r);
 /* validator.c */
 int		ft_check_dup_n(t_list **sort_list);
 int		ft_is_valid_args(int argc, char **argv);

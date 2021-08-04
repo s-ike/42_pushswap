@@ -45,7 +45,7 @@ static int
 			targets--;
 		}
 		else
-			ft_rrr(&stacks->a, NULL);	//l-r内のidを早く取り出したい
+			ft_rotate_a_less_than_p_in_range(&stacks->a, pivot_id, l, r);
 		if (!ret)
 			return (ret);
 		ptr = stacks->a.head->next;
@@ -65,10 +65,11 @@ static int
 	size = 0;
 	if (l <= r)
 		size = r - l + 1;
+	// if (size <= 5)にできるか
 	if (size <= 3)
 	{
 		ft_sort_3_b(&stacks->b);
-		pivot_id = -1; // このとき戻った先でpivotの値をr+1にしたい
+		pivot_id = -1; // このとき戻った先でpivotの値をr+1にしたい、どこまでソートしたかをretに入れて返す？
 	}
 	ptr = stacks->b.head->next;
 	while (ret && size-- && ptr != stacks->b.head)
