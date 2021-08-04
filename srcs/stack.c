@@ -52,6 +52,8 @@ void
 			if ((l <= lp->next->id && lp->next->id < p)
 			&& !(l <= rp->next->id && lp->next->id < p))
 				return (ft_rr(a, NULL));
+			else
+				return (ft_rrr(a, NULL));
 		}
 		else if (l <= lp->id && lp->id < p)
 			return (ft_rr(a, NULL));
