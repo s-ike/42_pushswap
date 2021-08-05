@@ -31,36 +31,3 @@ void
 	else
 		ft_rr(a, NULL);
 }
-
-void
-	ft_rotate_a_less_than_p_in_range(t_dlist *a, int p, int l, int r)
-{
-	t_dnode	*lp;
-	t_dnode	*rp;
-
-	if (l < 0 || p < 0 || r < p)
-		return ;
-	lp = a->head->next;
-	if (l <= lp->id && lp->id < p)
-		return ;
-	lp = lp->next;
-	rp = a->head->prev;
-	while (lp != rp)
-	{
-		if ((l <= lp->id && lp->id < p) && (l <= rp->id && rp->id < p))
-		{
-			if ((l <= lp->next->id && lp->next->id < p)
-			&& !(l <= rp->next->id && lp->next->id < p))
-				return (ft_rr(a, NULL));
-			else
-				return (ft_rrr(a, NULL));
-		}
-		else if (l <= lp->id && lp->id < p)
-			return (ft_rr(a, NULL));
-		else if (l <= rp->id && rp->id < p)
-			return (ft_rrr(a, NULL));
-		lp = lp->next;
-		rp = rp->prev;
-	}
-	ft_rrr(a, NULL);
-}

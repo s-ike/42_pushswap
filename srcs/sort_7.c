@@ -1,7 +1,7 @@
 #include "push_swap.h"
 
 static int
-	get_targets(t_dlist *dlist, int l, int r, int pivot)
+	cnt_less_than_id_in_range(t_dlist *dlist, int l, int r, int pivot)
 {
 	t_dnode	*ptr;
 	int		cnt;
@@ -11,6 +11,23 @@ static int
 	while (ptr != dlist->head)
 	{
 		if (l <= ptr->id && ptr->id <= r && ptr->id < pivot)
+			cnt++;
+		ptr = ptr->next;
+	}
+	return (cnt);
+}
+
+static int
+	cnt_more_than_id_in_range(t_dlist *dlist, int l, int r, int pivot)
+{
+	t_dnode	*ptr;
+	int		cnt;
+
+	ptr = dlist->head->next;
+	cnt = 0;
+	while (ptr != dlist->head)
+	{
+		if (l <= ptr->id && ptr->id <= r && ptr->id > pivot)
 			cnt++;
 		ptr = ptr->next;
 	}
@@ -30,7 +47,7 @@ static int
 	if (l <= r)
 		size = r - l + 1;
 	ptr = stacks->a.head->next;
-	targets = get_targets(&stacks->a, l, r, pivot_id);
+	targets = cnt_less_than_id_in_range(&stacks->a, l, r, pivot_id);
 	while (ret && targets && ptr != stacks->a.head)
 	{
 		if (size <= 2
@@ -48,8 +65,6 @@ static int
 		}
 		else
 			ft_rotate_a_less_than_p_in_range(&stacks->a, pivot_id, l, r);
-		if (!ret)
-			return (ret);
 		ptr = stacks->a.head->next;
 	}
 	return (ret);
@@ -59,9 +74,9 @@ static int
 	push_to_a(t_stacks *stacks, int l, int r, int pivot_id)
 {
 	int		ret;
+	int		targets;
 	size_t	size;
 	t_dnode	*ptr;
-	t_dnode	*tmp;
 
 	ret = r;
 	size = 0;
@@ -75,17 +90,19 @@ static int
 		ret = r + 1;
 	}
 	ptr = stacks->b.head->next;
-	while (size-- && ptr != stacks->b.head)
+	targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id);
+	while (targets && ptr != stacks->b.head)
 	{
-		tmp = ptr->next; // rr固定なので
 		if (ptr->id > pivot_id)
 		{
-			if (!ft_pa(&stacks->a, &stacks->b))
+			if (ft_pa(&stacks->a, &stacks->b))
+				targets--;
+			else
 				return (-1);
 		}
 		else
-			ft_rr(NULL, &stacks->b);
-		ptr = tmp;
+			ft_rotate_b_more_than_p_in_range(&stacks->b, pivot_id, l, r);
+		ptr = stacks->b.head->next;
 	}
 	return (ret);
 }
