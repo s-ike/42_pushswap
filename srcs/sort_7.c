@@ -41,6 +41,8 @@ static int
 		}
 		else if (size > 2 && l <= ptr->id && ptr->id <= r && ptr->id < pivot_id)
 		{
+			// もしtargets==1&&ptr->id == rの場合最大値なのでpbしてもすぐpaされるのでする必要がない
+			// ただし単にスキップしてしまって良いか
 			ret = ft_pb(&stacks->a, &stacks->b);
 			targets--;
 		}
@@ -61,7 +63,7 @@ static int
 	t_dnode	*ptr;
 	t_dnode	*tmp;
 
-	ret = 1;
+	ret = r;
 	size = 0;
 	if (l <= r)
 		size = r - l + 1;
@@ -69,18 +71,20 @@ static int
 	if (size <= 3)
 	{
 		ft_sort_3_b(&stacks->b);
-		pivot_id = -1; // このとき戻った先でpivotの値をr+1にしたい、どこまでソートしたかをretに入れて返す？
+		pivot_id = -1;
+		ret = r + 1;
 	}
 	ptr = stacks->b.head->next;
-	while (ret && size-- && ptr != stacks->b.head)
+	while (size-- && ptr != stacks->b.head)
 	{
 		tmp = ptr->next; // rr固定なので
 		if (ptr->id > pivot_id)
-			ret = ft_pa(&stacks->a, &stacks->b);
+		{
+			if (!ft_pa(&stacks->a, &stacks->b))
+				return (-1);
+		}
 		else
 			ft_rr(NULL, &stacks->b);
-		if (!ret)
-			return (ret);
 		ptr = tmp;
 	}
 	return (ret);
@@ -136,8 +140,12 @@ static void
 		ret = push_to_b_and_rotate(stacks, l, r, pivot_id);
 	else
 		ft_rotate_a_until_min(&stacks->a);
+	if (!ret)
+	{
+		//
+	}
 	pivot_id--;
-	while (ret && ret != SORTED && !cdl_is_empty(&stacks->b))
+	while (r != -1 && !cdl_is_empty(&stacks->b))
 	{
 		int	bl;
 
@@ -146,10 +154,10 @@ static void
 		r = pivot_id;
 		pivot_id = (r - bl + 1) / 2 + bl;
 		// printf("%d, %d, %d\n", bl, r, pivot_id);
-		ret = push_to_a(stacks, bl, r, pivot_id);
+		r = push_to_a(stacks, bl, r, pivot_id);
 		bl = r;
 	}
-	if (!ret)
+	if (r == -1)
 	{
 		//
 	}
