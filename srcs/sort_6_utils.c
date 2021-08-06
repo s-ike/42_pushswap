@@ -32,7 +32,7 @@ int
 		return (0);
 	while (min_node_idx != 1)
 	{
-		ft_rotate_a(a, min_node_idx);
+		ft_rotate(a, min_node_idx, 'a');
 		min_node_idx = cdl_get_min_node_idx(a);
 		if (min_node_idx == 0)
 			return (0);
@@ -51,7 +51,7 @@ int
 		return (0);
 	while (max_node_idx != 1)
 	{
-		ft_rotate_a(&stacks->a, max_node_idx);
+		ft_rotate(&stacks->a, max_node_idx, 'a');
 		max_node_idx = cdl_get_max_node_idx(&stacks->a);
 		if (max_node_idx == 0)
 			return (0);

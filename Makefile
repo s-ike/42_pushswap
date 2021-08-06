@@ -15,6 +15,7 @@ SRCS		:= push_swap.c \
 				sort_4.c \
 				sort_6.c \
 				sort_6_utils.c \
+				sort_6_b.c \
 				sort_7.c \
 				sort.c \
 				stack.c \

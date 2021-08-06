@@ -51,6 +51,8 @@ void	ft_sort_3_b(t_dlist *a);
 void	ft_sort_4(t_dlist *a);
 /* sort_6.c */
 void	ft_sort_6(t_stacks *stacks);
+/* sort_6_b.c */
+void	ft_sort_6_b(t_stacks *stacks);
 /* sort_7.c */
 void	ft_sort_7(t_stacks *stacks);
 /* sort_6_utils.c */
@@ -63,7 +65,7 @@ void	ft_sort(t_stacks *stacks);
 /* stack.c */
 int		ft_init_stacks(t_stacks *stacks);
 void	ft_terminate_stacks(t_stacks *stacks);
-void	ft_rotate_a(t_dlist *a, size_t target_node_idx);
+void	ft_rotate(t_dlist *a, size_t target_node_idx, char stack);
 /* stack_rotate_in_range.c */
 void	ft_rotate_a_less_than_p_in_range(t_dlist *a, int p, int l, int r);
 void	ft_rotate_b_more_than_p_in_range(t_dlist *b, int p, int l, int r);

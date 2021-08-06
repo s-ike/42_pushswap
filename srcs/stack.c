@@ -17,17 +17,27 @@ void
 }
 
 void
-	ft_rotate_a(t_dlist *a, size_t target_node_idx)
+	ft_rotate(t_dlist *dlist, size_t target_node_idx, char stack)
 {
 	size_t	proximity;
 	size_t	size;
 
-	size = cdl_size(a);
+	size = cdl_size(dlist);
 	proximity = size / 2;
 	if (proximity < (size + 1) / 2)
 		proximity = (size + 1) / 2;
 	if (proximity < target_node_idx)
-		ft_rrr(a, NULL);
+	{
+		if (stack == 'a')
+			ft_rrr(dlist, NULL);
+		else
+			ft_rrr(NULL, dlist);
+	}
 	else
-		ft_rr(a, NULL);
+	{
+		if (stack == 'a')
+			ft_rr(dlist, NULL);
+		else
+			ft_rr(NULL, dlist);
+	}
 }

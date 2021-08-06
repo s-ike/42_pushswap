@@ -73,21 +73,17 @@ static int
 static int
 	push_to_a(t_stacks *stacks, int l, int r, int pivot_id)
 {
-	int		ret;
 	int		targets;
 	size_t	size;
 	t_dnode	*ptr;
 
-	ret = r;
 	size = 0;
 	if (l <= r)
 		size = r - l + 1;
-	// if (size <= 5)にできるか
-	if (size <= 3)
+	if (size <= 6)
 	{
-		ft_sort_3_b(&stacks->b);
-		pivot_id = -1;
-		ret = r + 1;
+		ft_sort_6_b(stacks);
+		return (r + 1);
 	}
 	ptr = stacks->b.head->next;
 	targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id);
@@ -104,7 +100,7 @@ static int
 			ft_rotate_b_more_than_p_in_range(&stacks->b, pivot_id, l, r);
 		ptr = stacks->b.head->next;
 	}
-	return (ret);
+	return (r);
 }
 
 static void
@@ -129,7 +125,7 @@ static void
 			return ;
 		}
 		else
-			ft_rotate_a(a, idx + 1);
+			ft_rotate(a, idx + 1, 'a');
 	}
 }
 
