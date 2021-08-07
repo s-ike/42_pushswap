@@ -67,8 +67,8 @@ int		ft_init_stacks(t_stacks *stacks);
 void	ft_terminate_stacks(t_stacks *stacks);
 void	ft_rotate(t_dlist *a, size_t target_node_idx, char stack);
 /* stack_rotate_in_range.c */
-void	ft_rotate_a_less_than_p_in_range(t_dlist *a, int p, int l, int r);
-void	ft_rotate_b_more_than_p_in_range(t_dlist *b, int p, int l, int r);
+void	ft_rotate_a_in_range(t_dlist *a, int l, int r);
+void	ft_rotate_b_until_find_id_or_more_in_range(t_dlist *b, int p, int l, int r);
 /* validator.c */
 int		ft_check_dup_n(t_list **sort_list);
 int		ft_is_valid_args(int argc, char **argv);

@@ -24,7 +24,7 @@ int		cdl_add_back_dlist(t_dlist *dlist, int n, int id);
 int		cdl_is_empty(const t_dlist *dlist);
 size_t	cdl_size(const t_dlist *dlist);
 int		cdl_is_sorted(t_dnode *head, t_dnode *start, int compare(int x, int y));
-int		cdl_is_range_sorted_asc_order(t_dlist *dlist, int start_id, int end_id);
+int		cdl_is_sorted_asc_in_range(t_dlist *dlist, int start_id, int end_id);
 /* init.c */
 int		cdl_init_dlist(t_dlist *dlist);
 /* print.c */

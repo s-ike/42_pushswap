@@ -46,7 +46,7 @@ static int
 }
 
 int
-	cdl_is_range_sorted_asc_order(t_dlist *dlist, int start_id, int end_id)
+	cdl_is_sorted_asc_in_range(t_dlist *dlist, int start_id, int end_id)
 {
 	t_dnode	*ptr;
 	t_dnode	*prev;
