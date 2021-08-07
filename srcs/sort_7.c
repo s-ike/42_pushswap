@@ -58,15 +58,16 @@ static int
 		size = r - l + 1;
 	ret = 1;
 	ptr = stacks->b.head->next;
-	targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id);
-	if (size <= 2)
+	targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id); // pivot_id - l + 1でも！？
+	if (size <= 3)
 	{
 		ft_sort_3_b(&stacks->b);
 		ret = SORTED;
+		targets = cdl_size(&stacks->b);
 	}
 	while (targets && ptr != stacks->b.head)
 	{
-		if (pivot_id <= ptr->id)
+		if (ret == SORTED || pivot_id <= ptr->id)
 		{
 			if (ft_pa(&stacks->a, &stacks->b))
 				targets--;
@@ -127,12 +128,13 @@ static void
 static void
 	re_sort_b(t_stacks *stacks, int l, int r)
 {
-	int pivot_id = (l + r) / 2;
+	int pivot_id;
 	int	ret;
 
 	if (cdl_is_empty(&stacks->b))
 		return ;
 	rotate_a(&stacks->a, l - 1);
+	pivot_id = (l + r) / 2;
 	ret = re_push_to_a_and_rottate(stacks, l, r, pivot_id);
 	if (!ret) { //
 	}
