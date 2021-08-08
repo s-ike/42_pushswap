@@ -18,28 +18,37 @@ static int
 }
 
 static int
-	re_push_to_b_and_rotate(t_stacks *stacks, int l, int r)
+	re_push_to_b_and_rotate(t_stacks *stacks, int *l, int r)
 {
 	int		ret;
 	int		targets;
 	t_dnode	*ptr;
+	int		flag;
 
 	ret = 1;
 	targets = 0;
-	if (l <= r)
-		targets = r - l + 1;
+	if (*l <= r)
+		targets = r - *l + 1;
 	ptr = stacks->a.head->next;
+	flag = 0;
 	while (ret && targets && ptr != stacks->a.head)
 	{
-		if (l <= ptr->id && ptr->id <= r)
+		if ((stacks->a.head->next->id == *l
+			&& (stacks->a.head->prev->id == *l - 1 || !flag))
+			|| (stacks->a.head->prev->id == *l
+			&& (stacks->a.head->prev->prev->id == *l - 1 || !flag)))
 		{
-			// もしtargets==1&&ptr->id == rの場合最大値なのでpbしてもすぐpaされるのでする必要がない
-			// ただし単にスキップしてしまって良いか
+			(*l)++;
+			targets--;
+			flag = 1;
+		}
+		if (*l <= ptr->id && ptr->id <= r)
+		{
 			ret = ft_pb(&stacks->a, &stacks->b);
 			targets--;
 		}
 		else
-			ft_rotate_a_in_range(&stacks->a, l, r);
+			ft_rotate_a_in_range(&stacks->a, *l, r);
 		ptr = stacks->a.head->next;
 	}
 	return (ret);
@@ -59,6 +68,7 @@ static int
 	ret = 1;
 	ptr = stacks->b.head->next;
 	targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id); // pivot_id - l + 1でも！？
+	// sizeの取得と判定をwhileループ内に入れる
 	if (size <= 3)
 	{
 		ft_sort_3_b(&stacks->b);
@@ -119,7 +129,7 @@ static void
 	if (cdl_is_sorted_asc_in_range(&stacks->a, l, r))
 		return ;
 	else
-		ret = re_push_to_b_and_rotate(stacks, l, r);
+		ret = re_push_to_b_and_rotate(stacks, &l, r);
 	if (!ret) { //
 	}
 	re_sort_b(stacks, l, r);
@@ -153,7 +163,7 @@ static void
 		return ;
 	pivot_id = (l + r) / 2;
 	re_sort_a(stacks, l, pivot_id - 1);
-	re_sort_a(stacks, pivot_id + 1, r);
+	re_sort_a(stacks, pivot_id, r);
 }
 
 void
