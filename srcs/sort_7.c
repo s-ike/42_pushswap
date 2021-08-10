@@ -18,7 +18,7 @@ static int
 }
 
 static int
-	re_push_to_b_and_rotate(t_stacks *stacks, int *l, int r)
+	push_to_b_and_rotate(t_stacks *stacks, int *l, int r)
 {
 	int		ret;
 	int		targets;
@@ -34,9 +34,9 @@ static int
 	while (ret && targets && ptr != stacks->a.head)
 	{
 		if ((stacks->a.head->next->id == *l
-			&& (stacks->a.head->prev->id == *l - 1 || !flag))
+				&& (stacks->a.head->prev->id == *l - 1 || !flag))
 			|| (stacks->a.head->prev->id == *l
-			&& (stacks->a.head->prev->prev->id == *l - 1 || !flag)))
+				&& (stacks->a.head->prev->prev->id == *l - 1 || !flag)))
 		{
 			(*l)++;
 			targets--;
@@ -55,7 +55,7 @@ static int
 }
 
 static int
-	re_push_to_a_and_rottate(t_stacks *stacks, int l, int r, int pivot_id)
+	push_to_a_and_rotate(t_stacks *stacks, int l, int r, int pivot_id)
 {
 	int		targets;
 	size_t	size;
@@ -67,8 +67,7 @@ static int
 		size = r - l + 1;
 	ret = 1;
 	ptr = stacks->b.head->next;
-	targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id); // pivot_id - l + 1でも！？
-	// sizeの取得と判定をwhileループ内に入れる
+	targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id);
 	if (size <= 6)
 	{
 		ft_sort_6_b(stacks);
@@ -78,7 +77,8 @@ static int
 	{
 		if (ptr->id + 1 == ptr->next->id && pivot_id <= ptr->next->id)
 			ft_ss(NULL, &stacks->b);
-		else if (ptr->id + 1 == stacks->b.head->prev->id && pivot_id <= stacks->b.head->prev->id)
+		else if (ptr->id + 1 == stacks->b.head->prev->id
+			&& pivot_id <= stacks->b.head->prev->id)
 			ft_rrr(NULL, &stacks->b);
 		if (ret == SORTED || pivot_id <= ptr->id)
 		{
@@ -88,7 +88,8 @@ static int
 				return (0);
 		}
 		else
-			ft_rotate_b_until_find_id_or_more_in_range(&stacks->b, pivot_id, l, r);
+			ft_rotate_b_until_find_id_or_more_in_range(
+				&stacks->b, pivot_id, l, r);
 		ptr = stacks->b.head->next;
 	}
 	return (ret);
@@ -147,9 +148,10 @@ static void
 // 	}
 // }
 
-static void	re_sort_b(t_stacks *stacks, int l, int r);
+static void	sort_b(t_stacks *stacks, int l, int r);
+
 static void
-	re_sort_a(t_stacks *stacks, int l, int r)
+	sort_a(t_stacks *stacks, int l, int r)
 {
 	int	ret;
 
@@ -160,48 +162,51 @@ static void
 		return ;
 	// check_range_a_is_sorted(&stacks->a, &l, r);
 	if (l != r)
-		ret = re_push_to_b_and_rotate(stacks, &l, r);
-	if (!ret) { //
+		ret = push_to_b_and_rotate(stacks, &l, r);
+	if (!ret)
+	{
 	}
-	re_sort_b(stacks, l, r);
+	sort_b(stacks, l, r);
 }
 
 static void
-	re_sort_b(t_stacks *stacks, int l, int r)
+	sort_b(t_stacks *stacks, int l, int r)
 {
-	int pivot_id;
+	int	pivot_id;
 	int	ret;
 
 	if (cdl_is_empty(&stacks->b))
 		return ;
 	rotate_a(&stacks->a, l - 1);
 	pivot_id = (l + r) / 2;
-	ret = re_push_to_a_and_rottate(stacks, l, r, pivot_id);
-	if (!ret) { //
+	ret = push_to_a_and_rotate(stacks, l, r, pivot_id);
+	if (!ret)
+	{
 	}
-	re_sort_b(stacks, l, pivot_id - 1);
+	sort_b(stacks, l, pivot_id - 1);
 	if (l == r || ret == SORTED)
 		return ;
-	re_sort_a(stacks, pivot_id, r);
+	sort_a(stacks, pivot_id, r);
 }
 
 static void
-	re_sort_7(t_stacks *stacks, int l, int r)
+	sort_7(t_stacks *stacks, int l, int r)
 {
 	int	pivot_id;
 
 	if (l == r)
 		return ;
 	pivot_id = (l + r) / 2;
-	re_sort_a(stacks, l, pivot_id - 1);
-	re_sort_a(stacks, pivot_id, r);
+	sort_a(stacks, l, pivot_id - 1);
+	sort_a(stacks, pivot_id, r);
 }
 
 void
 	ft_sort_7(t_stacks *stacks)
 {
-	if (cdl_is_sorted(stacks->a.head, stacks->a.head->next, ft_is_ascending_order))
+	if (cdl_is_sorted(
+			stacks->a.head, stacks->a.head->next, ft_is_ascending_order))
 		return ;
-	re_sort_7(stacks, 0, cdl_size(&stacks->a) - 1);
+	sort_7(stacks, 0, cdl_size(&stacks->a) - 1);
 	ft_rotate_a_until_min(&stacks->a);
 }
