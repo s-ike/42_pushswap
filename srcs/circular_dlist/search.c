@@ -1,6 +1,22 @@
 #include "circular_dlist.h"
 
 t_dnode
+	*cdl_get_node_by_id(t_dlist *dlist, int id)
+{
+	t_dnode	*ptr;
+
+
+	ptr = dlist->head->next;
+	while (ptr != dlist->head)
+	{
+		if (ptr->id == id)
+			return (ptr);
+		ptr = ptr->next;
+	}
+	return (NULL);
+}
+
+t_dnode
 	*cdl_get_node_by_idx(t_dlist *dlist, size_t idx)
 {
 	t_dnode	*ptr;
