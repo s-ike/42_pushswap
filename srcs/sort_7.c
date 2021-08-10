@@ -77,6 +77,10 @@ static int
 	}
 	while (targets && ptr != stacks->b.head)
 	{
+		if (ptr->id + 1 == ptr->next->id && pivot_id <= ptr->next->id)
+			ft_ss(NULL, &stacks->b);
+		else if (ptr->id + 1 == stacks->b.head->prev->id && pivot_id <= stacks->b.head->prev->id)
+			ft_rrr(NULL, &stacks->b);
 		if (ret == SORTED || pivot_id <= ptr->id)
 		{
 			if (ft_pa(&stacks->a, &stacks->b))
