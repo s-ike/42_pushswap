@@ -69,11 +69,10 @@ static int
 	ptr = stacks->b.head->next;
 	targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id); // pivot_id - l + 1でも！？
 	// sizeの取得と判定をwhileループ内に入れる
-	if (size <= 3)
+	if (size <= 6)
 	{
-		ft_sort_3_b(&stacks->b);
-		ret = SORTED;
-		targets = cdl_size(&stacks->b);
+		ft_sort_6_b(stacks);
+		return (SORTED);
 	}
 	while (targets && ptr != stacks->b.head)
 	{
