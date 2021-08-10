@@ -120,32 +120,32 @@ static void
 	}
 }
 
-static void
-	check_range_a_is_sorted(t_dlist *a, int *l, int r)
-{
-	t_dnode	*start;
-	t_dnode	*ptr;
-	t_dnode	*prev;
+// static void
+// 	check_range_a_is_sorted(t_dlist *a, int *l, int r)
+// {
+// 	t_dnode	*start;
+// 	t_dnode	*ptr;
+// 	t_dnode	*prev;
 
-	ptr = cdl_get_node_by_id(a, *l);
-	if (!ptr)
-		return ;
-	start = ptr;
-	prev = ptr;
-	ptr = ptr->next;
-	if (ptr == a->head)
-		ptr = ptr->next;
-	while (ptr != start)
-	{
-		if (r < ptr->id || prev->id + 1 != ptr->id)
-			break ;
-		(*l)++;
-		prev = ptr;
-		ptr = ptr->next;
-		if (ptr == a->head)
-			ptr = ptr->next;
-	}
-}
+// 	ptr = cdl_get_node_by_id(a, *l);
+// 	if (!ptr)
+// 		return ;
+// 	start = ptr;
+// 	prev = ptr;
+// 	ptr = ptr->next;
+// 	if (ptr == a->head)
+// 		ptr = ptr->next;
+// 	while (ptr != start)
+// 	{
+// 		if (r < ptr->id || prev->id + 1 != ptr->id)
+// 			break ;
+// 		(*l)++;
+// 		prev = ptr;
+// 		ptr = ptr->next;
+// 		if (ptr == a->head)
+// 			ptr = ptr->next;
+// 	}
+// }
 
 static void	re_sort_b(t_stacks *stacks, int l, int r);
 static void
@@ -158,7 +158,7 @@ static void
 	ret = 1;
 	if (cdl_is_sorted_asc_in_range(&stacks->a, l, r))
 		return ;
-	check_range_a_is_sorted(&stacks->a, &l, r);
+	// check_range_a_is_sorted(&stacks->a, &l, r);
 	if (l != r)
 		ret = re_push_to_b_and_rotate(stacks, &l, r);
 	if (!ret) { //
