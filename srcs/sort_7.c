@@ -48,7 +48,7 @@ static int
 			targets--;
 		}
 		else if (targets)
-			ft_rotate_a_in_range(&stacks->a, *l, r);
+			ft_rr(&stacks->a, NULL);
 		ptr = stacks->a.head->next;
 	}
 	return (ret);
