@@ -39,12 +39,6 @@ int
 	return (1);
 }
 
-static int
-	ncmp(int n1, int n2)
-{
-	return (n1 - n2);
-}
-
 int
 	cdl_is_sorted_asc_in_range(t_dlist *dlist, int start_id, int end_id)
 {
@@ -56,7 +50,7 @@ int
 	ptr = dlist->head->next;
 	if (ptr == dlist->head)
 		return (0);
-	ptr = cdl_search(dlist, start_id, ncmp);
+	ptr = cdl_search(dlist, start_id, cdl_ncmp);
 	prev = ptr->prev;
 	if (prev == dlist->head)
 		prev = prev->prev;

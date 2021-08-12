@@ -20,6 +20,8 @@ typedef struct s_dlist
 /* add.c */
 int		cdl_add_front_dlist(t_dlist *dlist, int n, int id);
 int		cdl_add_back_dlist(t_dlist *dlist, int n, int id);
+/* comp.c */
+int		cdl_ncmp(int n1, int n2);
 /* info.c */
 int		cdl_is_empty(const t_dlist *dlist);
 size_t	cdl_size(const t_dlist *dlist);

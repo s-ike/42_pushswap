@@ -22,6 +22,7 @@ SRCS		:= push_swap.c \
 				stack_rotate_in_range.c \
 				validator.c \
 				circular_dlist/add.c \
+				circular_dlist/comp.c \
 				circular_dlist/info.c \
 				circular_dlist/init.c \
 				circular_dlist/print.c \
