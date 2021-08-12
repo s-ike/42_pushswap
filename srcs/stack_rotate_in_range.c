@@ -43,34 +43,51 @@ void
 	rotate_a_in_range(a, l, r);
 }
 
+// lpから何個目で対象に行き着くか、rpから何個目で対象に行き着くか、比較
+// rp_cnt < lp_cnt / 2だったらrrbする
 static void
 	rotate_b_until_find_id_or_more_in_range(t_dlist *b, int p, int l)
 {
 	t_dnode	*lp;
 	t_dnode	*rp;
-	int		start_r;
+	int		start_rp_id;
+	int		start_lp_id;
+	size_t	lp_cnt;
+	size_t	rp_cnt;
+	int		lp_flag;
+	int		rp_flag;
 
-	lp = b->head->next->next;
+	lp = b->head->next;
 	rp = b->head->prev;
-	start_r = rp->id;
-	while (lp->id != start_r)
+	start_rp_id = rp->id;
+	start_lp_id = lp->id;
+	lp_cnt = 0;
+	rp_cnt = 0;
+	lp_flag = 0;
+	rp_flag = 0;
+	while (lp->id != start_rp_id && rp->id != start_lp_id)
 	{
-		if ((l <= lp->id && p <= lp->id) && (l <= rp->id && p <= rp->id))
+		if (lp->id != start_rp_id && !(l <= lp->id && p <= lp->id))
 		{
-			if ((l <= lp->next->id && p <=lp->next->id)
-			&& !(l <= rp->prev->id && p <= rp->prev->id))
-				return (ft_rr(NULL, b));
-			else
-				return (ft_rrr(NULL, b));
+			lp = lp->next;
+			lp_cnt++;
 		}
-		else if (l <= lp->id && p <= lp->id)
-			return (ft_rr(NULL, b));
-		else if (l <= rp->id && p <= rp->id)
-			return (ft_rrr(NULL, b));
-		lp = lp->next;
-		rp = rp->prev;
+		else
+			lp_flag = 1;
+		if (rp->id != start_lp_id && !(l <= rp->id && p <= rp->id))
+		{
+			rp = rp->prev;
+			rp_cnt++;
+		}
+		else
+			rp_flag = 1;
+		if (lp_flag && rp_flag)
+			break ;
 	}
-	ft_rrr(NULL, b);
+	if (rp_cnt < lp_cnt / 2)
+		ft_rrr(NULL, b);
+	else
+		ft_rr(NULL, b);
 }
 
 void

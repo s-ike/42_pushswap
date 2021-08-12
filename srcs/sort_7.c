@@ -92,11 +92,13 @@ static int
 	}
 	while (targets && ptr != stacks->b.head)
 	{
+		// 要素数多いとムダになる（aに戻した後、またbにくる場合）ことも多そう
+		// pivot_idと見比べてやるべきか判定すると良いかも
 		if (ptr->id + 1 == ptr->next->id && pivot_id <= ptr->next->id)
 			ft_ss(NULL, &stacks->b);
-		else if (ptr->id + 1 == stacks->b.head->prev->id
-			&& pivot_id <= stacks->b.head->prev->id)
-			ft_rrr(NULL, &stacks->b);
+		// else if (ptr->id + 1 == stacks->b.head->prev->id
+		// 	&& pivot_id <= stacks->b.head->prev->id)
+		// 	ft_rrr(NULL, &stacks->b);
 		if (ret == SORTED || pivot_id <= ptr->id)
 		{
 			if (ft_pa(&stacks->a, &stacks->b))

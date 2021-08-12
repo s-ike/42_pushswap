@@ -38,6 +38,8 @@ int
 	}
 	if (!ft_make_sort_list(&sort_list, argc, argv))
 		ft_exit_failure(&stacks);
+	// 重複チェックが効いていない、以下の7と18が重複している引数で検出せず
+	// 7 20 11 5 0 1 19 18 2 7 17 18 3 9 4 16 12 8
 	if (!ft_check_dup_n(&sort_list))
 	{
 		ft_lstclear(&sort_list, free);
