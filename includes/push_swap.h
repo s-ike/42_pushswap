@@ -6,6 +6,7 @@
 # include <stdint.h>
 # include "libft.h"
 # include "circular_dlist.h"
+# include "t_bool.h"
 
 # define MSG_ERR "Error"
 

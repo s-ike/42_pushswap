@@ -20,7 +20,7 @@ static int
 static int
 	can_rotate_b(t_dlist *b, int l, int r)
 {
-	int		pivot_id;
+	int	pivot_id;
 
 	if (cdl_is_empty(b) || cdl_size(b) == 1)
 		return (0);
@@ -31,7 +31,7 @@ static int
 }
 
 static int
-	push_to_b_and_rotate(t_stacks *stacks, int *l, int r)
+	push_to_b_and_rotate(t_stacks *stacks, int *l, int r, t_bool is_first)
 {
 	int		ret;
 	int		targets;
@@ -46,14 +46,17 @@ static int
 	flag = 0;
 	while (ret && targets && ptr != stacks->a.head)
 	{
-		if ((stacks->a.head->next->id == *l
+		if (is_first == FALSE)
+		{
+			if ((stacks->a.head->next->id == *l
 				&& (stacks->a.head->prev->id == *l - 1 || !flag))
 			|| (stacks->a.head->prev->id == *l
 				&& (stacks->a.head->prev->prev->id == *l - 1 || !flag)))
-		{
-			(*l)++;
-			targets--;
-			flag = 1;
+			{
+				(*l)++;
+				targets--;
+				flag = 1;
+			}
 		}
 		if (*l <= ptr->id && ptr->id <= r && can_rotate_b(&stacks->b, *l, r))
 			ft_rr(NULL, &stacks->b);
@@ -170,7 +173,7 @@ static void
 static void	sort_b(t_stacks *stacks, int l, int r);
 
 static void
-	sort_a(t_stacks *stacks, int l, int r)
+	sort_a(t_stacks *stacks, int l, int r, t_bool is_first)
 {
 	int	ret;
 
@@ -181,7 +184,7 @@ static void
 		return ;
 	// check_range_a_is_sorted(&stacks->a, &l, r);
 	if (l != r)
-		ret = push_to_b_and_rotate(stacks, &l, r);
+		ret = push_to_b_and_rotate(stacks, &l, r, is_first);
 	if (!ret)
 	{
 	}
@@ -205,7 +208,7 @@ static void
 	sort_b(stacks, l, pivot_id - 1);
 	if (l == r || ret == SORTED)
 		return ;
-	sort_a(stacks, pivot_id, r);
+	sort_a(stacks, pivot_id, r, FALSE);
 }
 
 static void
@@ -216,8 +219,8 @@ static void
 	if (l == r)
 		return ;
 	pivot_id = (l + r) / 2;
-	sort_a(stacks, l, pivot_id - 1);
-	sort_a(stacks, pivot_id, r);
+	sort_a(stacks, l, pivot_id - 1, TRUE);
+	sort_a(stacks, pivot_id, r, FALSE);
 }
 
 void
