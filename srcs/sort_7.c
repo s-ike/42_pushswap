@@ -18,6 +18,19 @@ static int
 }
 
 static int
+	can_rotate_b(t_dlist *b, int l, int r)
+{
+	int		pivot_id;
+
+	if (cdl_is_empty(b) || cdl_size(b) == 1)
+		return (0);
+	pivot_id = (l + r) / 2;
+	if (b->head->next->id < pivot_id && pivot_id <= b->head->next->next->id)
+		return (1);
+	return (0);
+}
+
+static int
 	push_to_b_and_rotate(t_stacks *stacks, int *l, int r)
 {
 	int		ret;
@@ -42,11 +55,15 @@ static int
 			targets--;
 			flag = 1;
 		}
-		if (*l <= ptr->id && ptr->id <= r)
+		if (*l <= ptr->id && ptr->id <= r && can_rotate_b(&stacks->b, *l, r))
+			ft_rr(NULL, &stacks->b);
+		else if (*l <= ptr->id && ptr->id <= r)
 		{
 			ret = ft_pb(&stacks->a, &stacks->b);
 			targets--;
 		}
+		else if (targets && can_rotate_b(&stacks->b, *l, r))
+			ft_rr(&stacks->a, &stacks->b);
 		else if (targets)
 			ft_rr(&stacks->a, NULL);
 		ptr = stacks->a.head->next;
