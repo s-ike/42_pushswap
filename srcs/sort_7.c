@@ -31,7 +31,7 @@ static int
 }
 
 static int
-	push_to_b_and_rotate(t_stacks *stacks, int *l, int r, t_bool is_first)
+	pb_and_rotate_a(t_stacks *stacks, int *l, int r, t_bool is_first)
 {
 	int		ret;
 	int		targets;
@@ -75,7 +75,7 @@ static int
 }
 
 static int
-	push_to_a_and_rotate(t_stacks *stacks, int l, int r, int pivot_id)
+	pa_and_rotate_b(t_stacks *stacks, int l, int r, int pivot_id)
 {
 	int		targets;
 	size_t	size;
@@ -95,8 +95,6 @@ static int
 	}
 	while (targets && ptr != stacks->b.head)
 	{
-		// 要素数多いとムダになる（aに戻した後、またbにくる場合）ことも多そう
-		// pivot_idと見比べてやるべきか判定すると良いかも
 		if (ptr->id + 1 == ptr->next->id && pivot_id <= ptr->next->id)
 			ft_ss(NULL, &stacks->b);
 		// else if (ptr->id + 1 == stacks->b.head->prev->id
@@ -138,8 +136,7 @@ static void
 			ft_rr(a, NULL);
 			return ;
 		}
-		else
-			ft_rotate(a, idx + 1, 'a');
+		ft_rotate(a, idx + 1, 'a');
 	}
 }
 
@@ -184,7 +181,7 @@ static void
 		return ;
 	// check_range_a_is_sorted(&stacks->a, &l, r);
 	if (l != r)
-		ret = push_to_b_and_rotate(stacks, &l, r, is_first);
+		ret = pb_and_rotate_a(stacks, &l, r, is_first);
 	if (!ret)
 	{
 	}
@@ -201,7 +198,7 @@ static void
 		return ;
 	rotate_a(&stacks->a, l - 1);
 	pivot_id = (l + r) / 2;
-	ret = push_to_a_and_rotate(stacks, l, r, pivot_id);
+	ret = pa_and_rotate_b(stacks, l, r, pivot_id);
 	if (!ret)
 	{
 	}
