@@ -11,16 +11,6 @@
 // 		ft_ss(&stacks->a, NULL);
 // }
 
-static void
-	check_sb(t_dlist *b, size_t size)
-{
-	if (size < 4)
-		return ;
-	if (b->head->next->next->id == (int)(size - 1)
-		&& b->head->next->next->id - 1 == b->head->next->id)
-		ft_ss(NULL, b);
-}
-
 int
 	push_max(t_stacks *stacks)
 {
@@ -30,6 +20,12 @@ int
 	max_node_idx = cdl_get_max_node_idx(&stacks->b);
 	if (max_node_idx == 0)
 		return (0);
+	if (max_node_idx == 2
+		&& stacks->b.head->next->next->id - 1 == stacks->b.head->next->id)
+	{
+		ft_ss(NULL, &stacks->b);
+		max_node_idx = cdl_get_max_node_idx(&stacks->b);
+	}
 	while (max_node_idx != 1)
 	{
 		ft_rotate(&stacks->b, max_node_idx, 'b');
@@ -48,15 +44,9 @@ static int
 
 	ret = 1;
 	size = cdl_size(&stacks->b);
-	while (size)
+	while (4 <= size)
 	{
-		if (4 <= size)
-		{
-			check_sb(&stacks->b, size);
-			ret = push_max(stacks);
-		}
-		else
-			break ;
+		ret = push_max(stacks);
 		if (!ret)
 			return (ret);
 		size = cdl_size(&stacks->b);
