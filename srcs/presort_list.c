@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   presort_list.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/14 03:40:50 by sikeda            #+#    #+#             */
+/*   Updated: 2021/08/14 03:49:59 by sikeda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int
@@ -69,14 +81,13 @@ int
 		if (sort)
 			sort_node = ft_lstnew(sort);
 		if (!sort || !sort_node)
-		{
-			ft_lstclear(sort_list, free);
 			return (0);
-		}
 		ft_lstadd_front(sort_list, sort_node);
 		i++;
 	}
 	ft_sort_list(sort_list, sort_list_n_order);
+	if (!ft_check_dup_n(sort_list))
+		return (0);
 	set_id(sort_list);
 	ft_sort_list(sort_list, sort_list_org_order);
 	return (1);
