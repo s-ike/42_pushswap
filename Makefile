@@ -42,8 +42,13 @@ LFLAGS		:= -L${LIBDIR} -lft
 
 CC			:= gcc
 CFLAGS		:= -Wall -Wextra -Werror
+
 DEBUG		:= -g
+ifdef LEAKS
+DEBUG2		:=
+else
 DEBUG2		:= -fsanitize=address
+endif
 
 RM			:= rm -f
 C_GREEN		:= "\x1b[32m"
@@ -66,6 +71,9 @@ $(LIBPATH):	init
 init:		## git clone --recursive https://this_repository
 			git submodule update --init
 
+leaks:		$(LIBPATH)	## For leak check
+			$(MAKE) CFLAGS="$(CFLAGS) -D LEAKS=1" LEAKS=TRUE
+
 clean:
 			$(RM) $(OBJS)
 			$(MAKE) clean -C $(LIBDIR)
@@ -79,4 +87,4 @@ re:			fclean $(NAME)
 bonus:		$(NAME)
 
 .PHONY:		all clean fclean re bonus
-.PHONY:		init
+.PHONY:		init leaks
