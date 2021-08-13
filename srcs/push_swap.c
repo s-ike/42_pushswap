@@ -52,7 +52,5 @@ int
 	// cdl_print_dlist(&stacks.a);
 	// ft_putendl_fd("b", STDOUT_FILENO);
 	// cdl_print_dlist(&stacks.b);
-	if (0) // debug
-		ft_exit_success_with_leaks(&stacks);
 	ft_exit_success(&stacks);
 }

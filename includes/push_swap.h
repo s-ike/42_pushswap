@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
+/*   Updated: 2021/08/14 03:43:36 by sikeda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
@@ -28,7 +40,6 @@ typedef struct s_sort
 /* exit.c */
 void	ft_exit_failure(t_stacks *stacks);
 void	ft_exit_success(t_stacks *stacks);
-void	ft_exit_success_with_leaks(t_stacks *stacks);
 /* op_push.c */
 int		ft_pa(t_dlist *a, t_dlist *b);
 int		ft_pb(t_dlist *a, t_dlist *b);
