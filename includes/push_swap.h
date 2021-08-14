@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/14 03:43:36 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/15 01:03:10 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,8 @@ int		ft_make_sort_list(t_list **sort_list, int argc, char **argv);
 void	ft_sort_2(t_dlist *a);
 /* sort_3.c */
 void	ft_sort_3(t_dlist *a);
-/* sort_3_b.c */
-void	ft_sort_3_b(t_dlist *a);
+/* ft_sort_3_b_and_pa.c */
+int		ft_sort_3_b_and_pa(t_stacks *a);
 /* sort_4.c */
 void	ft_sort_4(t_dlist *a);
 /* sort_6.c */

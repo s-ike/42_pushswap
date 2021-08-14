@@ -1,15 +1,16 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_6_b.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/15 01:02:15 by sikeda            #+#    #+#             */
+/*   Updated: 2021/08/15 01:02:34 by sikeda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// static void
-// 	swap_firt_value(t_stacks *stacks, size_t size)
-// {
-// 	if (4 < size
-// 		&& !cdl_is_sorted(
-// 			stacks->a.head, stacks->a.head->next, ft_is_ascending_order)
-// 		&& cdl_is_sorted(
-// 			stacks->a.head, stacks->a.head->next->next, ft_is_ascending_order))
-// 		ft_ss(&stacks->a, NULL);
-// }
+#include "push_swap.h"
 
 int
 	push_max(t_stacks *stacks)
@@ -52,7 +53,7 @@ static int
 		size = cdl_size(&stacks->b);
 	}
 	if (ret)
-		ft_sort_3_b(&stacks->b);
+		ret = ft_sort_3_b_and_pa(stacks);
 	return (ret);
 }
 
@@ -64,10 +65,7 @@ void
 
 	ret = 1;
 	size = cdl_size(&stacks->a);
-	// swap_firt_value(stacks, size);
 	ret = push_to_a_and_rotate(stacks, size);
-	while (ret && !cdl_is_empty(&stacks->b))
-		ret = ft_pa(&stacks->a, &stacks->b);
 	if (!ret)
 		ft_exit_failure(stacks);
 }
