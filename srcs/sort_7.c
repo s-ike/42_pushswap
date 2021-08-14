@@ -88,7 +88,7 @@ static int
 	ret = 1;
 	ptr = stacks->b.head->next;
 	targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id);
-	if (size <= 6)
+	if (size <= 23)
 	{
 		ft_sort_6_b(stacks);
 		return (SORTED);
