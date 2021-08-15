@@ -73,6 +73,10 @@ static int
 		{
 			ret = ft_pb(&stacks->a, &stacks->b);
 			targets--;
+			if (2 <= cdl_size(&stacks->b)
+				&& (stacks->b.head->next->id == *l
+					|| (stacks->b.head->next->id == *l + 1 && cdl_get_min_node(&stacks->b)->id != *l)))
+				ft_rr(NULL, &stacks->b);
 		}
 		else if (targets)
 			ft_rr(&stacks->a, NULL);
@@ -108,6 +112,8 @@ static int
 	if (size <= 4)
 	{
 		ft_sort_6_b(stacks);
+		while (size--)
+			ft_rr(&stacks->a, NULL);
 		return (SORTED);
 	}
 	while (ptr != stacks->b.head)
@@ -130,6 +136,8 @@ static int
 			if (!ft_pa(&stacks->a, &stacks->b))
 				return (0);
 		}
+		else if (stacks->b.head->prev->id == l)
+			ft_rrr(NULL, &stacks->b);
 		else
 			ft_rotate_b_until_find_id_in_range(&stacks->b, pivot_id, l, r);
 		ptr = stacks->b.head->next;
