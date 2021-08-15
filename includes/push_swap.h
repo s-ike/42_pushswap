@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/15 01:03:10 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/15 01:53:51 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	ft_rotate(t_dlist *a, size_t target_node_idx, char stack);
 /* stack_rotate_in_range.c */
 void	ft_rotate_a_in_range(t_dlist *a, int l, int r);
 void	ft_rotate_b_until_find_id_or_more_in_range(t_dlist *b, int p, int l, int r);
+void	ft_rotate_b_until_find_less_than_id_in_range(t_dlist *b, int p, int l, int r);
 /* validator.c */
 int		ft_check_dup_n(t_list **sort_list);
 int		ft_is_valid_args(int argc, char **argv);

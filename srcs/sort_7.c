@@ -1,5 +1,5 @@
 #include "push_swap.h"
-
+/*
 static int
 	cnt_more_than_id_in_range(t_dlist *dlist, int l, int r, int pivot)
 {
@@ -15,20 +15,20 @@ static int
 		ptr = ptr->next;
 	}
 	return (cnt);
-}
+}*/
 
-static int
-	can_rotate_b(t_dlist *b, int l, int r)
-{
-	int	pivot_id;
+// static int
+// 	can_rotate_b(t_dlist *b, int l, int r)
+// {
+// 	int	pivot_id;
 
-	if (cdl_is_empty(b) || cdl_size(b) == 1)
-		return (0);
-	pivot_id = (l + r) / 2;
-	if (b->head->next->id < pivot_id && pivot_id <= b->head->next->next->id)
-		return (1);
-	return (0);
-}
+// 	if (cdl_is_empty(b) || cdl_size(b) == 1)
+// 		return (0);
+// 	pivot_id = (l + r) / 2;
+// 	if (b->head->next->id < pivot_id && pivot_id <= b->head->next->next->id)
+// 		return (1);
+// 	return (0);
+// }
 
 static int
 	pb_and_rotate_a(t_stacks *stacks, int *l, int r, t_bool is_first)
@@ -58,15 +58,22 @@ static int
 				flag = 1;
 			}
 		}
-		if (*l <= ptr->id && ptr->id <= r && can_rotate_b(&stacks->b, *l, r))
-			ft_rr(NULL, &stacks->b);
-		else if (*l <= ptr->id && ptr->id <= r)
+		// if (*l <= ptr->id && ptr->id <= r && can_rotate_b(&stacks->b, *l, r))
+		// 	ft_rr(NULL, &stacks->b);
+		// else if (*l <= ptr->id && ptr->id <= r)
+		// {
+		// 	ret = ft_pb(&stacks->a, &stacks->b);
+		// 	targets--;
+		// }
+		// else if (targets && can_rotate_b(&stacks->b, *l, r))
+		// 	ft_rr(&stacks->a, &stacks->b);
+		// else if (targets)
+		// 	ft_rr(&stacks->a, NULL);
+		if (*l <= ptr->id && ptr->id <= r)
 		{
 			ret = ft_pb(&stacks->a, &stacks->b);
 			targets--;
 		}
-		else if (targets && can_rotate_b(&stacks->b, *l, r))
-			ft_rr(&stacks->a, &stacks->b);
 		else if (targets)
 			ft_rr(&stacks->a, NULL);
 		ptr = stacks->a.head->next;
@@ -77,42 +84,51 @@ static int
 static int
 	pa_and_rotate_b(t_stacks *stacks, int l, int r, int pivot_id)
 {
-	int		targets;
+	// int		targets;
 	size_t	size;
 	t_dnode	*ptr;
-	int		ret;
 
 	size = 0;
 	if (l <= r)
 		size = r - l + 1;
-	ret = 1;
 	ptr = stacks->b.head->next;
-	targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id);
-	if (size <= 23)
+	// targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id);
+	// targets = size - targets;
+	if (size <= 4)
 	{
 		ft_sort_6_b(stacks);
 		return (SORTED);
 	}
-	while (targets && ptr != stacks->b.head)
+	while (ptr != stacks->b.head)
 	{
-		if (ptr->id + 1 == ptr->next->id && pivot_id <= ptr->next->id)
-			ft_ss(NULL, &stacks->b);
+		// if (ptr->id + 1 == ptr->next->id && pivot_id <= ptr->next->id)
+		// 	ft_ss(NULL, &stacks->b);
+
 		// else if (ptr->id + 1 == stacks->b.head->prev->id
 		// 	&& pivot_id <= stacks->b.head->prev->id)
 		// 	ft_rrr(NULL, &stacks->b);
-		if (ret == SORTED || pivot_id <= ptr->id)
+		if (ptr->id < pivot_id && ptr->id == l)
 		{
 			if (ft_pa(&stacks->a, &stacks->b))
-				targets--;
+			{
+				// targets--;
+				ft_rr(&stacks->a, NULL);
+			}
 			else
+				return (0);
+			l++;
+		}
+		else if (pivot_id <= ptr->id)
+		{
+			if (!ft_pa(&stacks->a, &stacks->b))
 				return (0);
 		}
 		else
-			ft_rotate_b_until_find_id_or_more_in_range(
+			ft_rotate_b_until_find_less_than_id_in_range(
 				&stacks->b, pivot_id, l, r);
 		ptr = stacks->b.head->next;
 	}
-	return (ret);
+	return (1);
 }
 
 static void
@@ -197,7 +213,7 @@ static void
 	if (cdl_is_empty(&stacks->b))
 		return ;
 	rotate_a(&stacks->a, l - 1);
-	pivot_id = (l + r) / 2;
+	pivot_id = (l + r) / 2; // 0-7の8要素で3になる
 	ret = pa_and_rotate_b(stacks, l, r, pivot_id);
 	if (!ret)
 	{

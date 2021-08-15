@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 00:58:25 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/15 01:00:28 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/15 17:27:34 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,12 +29,10 @@ static int
 static int
 	sort_2_and_pa(t_stacks *stacks)
 {
-	t_dlist	*a;
 	t_dlist	*b;
 	int		x;
 	int		y;
 
-	a = &stacks->a;
 	b = &stacks->b;
 	x = b->head->next->n;
 	y = b->head->next->next->n;
