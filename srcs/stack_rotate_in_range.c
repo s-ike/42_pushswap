@@ -104,7 +104,7 @@ void
 }
 
 static void
-	rotate_b_until_find_less_than_id_in_range(t_dlist *b, int p, int l)
+	rotate_b_until_find_id_in_range(t_dlist *b, int p, int l)
 {
 	t_dnode	*lp;
 	t_dnode	*rp;
@@ -152,7 +152,7 @@ static void
 }
 
 void
-	ft_rotate_b_until_find_less_than_id_in_range(t_dlist *b, int p, int l, int r)
+	ft_rotate_b_until_find_id_in_range(t_dlist *b, int p, int l, int r)
 {
 	t_dnode	*lp;
 
@@ -161,5 +161,5 @@ void
 	lp = b->head->next;
 	if (l <= lp->id && lp->id == l)
 		return ;
-	rotate_b_until_find_less_than_id_in_range(b, p, l);
+	rotate_b_until_find_id_in_range(b, p, l);
 }

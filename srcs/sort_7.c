@@ -81,10 +81,23 @@ static int
 	return (ret);
 }
 
+static void
+	ra_or_rr(t_stacks *stacks, int l)
+{
+	if (stacks->b.head->next->id == l)
+		return (ft_rr(&stacks->a, NULL));
+	else if (stacks->b.head->prev->id == l)
+	{
+		ft_rr(&stacks->a, NULL);
+		return (ft_rrr(NULL, &stacks->b));
+	}
+	else if (1 < cdl_size(&stacks->b))
+		return (ft_rr(&stacks->a, &stacks->b));
+}
+
 static int
 	pa_and_rotate_b(t_stacks *stacks, int l, int r, int pivot_id)
 {
-	// int		targets;
 	size_t	size;
 	t_dnode	*ptr;
 
@@ -92,8 +105,6 @@ static int
 	if (l <= r)
 		size = r - l + 1;
 	ptr = stacks->b.head->next;
-	// targets = cnt_more_than_id_in_range(&stacks->b, l, r, pivot_id);
-	// targets = size - targets;
 	if (size <= 4)
 	{
 		ft_sort_6_b(stacks);
@@ -109,14 +120,10 @@ static int
 		// 	ft_rrr(NULL, &stacks->b);
 		if (ptr->id < pivot_id && ptr->id == l)
 		{
-			if (ft_pa(&stacks->a, &stacks->b))
-			{
-				// targets--;
-				ft_rr(&stacks->a, NULL);
-			}
-			else
+			if (!ft_pa(&stacks->a, &stacks->b))
 				return (0);
 			l++;
+			ra_or_rr(stacks, l);
 		}
 		else if (pivot_id <= ptr->id)
 		{
@@ -124,8 +131,7 @@ static int
 				return (0);
 		}
 		else
-			ft_rotate_b_until_find_less_than_id_in_range(
-				&stacks->b, pivot_id, l, r);
+			ft_rotate_b_until_find_id_in_range(&stacks->b, pivot_id, l, r);
 		ptr = stacks->b.head->next;
 	}
 	return (1);
