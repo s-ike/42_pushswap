@@ -246,7 +246,7 @@ static void
 	if (l == r)
 		return ;
 	pivot_id = (l + r) / 2;
-	sort_a(stacks, l, pivot_id - 1, TRUE);
+	sort_a(stacks, l, pivot_id, TRUE);
 	sort_a(stacks, pivot_id, r, FALSE);
 }
 
