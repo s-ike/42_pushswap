@@ -73,6 +73,7 @@ static int
 		{
 			ret = ft_pb(&stacks->a, &stacks->b);
 			targets--;
+			// pbする最後の要素の場合はbの先頭にあると良いので行わない
 			if (2 <= cdl_size(&stacks->b)
 				&& (stacks->b.head->next->id == *l
 					|| (stacks->b.head->next->id == *l + 1 && cdl_get_min_node(&stacks->b)->id != *l)))
@@ -104,6 +105,7 @@ static int
 {
 	size_t	size;
 	t_dnode	*ptr;
+	// t_bool	is_last;
 
 	size = 0;
 	if (l <= r)
@@ -111,11 +113,13 @@ static int
 	ptr = stacks->b.head->next;
 	if (size <= 4)
 	{
+		// bの先頭が最小値であればpaしてrrかrb
 		ft_sort_6_b(stacks);
 		while (size--)
 			ft_rr(&stacks->a, NULL);
 		return (SORTED);
 	}
+	// is_last = FALSE;
 	while (ptr != stacks->b.head)
 	{
 		// if (ptr->id + 1 == ptr->next->id && pivot_id <= ptr->next->id)
@@ -126,6 +130,10 @@ static int
 		// 	ft_rrr(NULL, &stacks->b);
 		if (ptr->id < pivot_id && ptr->id == l)
 		{
+
+			// if (ptr->id + 1 == pivot_id)
+			// 	is_last = TRUE;
+
 			if (!ft_pa(&stacks->a, &stacks->b))
 				return (0);
 			l++;
@@ -219,6 +227,24 @@ static void
 }
 
 static void
+	sa(t_dlist *a, int r, int *p)
+{
+	t_dnode	*ptr;
+
+	ptr = a->head->next;
+	while (ptr != a->head && ptr->next != a->head && ptr->id <= r
+		&& ptr->next->id == a->head->prev->id + 1
+		&& ptr->id == ptr->next->id + 1)
+	{
+		ft_ss(a, NULL);
+		ft_rr(a, NULL);
+		ft_rr(a, NULL);
+		(*p) += 2;
+		ptr = a->head->next;
+	}
+}
+
+static void
 	sort_b(t_stacks *stacks, int l, int r)
 {
 	int	pivot_id;
@@ -232,6 +258,7 @@ static void
 	if (!ret)
 	{
 	}
+	sa(&stacks->a, r, &pivot_id);
 	sort_b(stacks, l, pivot_id - 1);
 	if (l == r || ret == SORTED)
 		return ;
