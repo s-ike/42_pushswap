@@ -16,6 +16,20 @@ void
 	return ;
 }
 
+void
+	ft_ra_or_rr(t_stacks *stacks, int target)
+{
+	if (stacks->b.head->next->id == target)
+		return (ft_rr(&stacks->a, NULL));
+	else if (2 < cdl_size(&stacks->b) && stacks->b.head->prev->id == target)
+	{
+		ft_rr(&stacks->a, NULL);
+		return (ft_rrr(NULL, &stacks->b));
+	}
+	else if (1 < cdl_size(&stacks->b))
+		return (ft_rr(&stacks->a, &stacks->b));
+}
+
 char
 	*ft_get_rotate_op(t_dlist *dlist, size_t target_node_idx, char stack)
 {

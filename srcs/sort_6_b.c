@@ -6,26 +6,11 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 01:02:15 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/17 18:12:16 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/17 18:50:30 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-// sort_7.cからコピー
-static void
-	ra_or_rr(t_stacks *stacks, int l)
-{
-	if (stacks->b.head->next->id == l)
-		return (ft_rr(&stacks->a, NULL));
-	else if (stacks->b.head->prev->id == l)
-	{
-		ft_rr(&stacks->a, NULL);
-		return (ft_rrr(NULL, &stacks->b));
-	}
-	else if (1 < cdl_size(&stacks->b))
-		return (ft_rr(&stacks->a, &stacks->b));
-}
 
 int
 	push_min(t_stacks *stacks)
@@ -68,9 +53,9 @@ static int
 		size = cdl_size(&stacks->b);
 		// rr or ra
 		if (size)
-			ra_or_rr(stacks, cdl_get_min_node(&stacks->b)->id);
+			ft_ra_or_rr(stacks, cdl_get_min_node(&stacks->b)->id);
 		else
-			ra_or_rr(stacks, 0);
+			ft_ra_or_rr(stacks, 0);
 	}
 	return (ret);
 }

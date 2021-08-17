@@ -86,20 +86,6 @@ static int
 	return (ret);
 }
 
-static void
-	ra_or_rr(t_stacks *stacks, int l)
-{
-	if (stacks->b.head->next->id == l)
-		return (ft_rr(&stacks->a, NULL));
-	else if (stacks->b.head->prev->id == l)
-	{
-		ft_rr(&stacks->a, NULL);
-		return (ft_rrr(NULL, &stacks->b));
-	}
-	else if (1 < cdl_size(&stacks->b))
-		return (ft_rr(&stacks->a, &stacks->b));
-}
-
 static int
 	pa_and_rotate_b(t_stacks *stacks, int l, int r, int pivot_id)
 {
@@ -134,7 +120,7 @@ static int
 			if (!ft_pa(&stacks->a, &stacks->b))
 				return (0);
 			l++;
-			ra_or_rr(stacks, l);
+			ft_ra_or_rr(stacks, l);
 		}
 		else if (pivot_id <= ptr->id)
 		{

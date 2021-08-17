@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/17 17:51:17 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/17 18:50:18 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,6 +84,7 @@ void	ft_sort(t_stacks *stacks);
 /* stack.c */
 int		ft_init_stacks(t_stacks *stacks);
 void	ft_terminate_stacks(t_stacks *stacks);
+void	ft_ra_or_rr(t_stacks *stacks, int target);
 char	*ft_get_rotate_op(t_dlist *dlist, size_t target_node_idx, char stack);
 void	ft_rotate_by_op(t_stacks *stacks, const char *op);
 void	ft_rotate(t_stacks *stacks, size_t target_node_idx, char stack_name);
