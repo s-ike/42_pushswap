@@ -8,6 +8,7 @@ push_swap_tester*
 # Dev
 *_test.c
 *_old.c
+*.py
 
 # General
 .DS_Store

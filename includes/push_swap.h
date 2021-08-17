@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/15 19:02:10 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/17 17:51:17 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,13 @@
 # include "t_bool.h"
 
 # define MSG_ERR "Error"
+
+# define OP_RA "ra"
+# define OP_RB "rb"
+# define OP_RR "rr"
+# define OP_RRA "rra"
+# define OP_RRB "rrb"
+# define OP_RRR "rrr"
 
 # define SORTED -1
 
@@ -69,7 +76,7 @@ void	ft_sort_6_b(t_stacks *stacks);
 void	ft_sort_7(t_stacks *stacks);
 /* sort_6_utils.c */
 int		ft_check_circular_sorted(t_dlist *dlist, t_dnode *skip);
-int		ft_rotate_a_until_min(t_dlist *a);
+int		ft_rotate_a_until_min(t_stacks *stacks);
 int		ft_push_max(t_stacks *stacks);
 int		ft_push_min(t_stacks *stacks);
 /* sort.c */
@@ -77,7 +84,9 @@ void	ft_sort(t_stacks *stacks);
 /* stack.c */
 int		ft_init_stacks(t_stacks *stacks);
 void	ft_terminate_stacks(t_stacks *stacks);
-void	ft_rotate(t_dlist *a, size_t target_node_idx, char stack);
+char	*ft_get_rotate_op(t_dlist *dlist, size_t target_node_idx, char stack);
+void	ft_rotate_by_op(t_stacks *stacks, const char *op);
+void	ft_rotate(t_stacks *stacks, size_t target_node_idx, char stack_name);
 /* stack_rotate_in_range.c */
 void	ft_rotate_a_in_range(t_dlist *a, int l, int r);
 void	ft_rotate_b_until_find_id_or_more_in_range(t_dlist *b, int p, int l, int r);

@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 01:02:15 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/15 01:02:34 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/17 03:40:46 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int
 	}
 	while (max_node_idx != 1)
 	{
-		ft_rotate(&stacks->b, max_node_idx, 'b');
+		ft_rotate(stacks, max_node_idx, 'b');
 		max_node_idx = cdl_get_max_node_idx(&stacks->b);
 		if (max_node_idx == 0)
 			return (0);

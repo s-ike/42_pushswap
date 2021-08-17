@@ -154,27 +154,29 @@ static int
 }
 
 static void
-	rotate_a(t_dlist *a, int end_id)
+	rotate_a(t_stacks *stacks, int end_id)
 {
 	size_t	idx;
 	size_t	size;
 
 	if (end_id == -1)
 		return ;
-	size = cdl_size(a);
+	size = cdl_size(&stacks->a);
 	while (1)
 	{
-		idx = cdl_get_idx_by_id(a, end_id);
+		t_dnode	*debug = stacks->a.head->next;
+		(void)debug;
+		idx = cdl_get_idx_by_id(&stacks->a, end_id);
 		if (idx == 0)
 			return ;
 		else if (idx == size)
 			return ;
 		else if (idx == 1)
 		{
-			ft_rr(a, NULL);
+			ft_rr(&stacks->a, NULL);
 			return ;
 		}
-		ft_rotate(a, idx + 1, 'a');
+		ft_rotate(stacks, idx + 1, 'a');
 	}
 }
 
@@ -252,7 +254,7 @@ static void
 
 	if (cdl_is_empty(&stacks->b))
 		return ;
-	rotate_a(&stacks->a, l - 1);
+	rotate_a(stacks, l - 1);
 	pivot_id = (l + r) / 2; // 0-7の8要素で3になる
 	ret = pa_and_rotate_b(stacks, l, r, pivot_id);
 	if (!ret)
@@ -284,5 +286,5 @@ void
 			stacks->a.head, stacks->a.head->next, ft_is_ascending_order))
 		return ;
 	sort_7(stacks, 0, cdl_size(&stacks->a) - 1);
-	ft_rotate_a_until_min(&stacks->a);
+	ft_rotate_a_until_min(stacks);
 }
