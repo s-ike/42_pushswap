@@ -23,7 +23,7 @@ static int
 		ret = ft_push_max(stacks);
 		if (!ret)
 			return (ret);
-		return (ft_rotate_a_until_min(&stacks->a));
+		return (ft_rotate_a_until_min(stacks));
 	}
 	while (ret != SORTED && ret)
 	{
@@ -53,6 +53,6 @@ void
 	ret = push_to_b_and_rotate(stacks, size);
 	while (ret && stacks->b.head->next != stacks->b.head)
 		ret = ft_pa(&stacks->a, &stacks->b);
-	if (!ret || !ft_rotate_a_until_min(&stacks->a))
+	if (!ret || !ft_rotate_a_until_min(stacks))
 		ft_exit_failure(stacks);
 }
