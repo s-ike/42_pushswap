@@ -113,10 +113,7 @@ static int
 	ptr = stacks->b.head->next;
 	if (size <= 4)
 	{
-		// bの先頭が最小値であればpaしてrrかrb
 		ft_sort_6_b(stacks);
-		while (size--)
-			ft_rr(&stacks->a, NULL);
 		return (SORTED);
 	}
 	// is_last = FALSE;

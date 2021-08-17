@@ -6,32 +6,47 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 01:02:15 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/17 03:40:46 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/17 18:12:16 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int
-	push_max(t_stacks *stacks)
+// sort_7.cからコピー
+static void
+	ra_or_rr(t_stacks *stacks, int l)
 {
-	size_t	max_node_idx;
+	if (stacks->b.head->next->id == l)
+		return (ft_rr(&stacks->a, NULL));
+	else if (stacks->b.head->prev->id == l)
+	{
+		ft_rr(&stacks->a, NULL);
+		return (ft_rrr(NULL, &stacks->b));
+	}
+	else if (1 < cdl_size(&stacks->b))
+		return (ft_rr(&stacks->a, &stacks->b));
+}
+
+int
+	push_min(t_stacks *stacks)
+{
+	size_t	min_node_idx;
 	int		ret;
 
-	max_node_idx = cdl_get_max_node_idx(&stacks->b);
-	if (max_node_idx == 0)
+	min_node_idx = cdl_get_min_node_idx(&stacks->b);
+	if (min_node_idx == 0)
 		return (0);
-	if (max_node_idx == 2
-		&& stacks->b.head->next->next->id - 1 == stacks->b.head->next->id)
+	if (min_node_idx == 2
+		&& stacks->b.head->next->next->id + 1 == stacks->b.head->next->id)
 	{
 		ft_ss(NULL, &stacks->b);
-		max_node_idx = cdl_get_max_node_idx(&stacks->b);
+		min_node_idx = cdl_get_min_node_idx(&stacks->b);
 	}
-	while (max_node_idx != 1)
+	while (min_node_idx != 1)
 	{
-		ft_rotate(stacks, max_node_idx, 'b');
-		max_node_idx = cdl_get_max_node_idx(&stacks->b);
-		if (max_node_idx == 0)
+		ft_rotate(stacks, min_node_idx, 'b');
+		min_node_idx = cdl_get_min_node_idx(&stacks->b);
+		if (min_node_idx == 0)
 			return (0);
 	}
 	ret = ft_pa(&stacks->a, &stacks->b);
@@ -39,21 +54,24 @@ int
 }
 
 static int
-	push_to_a_and_rotate(t_stacks *stacks, size_t size)
+	pa_and_rotate(t_stacks *stacks, size_t size)
 {
 	int	ret;
 
 	ret = 1;
 	size = cdl_size(&stacks->b);
-	while (4 <= size)
+	while (size)
 	{
-		ret = push_max(stacks);
+		ret = push_min(stacks);
 		if (!ret)
 			return (ret);
 		size = cdl_size(&stacks->b);
+		// rr or ra
+		if (size)
+			ra_or_rr(stacks, cdl_get_min_node(&stacks->b)->id);
+		else
+			ra_or_rr(stacks, 0);
 	}
-	if (ret)
-		ret = ft_sort_3_b_and_pa(stacks);
 	return (ret);
 }
 
@@ -65,7 +83,7 @@ void
 
 	ret = 1;
 	size = cdl_size(&stacks->a);
-	ret = push_to_a_and_rotate(stacks, size);
+	ret = pa_and_rotate(stacks, size);
 	if (!ret)
 		ft_exit_failure(stacks);
 }
