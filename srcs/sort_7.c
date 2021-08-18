@@ -30,6 +30,31 @@ static int
 // 	return (0);
 // }
 
+static void
+	rotate_a(t_stacks *stacks, int end_id)
+{
+	size_t	idx;
+	size_t	size;
+
+	if (end_id == -1)
+		return ;
+	size = cdl_size(&stacks->a);
+	while (1)
+	{
+		idx = cdl_get_idx_by_id(&stacks->a, end_id);
+		if (idx == 0)
+			return ;
+		else if (idx == size)
+			return ;
+		else if (idx == 1)
+		{
+			ft_rr(&stacks->a, NULL);
+			return ;
+		}
+		ft_rotate(stacks, idx + 1, 'a');
+	}
+}
+
 static int
 	pb_and_rotate_a(t_stacks *stacks, int *l, int r, t_bool is_first)
 {
@@ -78,6 +103,9 @@ static int
 				&& (stacks->b.head->next->id == *l
 					|| (stacks->b.head->next->id == *l + 1 && cdl_get_min_node(&stacks->b)->id != *l)))
 				ft_rr(NULL, &stacks->b);
+			// if (1 < targets
+			// 	&& (*l <= stacks->b.head->next->id && stacks->b.head->next->id <= *l + (r - *l) / 5))
+			// 	ft_rr(NULL, &stacks->b);
 		}
 		else if (targets)
 			ft_rr(&stacks->a, NULL);
@@ -91,19 +119,24 @@ static int
 {
 	size_t	size;
 	t_dnode	*ptr;
-	// t_bool	is_last;
+	int		not_targets;
+	t_bool	not_targets_flag;
 
 	size = 0;
 	if (l <= r)
 		size = r - l + 1;
-	ptr = stacks->b.head->next;
 	if (size <= 4)
 	{
 		ft_sort_6_b(stacks);
 		return (SORTED);
 	}
-	// is_last = FALSE;
-	while (ptr != stacks->b.head)
+	not_targets = r - pivot_id + 1;
+	not_targets_flag = FALSE;
+	if (not_targets == 0)
+		not_targets_flag = TRUE;
+	ptr = stacks->b.head->next;
+	while (ptr != stacks->b.head
+		&& ((not_targets_flag == FALSE && not_targets) || not_targets_flag == TRUE))
 	{
 		// if (ptr->id + 1 == ptr->next->id && pivot_id <= ptr->next->id)
 		// 	ft_ss(NULL, &stacks->b);
@@ -126,6 +159,7 @@ static int
 		{
 			if (!ft_pa(&stacks->a, &stacks->b))
 				return (0);
+			not_targets--;
 		}
 		else if (stacks->b.head->prev->id == l)
 			ft_rrr(NULL, &stacks->b);
@@ -133,34 +167,31 @@ static int
 			ft_rotate_b_until_find_id_in_range(&stacks->b, pivot_id, l, r);
 		ptr = stacks->b.head->next;
 	}
-	return (1);
-}
-
-static void
-	rotate_a(t_stacks *stacks, int end_id)
-{
-	size_t	idx;
-	size_t	size;
-
-	if (end_id == -1)
-		return ;
-	size = cdl_size(&stacks->a);
-	while (1)
+	if (not_targets_flag == FALSE && not_targets == 0 && cdl_size(&stacks->b))
 	{
-		t_dnode	*debug = stacks->a.head->next;
-		(void)debug;
-		idx = cdl_get_idx_by_id(&stacks->a, end_id);
-		if (idx == 0)
-			return ;
-		else if (idx == size)
-			return ;
-		else if (idx == 1)
+		int	min_id;
+		int	max_id;
+		int	next_l;
+		int	ret;
+
+		min_id = cdl_get_min_node(&stacks->b)->id;
+		max_id = cdl_get_max_node(&stacks->b)->id;
+		ret = 1;
+		while (ret != SORTED && ret)
 		{
-			ft_rr(&stacks->a, NULL);
-			return ;
+			next_l = (min_id + max_id) / 2;
+			ret = pa_and_rotate_b(stacks, min_id, max_id, next_l);
+			if (ret != SORTED)
+				pb_and_rotate_a(stacks, &next_l, max_id, FALSE);
+			else if (!ret){}
+			if (ret != SORTED)
+				rotate_a(stacks, next_l - 1);
+			else
+				rotate_a(stacks, max_id);
+			min_id = next_l;
 		}
-		ft_rotate(stacks, idx + 1, 'a');
 	}
+	return (1);
 }
 
 // static void
