@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/20 11:09:34 by sikeda            #+#    #+#             */
+/*   Updated: 2021/08/20 11:15:20 by sikeda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int
@@ -21,7 +33,15 @@ static int
 	return (1);
 }
 
-#include <stdio.h>
+static void
+	test_print(t_stacks *stacks)
+{
+	ft_putendl_fd("a", STDOUT_FILENO);
+	cdl_print_dlist(&stacks->a);
+	ft_putendl_fd("b", STDOUT_FILENO);
+	cdl_print_dlist(&stacks->b);
+}
+
 int
 	main(int argc, char **argv)
 {
@@ -41,9 +61,7 @@ int
 	if (!make_stack_a(&stacks, &sort_list))
 		ft_exit_failure(&stacks);
 	ft_sort(&stacks);
-	// ft_putendl_fd("a", STDOUT_FILENO);
-	// cdl_print_dlist(&stacks.a);
-	// ft_putendl_fd("b", STDOUT_FILENO);
-	// cdl_print_dlist(&stacks.b);
+	if (0)
+		test_print(&stacks);
 	ft_exit_success(&stacks);
 }

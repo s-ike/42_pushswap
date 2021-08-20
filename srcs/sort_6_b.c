@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 01:02:15 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/17 18:50:30 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/20 11:19:39 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ static int
 		if (!ret)
 			return (ret);
 		size = cdl_size(&stacks->b);
-		// rr or ra
 		if (size)
 			ft_ra_or_rr(stacks, cdl_get_min_node(&stacks->b)->id);
 		else

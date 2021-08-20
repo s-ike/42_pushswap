@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:45:52 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/14 03:45:52 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/20 11:25:55 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ t_dnode
 	*cdl_get_node_by_id(t_dlist *dlist, int id)
 {
 	t_dnode	*ptr;
-
 
 	ptr = dlist->head->next;
 	while (ptr != dlist->head)

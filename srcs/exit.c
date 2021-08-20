@@ -6,13 +6,14 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:31:21 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/14 03:31:23 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/20 11:13:15 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 #ifdef LEAKS
+
 void
 	ft_exit_failure(t_stacks *stacks)
 {
@@ -29,8 +30,8 @@ void
 	system("leaks push_swap");
 	exit(EXIT_SUCCESS);
 }
-
 #else
+
 void
 	ft_exit_failure(t_stacks *stacks)
 {
