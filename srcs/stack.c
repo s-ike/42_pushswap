@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:20 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:10:21 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/20 22:56:47 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int
 {
 	if (cdl_init_dlist(&stacks->a))
 		return (cdl_init_dlist(&stacks->b));
+	cdl_terminate(&stacks->a);
 	return (0);
 }
 

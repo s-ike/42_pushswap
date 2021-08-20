@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:24 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:10:24 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/20 23:39:14 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ static int
 	while (ft_isdigit(*s))
 	{
 		num = num * 10 + *s - '0';
-		if (is_minus && (int64_t)__INT_MAX__ + 1 < num)
+		if (is_minus && (uint64_t)__INT_MAX__ + 1 < num)
 			return (-1);
 		else if (!is_minus && (uint64_t)__INT_MAX__ < num)
 			return (1);

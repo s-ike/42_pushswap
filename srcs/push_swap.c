@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:34 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:15:20 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/21 00:31:45 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,8 @@ int
 	t_stacks	stacks;
 	t_list		*sort_list;
 
+	if (argc < 2)
+		exit(EXIT_SUCCESS);
 	if (!ft_is_valid_args(argc, argv) || !ft_init_stacks(&stacks))
 	{
 		ft_putendl_fd(MSG_ERR, STDERR_FILENO);

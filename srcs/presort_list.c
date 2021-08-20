@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:40:50 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/14 03:49:59 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/21 00:12:44 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,21 +69,23 @@ int
 	ft_make_sort_list(t_list **sort_list, int argc, char **argv)
 {
 	t_list	*sort_node;
-	t_sort	*sort;
+	t_sort	*sort_info;
 	int		i;
 
 	*sort_list = NULL;
-	i = 1;
-	while (i < argc)
+	i = 0;
+	while (++i < argc)
 	{
-		sort_node = NULL;
-		sort = make_new_sort(i - 1, ft_atoi(argv[i]));
-		if (sort)
-			sort_node = ft_lstnew(sort);
-		if (!sort || !sort_node)
+		sort_info = make_new_sort(i - 1, ft_atoi(argv[i]));
+		if (!sort_info)
 			return (0);
+		sort_node = ft_lstnew(sort_info);
+		if (!sort_node)
+		{
+			free(sort_info);
+			return (0);
+		}
 		ft_lstadd_front(sort_list, sort_node);
-		i++;
 	}
 	ft_sort_list(sort_list, sort_list_n_order);
 	if (!ft_check_dup_n(sort_list))
