@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:11 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:10:12 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/21 00:40:19 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,9 @@ void
 	size = cdl_size(&stacks->a);
 	if (size <= 1)
 		return ;
-	if (size <= 3)
+	if (size == 2)
+		ft_sort_2(&stacks->a);
+	else if (size == 3)
 		ft_sort_3(&stacks->a);
 	else if (size <= 6)
 		ft_sort_6(stacks);
