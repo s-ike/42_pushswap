@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:44:45 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/14 03:44:46 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/20 00:31:34 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		cdl_ncmp(int n1, int n2);
 int		cdl_is_empty(const t_dlist *dlist);
 size_t	cdl_size(const t_dlist *dlist);
 int		cdl_is_sorted(t_dnode *head, t_dnode *start, int compare(int x, int y));
-int		cdl_is_sorted_asc_in_range(t_dlist *dlist, int start_id, int end_id);
+int		cdl_is_asc_order_range(t_dlist *dlist, int start_id, int end_id);
 /* init.c */
 int		cdl_init_dlist(t_dlist *dlist);
 /* print.c */

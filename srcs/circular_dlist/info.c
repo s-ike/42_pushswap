@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:45:32 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/14 03:45:33 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/20 00:31:34 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int
 }
 
 int
-	cdl_is_sorted_asc_in_range(t_dlist *dlist, int start_id, int end_id)
+	cdl_is_asc_order_range(t_dlist *dlist, int start_id, int end_id)
 {
 	t_dnode	*ptr;
 	t_dnode	*prev;

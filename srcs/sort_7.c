@@ -94,14 +94,18 @@ static int
 		// 	ft_rr(&stacks->a, &stacks->b);
 		// else if (targets)
 		// 	ft_rr(&stacks->a, NULL);
-		if (*l <= ptr->id && ptr->id <= r)
+		if (ptr->id <= r && ptr->next->id <= r && ptr->next != stacks->a.head
+		&& ptr->next->id == stacks->a.head->prev->id + 1
+		&& ptr->id == ptr->next->id + 1)
+			ft_ss(&stacks->a, NULL);
+		else if (*l <= ptr->id && ptr->id <= r)
 		{
 			ret = ft_pb(&stacks->a, &stacks->b);
 			targets--;
 			// pbする最後の要素の場合はbの先頭にあると良いので行わない
 			if (2 <= cdl_size(&stacks->b)
-				&& (stacks->b.head->next->id == *l
-					|| (stacks->b.head->next->id == *l + 1 && cdl_get_min_node(&stacks->b)->id != *l)))
+				&& (stacks->b.head->next->id == *l || stacks->b.head->next->id < (r - *l + 1) / 7 + *l + 1))
+					// || (stacks->b.head->next->id == *l + 1 && cdl_get_min_node(&stacks->b)->id != *l)))
 				ft_rr(NULL, &stacks->b);
 			// if (1 < targets
 			// 	&& (*l <= stacks->b.head->next->id && stacks->b.head->next->id <= *l + (r - *l) / 5))
@@ -231,33 +235,13 @@ static void
 	if (l == r)
 		return ;
 	ret = 1;
-	if (cdl_is_sorted_asc_in_range(&stacks->a, l, r))
+	if (cdl_is_asc_order_range(&stacks->a, l, r))
 		return ;
-	// check_range_a_is_sorted(&stacks->a, &l, r);
-	if (l != r)
-		ret = pb_and_rotate_a(stacks, &l, r, is_first);
+	ret = pb_and_rotate_a(stacks, &l, r, is_first);
 	if (!ret)
 	{
 	}
 	sort_b(stacks, l, r);
-}
-
-static void
-	sa(t_dlist *a, int r, int *p)
-{
-	t_dnode	*ptr;
-
-	ptr = a->head->next;
-	while (ptr != a->head && ptr->next != a->head && ptr->id <= r
-		&& ptr->next->id == a->head->prev->id + 1
-		&& ptr->id == ptr->next->id + 1)
-	{
-		ft_ss(a, NULL);
-		ft_rr(a, NULL);
-		ft_rr(a, NULL);
-		(*p) += 2;
-		ptr = a->head->next;
-	}
 }
 
 static void
@@ -274,7 +258,6 @@ static void
 	if (!ret)
 	{
 	}
-	sa(&stacks->a, r, &pivot_id);
 	sort_b(stacks, l, pivot_id - 1);
 	if (l == r || ret == SORTED)
 		return ;
