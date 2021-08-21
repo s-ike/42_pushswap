@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:04 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:10:05 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/21 16:13:34 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,65 +67,95 @@ static void
 	}
 }
 
+static void
+	skip_target(t_stacks *stacks, int *l, int *targets, t_bool *flag)
+{
+	t_dnode	*a_top;
+	t_dnode *a_btm;
+
+	a_top = stacks->a.head->next;
+	a_btm = stacks->a.head->prev;
+	if ((a_top->id == *l && (a_btm->id == *l - 1 || *flag == FALSE))
+	|| (a_btm->id == *l && (a_btm->prev->id == *l - 1 || *flag == FALSE)))
+	{
+		(*l)++;
+		(*targets)--;
+		*flag = TRUE;
+	}
+}
+
+static int
+	sa(t_stacks *stacks, int r)
+{
+	t_dnode	*a_top;
+	t_dnode	*a_btm;
+
+	a_top = stacks->a.head->next;
+	a_btm = stacks->a.head->prev;
+	if (a_top->id <= r
+		&& a_top->next->id <= r
+		&& a_top->next != stacks->a.head
+		&& a_top->next->id == a_btm->id + 1
+		&& a_top->id == a_top->next->id + 1)
+	{
+		ft_ss(&stacks->a, NULL);
+		return (1);
+	}
+	return (0);
+}
+
+static int
+	rb(t_stacks *stacks, int l, int r)
+{
+	t_dnode	*b_top;
+
+	b_top = stacks->b.head->next;
+	if (2 <= cdl_size(&stacks->b)
+		&& (b_top->id == l || b_top->id < (r - l + 1) / 7 + l + 1))
+	{
+		ft_rr(NULL, &stacks->b);
+		return (1);
+	}
+	return (0);
+}
+
+static int
+	pb(t_stacks *stacks, int l, int r, int *targets)
+{
+	int	ret;
+
+	ret = ft_pb(&stacks->a, &stacks->b);
+	(*targets)--;
+	if (ret)
+		rb(stacks, l, r);
+	return (ret);
+}
+
 static int
 	pb_and_rotate_a(t_stacks *stacks, int *l, int r, t_bool is_first)
 {
 	int		ret;
 	int		targets;
-	t_dnode	*ptr;
-	int		flag;
+	t_dnode	*a_top;
+	t_bool	flag;
 
 	ret = 1;
 	targets = 0;
 	if (*l <= r)
 		targets = r - *l + 1;
-	ptr = stacks->a.head->next;
-	flag = 0;
-	while (ret && targets && ptr != stacks->a.head)
+	a_top = stacks->a.head->next;
+	flag = FALSE;
+	while (ret && targets && a_top != stacks->a.head)
 	{
 		if (is_first == FALSE)
-		{
-			if ((stacks->a.head->next->id == *l
-				&& (stacks->a.head->prev->id == *l - 1 || !flag))
-			|| (stacks->a.head->prev->id == *l
-				&& (stacks->a.head->prev->prev->id == *l - 1 || !flag)))
-			{
-				(*l)++;
-				targets--;
-				flag = 1;
-			}
-		}
-		// if (*l <= ptr->id && ptr->id <= r && can_rotate_b(&stacks->b, *l, r))
-		// 	ft_rr(NULL, &stacks->b);
-		// else if (*l <= ptr->id && ptr->id <= r)
-		// {
-		// 	ret = ft_pb(&stacks->a, &stacks->b);
-		// 	targets--;
-		// }
-		// else if (targets && can_rotate_b(&stacks->b, *l, r))
-		// 	ft_rr(&stacks->a, &stacks->b);
-		// else if (targets)
-		// 	ft_rr(&stacks->a, NULL);
-		if (ptr->id <= r && ptr->next->id <= r && ptr->next != stacks->a.head
-		&& ptr->next->id == stacks->a.head->prev->id + 1
-		&& ptr->id == ptr->next->id + 1)
-			ft_ss(&stacks->a, NULL);
-		else if (*l <= ptr->id && ptr->id <= r)
-		{
-			ret = ft_pb(&stacks->a, &stacks->b);
-			targets--;
-			// pbする最後の要素の場合はbの先頭にあると良いので行わない
-			if (2 <= cdl_size(&stacks->b)
-				&& (stacks->b.head->next->id == *l || stacks->b.head->next->id < (r - *l + 1) / 7 + *l + 1))
-					// || (stacks->b.head->next->id == *l + 1 && cdl_get_min_node(&stacks->b)->id != *l)))
-				ft_rr(NULL, &stacks->b);
-			// if (1 < targets
-			// 	&& (*l <= stacks->b.head->next->id && stacks->b.head->next->id <= *l + (r - *l) / 5))
-			// 	ft_rr(NULL, &stacks->b);
-		}
+			skip_target(stacks, l, &targets, &flag);
+		if (sa(stacks, r))
+			;
+		else if (*l <= a_top->id && a_top->id <= r)
+			pb(stacks, *l, r, &targets);
 		else if (targets)
 			ft_rr(&stacks->a, NULL);
-		ptr = stacks->a.head->next;
+		a_top = stacks->a.head->next;
 	}
 	return (ret);
 }
@@ -246,13 +276,11 @@ static void
 
 	if (l == r)
 		return ;
-	ret = 1;
 	if (cdl_is_asc_order_range(&stacks->a, l, r))
 		return ;
 	ret = pb_and_rotate_a(stacks, &l, r, is_first);
 	if (!ret)
-	{
-	}
+		return (ft_exit_failure(stacks));
 	sort_b(stacks, l, r);
 }
 
@@ -265,11 +293,10 @@ static void
 	if (cdl_is_empty(&stacks->b))
 		return ;
 	rotate_a(stacks, l - 1);
-	pivot_id = (l + r) / 2; // 0-7の8要素で3になる
+	pivot_id = (l + r) / 2;
 	ret = pa_and_rotate_b(stacks, l, r, pivot_id);
 	if (!ret)
-	{
-	}
+		return (ft_exit_failure(stacks));
 	sort_b(stacks, l, pivot_id - 1);
 	if (l == r || ret == SORTED)
 		return ;
