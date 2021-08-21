@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sort_7_pa.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/08/21 22:44:35 by sikeda            #+#    #+#             */
+/*   Updated: 2021/08/22 02:32:07 by sikeda           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "push_swap.h"
 
 static int
@@ -6,6 +18,7 @@ static int
 	if (!ft_pa(&stacks->a, &stacks->b))
 		return (0);
 	(*l)++;
+	// このrr判定と、ft_rotate_b_until_find_id_in_rangeの判定が違う（rr,rrbが起きる）
 	ft_ra_or_rr(stacks, *l);
 	return (1);
 }
@@ -49,7 +62,7 @@ int
 	size = 0;
 	if (l <= r)
 		size = r - l + 1;
-	if (size <= 4)
+	if (size < SORTSIZE)
 	{
 		ft_sort_6_b(stacks);
 		return (SORTED);

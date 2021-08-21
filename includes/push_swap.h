@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/21 21:51:43 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/22 02:32:00 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@
 # define OP_RRR "rrr"
 
 # define SORTED -1
+# define SORTSIZE 7
 
 typedef struct s_stacks
 {
