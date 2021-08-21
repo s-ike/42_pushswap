@@ -6,41 +6,11 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:04 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/21 16:13:34 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/21 16:36:30 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-/*
-static int
-	cnt_more_than_id_in_range(t_dlist *dlist, int l, int r, int pivot)
-{
-	t_dnode	*ptr;
-	int		cnt;
-
-	ptr = dlist->head->next;
-	cnt = 0;
-	while (ptr != dlist->head)
-	{
-		if (l <= ptr->id && ptr->id <= r && pivot <= ptr->id)
-			cnt++;
-		ptr = ptr->next;
-	}
-	return (cnt);
-}*/
-
-// static int
-// 	can_rotate_b(t_dlist *b, int l, int r)
-// {
-// 	int	pivot_id;
-
-// 	if (cdl_is_empty(b) || cdl_size(b) == 1)
-// 		return (0);
-// 	pivot_id = (l + r) / 2;
-// 	if (b->head->next->id < pivot_id && pivot_id <= b->head->next->next->id)
-// 		return (1);
-// 	return (0);
-// }
 
 static void
 	rotate_a(t_stacks *stacks, int end_id)
@@ -65,99 +35,6 @@ static void
 		}
 		ft_rotate(stacks, idx + 1, 'a');
 	}
-}
-
-static void
-	skip_target(t_stacks *stacks, int *l, int *targets, t_bool *flag)
-{
-	t_dnode	*a_top;
-	t_dnode *a_btm;
-
-	a_top = stacks->a.head->next;
-	a_btm = stacks->a.head->prev;
-	if ((a_top->id == *l && (a_btm->id == *l - 1 || *flag == FALSE))
-	|| (a_btm->id == *l && (a_btm->prev->id == *l - 1 || *flag == FALSE)))
-	{
-		(*l)++;
-		(*targets)--;
-		*flag = TRUE;
-	}
-}
-
-static int
-	sa(t_stacks *stacks, int r)
-{
-	t_dnode	*a_top;
-	t_dnode	*a_btm;
-
-	a_top = stacks->a.head->next;
-	a_btm = stacks->a.head->prev;
-	if (a_top->id <= r
-		&& a_top->next->id <= r
-		&& a_top->next != stacks->a.head
-		&& a_top->next->id == a_btm->id + 1
-		&& a_top->id == a_top->next->id + 1)
-	{
-		ft_ss(&stacks->a, NULL);
-		return (1);
-	}
-	return (0);
-}
-
-static int
-	rb(t_stacks *stacks, int l, int r)
-{
-	t_dnode	*b_top;
-
-	b_top = stacks->b.head->next;
-	if (2 <= cdl_size(&stacks->b)
-		&& (b_top->id == l || b_top->id < (r - l + 1) / 7 + l + 1))
-	{
-		ft_rr(NULL, &stacks->b);
-		return (1);
-	}
-	return (0);
-}
-
-static int
-	pb(t_stacks *stacks, int l, int r, int *targets)
-{
-	int	ret;
-
-	ret = ft_pb(&stacks->a, &stacks->b);
-	(*targets)--;
-	if (ret)
-		rb(stacks, l, r);
-	return (ret);
-}
-
-static int
-	pb_and_rotate_a(t_stacks *stacks, int *l, int r, t_bool is_first)
-{
-	int		ret;
-	int		targets;
-	t_dnode	*a_top;
-	t_bool	flag;
-
-	ret = 1;
-	targets = 0;
-	if (*l <= r)
-		targets = r - *l + 1;
-	a_top = stacks->a.head->next;
-	flag = FALSE;
-	while (ret && targets && a_top != stacks->a.head)
-	{
-		if (is_first == FALSE)
-			skip_target(stacks, l, &targets, &flag);
-		if (sa(stacks, r))
-			;
-		else if (*l <= a_top->id && a_top->id <= r)
-			pb(stacks, *l, r, &targets);
-		else if (targets)
-			ft_rr(&stacks->a, NULL);
-		a_top = stacks->a.head->next;
-	}
-	return (ret);
 }
 
 static int
@@ -228,7 +105,7 @@ static int
 			next_l = (min_id + max_id) / 2;
 			ret = pa_and_rotate_b(stacks, min_id, max_id, next_l);
 			if (ret != SORTED)
-				pb_and_rotate_a(stacks, &next_l, max_id, FALSE);
+				ft_pb_and_rotate_a(stacks, &next_l, max_id, FALSE);
 			else if (!ret){}
 			if (ret != SORTED)
 				rotate_a(stacks, next_l - 1);
@@ -239,33 +116,6 @@ static int
 	}
 	return (1);
 }
-
-// static void
-// 	check_range_a_is_sorted(t_dlist *a, int *l, int r)
-// {
-// 	t_dnode	*start;
-// 	t_dnode	*ptr;
-// 	t_dnode	*prev;
-
-// 	ptr = cdl_get_node_by_id(a, *l);
-// 	if (!ptr)
-// 		return ;
-// 	start = ptr;
-// 	prev = ptr;
-// 	ptr = ptr->next;
-// 	if (ptr == a->head)
-// 		ptr = ptr->next;
-// 	while (ptr != start)
-// 	{
-// 		if (r < ptr->id || prev->id + 1 != ptr->id)
-// 			break ;
-// 		(*l)++;
-// 		prev = ptr;
-// 		ptr = ptr->next;
-// 		if (ptr == a->head)
-// 			ptr = ptr->next;
-// 	}
-// }
 
 static void	sort_b(t_stacks *stacks, int l, int r);
 
@@ -278,7 +128,7 @@ static void
 		return ;
 	if (cdl_is_asc_order_range(&stacks->a, l, r))
 		return ;
-	ret = pb_and_rotate_a(stacks, &l, r, is_first);
+	ret = ft_pb_and_rotate_a(stacks, &l, r, is_first);
 	if (!ret)
 		return (ft_exit_failure(stacks));
 	sort_b(stacks, l, r);

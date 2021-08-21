@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:22:02 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/21 16:34:18 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ void	ft_sort_6(t_stacks *stacks);
 void	ft_sort_6_b(t_stacks *stacks);
 /* sort_7.c */
 void	ft_sort_7(t_stacks *stacks);
+/* sort_7_pb.c */
+int		ft_pb_and_rotate_a(t_stacks *stacks, int *l, int r, t_bool is_first);
 /* sort_6_utils.c */
 int		ft_check_circular_sorted(t_dlist *dlist, t_dnode *skip);
 int		ft_rotate_a_until_min(t_stacks *stacks);
