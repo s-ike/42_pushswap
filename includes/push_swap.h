@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/21 16:34:18 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/21 21:51:43 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,10 @@ void	ft_sort_6(t_stacks *stacks);
 /* sort_6_b.c */
 void	ft_sort_6_b(t_stacks *stacks);
 /* sort_7.c */
+void	ft_rotate_a(t_stacks *stacks, int end_id);
 void	ft_sort_7(t_stacks *stacks);
+/* sort_7_pa.c */
+int		ft_pa_and_rotate_b(t_stacks *stacks, int l, int r, int pivot_id);
 /* sort_7_pb.c */
 int		ft_pb_and_rotate_a(t_stacks *stacks, int *l, int r, t_bool is_first);
 /* sort_6_utils.c */

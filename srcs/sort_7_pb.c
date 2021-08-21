@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 16:32:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/21 16:33:44 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/21 22:37:05 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,11 @@ static int
 static int
 	pb(t_stacks *stacks, int l, int r, int *targets)
 {
-	int	ret;
-
-	ret = ft_pb(&stacks->a, &stacks->b);
+	if (!ft_pb(&stacks->a, &stacks->b))
+		return (0);
 	(*targets)--;
-	if (ret)
-		rb(stacks, l, r);
-	return (ret);
+	rb(stacks, l, r);
+	return (1);
 }
 
 int
@@ -97,7 +95,7 @@ int
 		if (sa(stacks, r))
 			;
 		else if (*l <= a_top->id && a_top->id <= r)
-			pb(stacks, *l, r, &targets);
+			ret = pb(stacks, *l, r, &targets);
 		else if (targets)
 			ft_rr(&stacks->a, NULL);
 		a_top = stacks->a.head->next;
