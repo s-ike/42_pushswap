@@ -6,11 +6,61 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 22:44:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/22 02:32:07 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/22 21:51:31 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+static void
+	cnt_rotate_b(t_dnode **ptr, int *start_id, size_t *cnt, int target_id)
+{
+	int	flag[LR];
+
+	flag[L] = 0;
+	flag[R] = 0;
+	while (ptr[L]->id != start_id[R] && ptr[R]->id != start_id[L])
+	{
+		if (ptr[L]->id != start_id[R] && ptr[L]->id != target_id)
+		{
+			ptr[L] = ptr[L]->next;
+			cnt[L]++;
+		}
+		else
+			flag[L] = 1;
+		if (ptr[R]->id != start_id[L] && ptr[R]->id != target_id)
+		{
+			ptr[R] = ptr[R]->prev;
+			cnt[R]++;
+		}
+		else
+			flag[R] = 1;
+		if ((flag[L] && flag[R]) || cnt[L] < cnt[R])
+			break ;
+	}
+}
+
+static char
+	*rotate_b(t_dlist *b, int target_id)
+{
+	t_dnode	*ptr[LR];
+	int		start_id[LR];
+	size_t	cnt[LR];
+
+	ptr[L] = b->head->next;
+	ptr[R] = b->head->prev;
+	start_id[L] = ptr[L]->id;
+	start_id[R] = ptr[R]->id;
+	cnt[L] = 0;
+	cnt[R] = 0;
+	cnt_rotate_b(ptr, start_id, cnt, target_id);
+	if (cnt[L] < cnt[R])
+		return (OP_RB);
+	else if (cnt[R] < cnt[L] / 2)
+		return (OP_RRB);
+	else
+		return (OP_RB);
+}
 
 static int
 	pa_and_rotate_a(t_stacks *stacks, int *l)
@@ -18,8 +68,12 @@ static int
 	if (!ft_pa(&stacks->a, &stacks->b))
 		return (0);
 	(*l)++;
-	// このrr判定と、ft_rotate_b_until_find_id_in_rangeの判定が違う（rr,rrbが起きる）
-	ft_ra_or_rr(stacks, *l);
+	if (stacks->b.head->next->id == *l)
+		ft_rr(&stacks->a, NULL);
+	else if (!ft_strcmp(rotate_b(&stacks->b, *l), OP_RB))
+		ft_rr(&stacks->a, &stacks->b);
+	else
+		ft_rr(&stacks->a, NULL);
 	return (1);
 }
 
@@ -90,7 +144,7 @@ int
 		else if (stacks->b.head->prev->id == l)
 			ft_rrr(NULL, &stacks->b);
 		else
-			ft_rotate_b_until_find_id_in_range(&stacks->b, pivot_id, l, r);
+			ft_rotate_by_op(stacks, rotate_b(&stacks->b, l));
 		ptr = stacks->b.head->next;
 	}
 	if (not_targets_flag == FALSE && not_targets == 0 && cdl_size(&stacks->b))
