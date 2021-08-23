@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 16:32:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 01:41:08 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 00:27:58 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ static int
 
 	b_top = ps->stacks->b.head->next;
 	if (2 <= cdl_size(&ps->stacks->b)
-		&& (b_top->id == l || b_top->id < (r - l + 1) / SORTSIZE + l + 1))
+		&& (b_top->id == l || b_top->id < (r - l + 1) / RB_SIZE + l + 1))
 	{
 		ft_rr(NULL, &ps->stacks->b, ps);
 		return (1);
