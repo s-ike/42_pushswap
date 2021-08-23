@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 02:17:22 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 00:49:38 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,12 @@ typedef struct s_pushswap
 	t_list		*ans;
 }	t_pushswap;
 
+/* ans_list.c */
+int		ft_add_ans(t_list **ans, char *op);
+int		ft_optimize_ans(t_list *ans);
 /* exit.c */
 void	ft_exit_failure(t_stacks *stacks);
 void	ft_exit_success(t_stacks *stacks);
-/* op_list.c */
-int		ft_add_op_to_ans(t_list **ans, char *op);
 /* op_push.c */
 int		ft_pa(t_dlist *a, t_dlist *b, t_pushswap *ps);
 int		ft_pb(t_dlist *a, t_dlist *b, t_pushswap *ps);

@@ -2,8 +2,8 @@ NAME		:= push_swap
 
 SRCSDIR		:= ./srcs/
 SRCS		:= push_swap.c \
+				ans_list.c \
 				exit.c \
-				op_list.c \
 				op_push.c \
 				op_rotate.c \
 				op_rrotate.c \

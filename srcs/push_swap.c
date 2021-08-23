@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:34 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 21:45:57 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/23 22:43:01 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ int
 	ps.stacks = &stacks;
 	ps.ans = NULL;
 	ft_sort(&ps);
+	ft_optimize_ans(ps.ans);
 	t_list	*ans_ptr;
 	ans_ptr = ps.ans;
 	while (ans_ptr)
