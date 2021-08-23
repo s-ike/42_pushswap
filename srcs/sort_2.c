@@ -6,20 +6,20 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:38 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:09:39 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/22 23:59:47 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-	ft_sort_2(t_dlist *a)
+	ft_sort_2(t_pushswap *ps)
 {
 	int	x;
 	int	y;
 
-	x = a->head->next->n;
-	y = a->head->next->next->n;
+	x = ps->stacks->a.head->next->n;
+	y = ps->stacks->a.head->next->next->n;
 	if (y < x)
-		ft_ss(a, NULL);
+		ft_ss(&ps->stacks->a, NULL, ps);
 }

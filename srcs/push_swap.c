@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:34 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/21 00:31:45 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/23 21:45:57 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ static void
 int
 	main(int argc, char **argv)
 {
+	t_pushswap	ps;
 	t_stacks	stacks;
 	t_list		*sort_list;
 
@@ -62,8 +63,19 @@ int
 	}
 	if (!make_stack_a(&stacks, &sort_list))
 		ft_exit_failure(&stacks);
-	ft_sort(&stacks);
+	ps.stacks = &stacks;
+	ps.ans = NULL;
+	ft_sort(&ps);
+	t_list	*ans_ptr;
+	ans_ptr = ps.ans;
+	while (ans_ptr)
+	{
+		ft_putendl_fd(ans_ptr->content, STDOUT_FILENO);
+		ans_ptr = ans_ptr->next;
+	}
 	if (0)
-		test_print(&stacks);
+		test_print(ps.stacks);
 	ft_exit_success(&stacks);
+	// TODO:
+	// ft_lstclear(&ps.ans, free);
 }

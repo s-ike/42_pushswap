@@ -6,39 +6,43 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 00:58:25 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/15 17:27:34 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/23 01:53:19 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static int
-	pa(t_stacks *stacks, size_t n)
+	pa(t_pushswap *ps, size_t n)
 {
 	int	ret;
+	t_dlist	*a;
+	t_dlist	*b;
 
+	a = &ps->stacks->a;
+	b = &ps->stacks->b;
 	if (n <= 0)
 		return (1);
-	ret = ft_pa(&stacks->a, &stacks->b);
+	ret = ft_pa(a, b, ps);
 	n--;
 	while (n-- && ret)
-		ret = ft_pa(&stacks->a, &stacks->b);
+		ret = ft_pa(a, b, ps);
 	return (ret);
 }
 
 static int
-	sort_2_and_pa(t_stacks *stacks)
+	sort_2_and_pa(t_pushswap *ps)
 {
 	t_dlist	*b;
 	int		x;
 	int		y;
 
-	b = &stacks->b;
+	b = &ps->stacks->b;
 	x = b->head->next->n;
 	y = b->head->next->next->n;
 	if (x < y)
-		ft_ss(NULL, b);
-	return (pa(stacks, 2));
+		ft_ss(NULL, b, ps);
+	return (pa(ps, 2));
 }
 
 /*
@@ -49,42 +53,44 @@ else if (n[2] < n[0] && n[0] < n[1]) // 2,3,1
 else if (n[1] < n[2] && n[2] < n[0]) // 3,1,2
 */
 static int
-	sort_3_and_pa(t_stacks *stacks)
+	sort_3_and_pa(t_pushswap *ps)
 {
 	int	n[3];
+	t_dlist	*b;
 
-	n[0] = stacks->b.head->next->n;
-	n[1] = stacks->b.head->next->next->n;
-	n[2] = stacks->b.head->next->next->next->n;
+	b = &ps->stacks->b;
+	n[0] = b->head->next->n;
+	n[1] = b->head->next->next->n;
+	n[2] = b->head->next->next->next->n;
 	if (n[1] < n[0] && n[0] < n[2])
-		ft_rrr(NULL, &stacks->b);
+		ft_rrr(NULL, b, ps);
 	else if (n[0] < n[1] && n[1] < n[2])
 	{
-		ft_ss(NULL, &stacks->b);
-		ft_rrr(NULL, &stacks->b);
+		ft_ss(NULL, b, ps);
+		ft_rrr(NULL, b, ps);
 	}
 	else if (n[0] < n[2] && n[2] < n[1])
-		ft_rr(NULL, &stacks->b);
+		ft_rr(NULL, b, ps);
 	else if (n[2] < n[0] && n[0] < n[1])
-		ft_ss(NULL, &stacks->b);
+		ft_ss(NULL, b, ps);
 	else if (n[1] < n[2] && n[2] < n[0])
 	{
-		if (ft_pa(&stacks->a, &stacks->b))
-			ft_ss(NULL, &stacks->b);
+		if (ft_pa(&ps->stacks->a, b, ps))
+			ft_ss(NULL, b, ps);
 		else
 			return (0);
 	}
-	return (pa(stacks, cdl_size(&stacks->b)));
+	return (pa(ps, cdl_size(b)));
 }
 
 int
-	ft_sort_3_b_and_pa(t_stacks *stacks)
+	ft_sort_3_b_and_pa(t_pushswap *ps)
 {
 	size_t	size;
 
-	size = cdl_size(&stacks->b);
+	size = cdl_size(&ps->stacks->b);
 	if (size == 2)
-		return (sort_2_and_pa(stacks));
+		return (sort_2_and_pa(ps));
 	else
-		return (sort_3_and_pa(stacks));
+		return (sort_3_and_pa(ps));
 }

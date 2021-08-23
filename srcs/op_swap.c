@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:04 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:09:04 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/22 23:55:51 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,22 +33,27 @@ static void
 	sa_or_sb(b);
 }
 
-void
-	ft_ss(t_dlist *a, t_dlist *b)
+int
+	ft_ss(t_dlist *a, t_dlist *b, t_pushswap *ps)
 {
+	char	*op;
+
 	if (b == NULL)
 	{
 		sa_or_sb(a);
-		ft_putendl_fd("sa", STDOUT_FILENO);
+		op = ft_strdup(OP_SA);
 	}
 	else if (a == NULL)
 	{
 		sa_or_sb(b);
-		ft_putendl_fd("sb", STDOUT_FILENO);
+		op = ft_strdup(OP_SB);
 	}
 	else
 	{
 		ss(a, b);
-		ft_putendl_fd("ss", STDOUT_FILENO);
+		op = ft_strdup(OP_SS);
 	}
+	if (!op)
+		return (0);
+	return (ft_add_op_to_ans(&ps->ans, op));
 }

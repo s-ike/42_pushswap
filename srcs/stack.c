@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:20 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 22:56:47 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/23 01:43:07 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,25 @@ void
 	cdl_terminate(&stacks->b);
 	return ;
 }
-
-void
-	ft_ra_or_rr(t_stacks *stacks, int target)
+// 返り値voidにしていくかどうか
+int
+	ft_ra_or_rr(t_pushswap *ps, int target)
 {
-	if (stacks->b.head->next->id == target)
-		return (ft_rr(&stacks->a, NULL));
-	else if (2 < cdl_size(&stacks->b) && stacks->b.head->prev->id == target)
+	t_dlist	*a;
+	t_dlist	*b;
+
+	a = &ps->stacks->a;
+	b = &ps->stacks->b;
+	if (b->head->next->id == target)
+		return (ft_rr(a, NULL, ps));
+	else if (2 < cdl_size(b) && b->head->prev->id == target)
 	{
-		ft_rr(&stacks->a, NULL);
-		return (ft_rrr(NULL, &stacks->b));
+		ft_rr(a, NULL, ps);
+		return (ft_rrr(NULL, b, ps));
 	}
-	else if (1 < cdl_size(&stacks->b))
-		return (ft_rr(&stacks->a, &stacks->b));
+	else if (1 < cdl_size(b))
+		return (ft_rr(a, b, ps));
+	return (1);
 }
 
 char
@@ -65,30 +71,35 @@ char
 }
 
 void
-	ft_rotate_by_op(t_stacks *stacks, const char *op)
+	ft_rotate_by_op(t_pushswap *ps, const char *op)
 {
+	t_dlist	*a;
+	t_dlist	*b;
+
+	a = &ps->stacks->a;
+	b = &ps->stacks->b;
 	if (!ft_strcmp(op, OP_RA))
-		ft_rr(&stacks->a, NULL);
+		ft_rr(a, NULL, ps);
 	else if (!ft_strcmp(op, OP_RB))
-		ft_rr(NULL, &stacks->b);
+		ft_rr(NULL, b, ps);
 	else if (!ft_strcmp(op, OP_RRA))
-		ft_rrr(&stacks->a, NULL);
+		ft_rrr(a, NULL, ps);
 	else if (!ft_strcmp(op, OP_RRB))
-		ft_rrr(NULL, &stacks->b);
+		ft_rrr(NULL, b, ps);
 	else if (!ft_strcmp(op, OP_RR))
-		ft_rr(&stacks->a, &stacks->b);
+		ft_rr(a, b, ps);
 	else if (!ft_strcmp(op, OP_RRR))
-		ft_rrr(&stacks->a, &stacks->b);
+		ft_rrr(a, b, ps);
 }
 
 void
-	ft_rotate(t_stacks *stacks, size_t target_node_idx, char stack_name)
+	ft_rotate(t_pushswap *ps, size_t target_node_idx, char stack_name)
 {
 	char	*op;
 
 	if (stack_name == 'a')
-		op = ft_get_rotate_op(&stacks->a, target_node_idx, stack_name);
+		op = ft_get_rotate_op(&ps->stacks->a, target_node_idx, stack_name);
 	else
-		op = ft_get_rotate_op(&stacks->b, target_node_idx, stack_name);
-	ft_rotate_by_op(stacks, op);
+		op = ft_get_rotate_op(&ps->stacks->b, target_node_idx, stack_name);
+	ft_rotate_by_op(ps, op);
 }

@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:46 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:09:47 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/23 00:16:46 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,29 @@ else if (x < z && z < y) // 1,3,2
 else if (z < x && x < y) // 2,3,1
 */
 void
-	ft_sort_3(t_dlist *a)
+	ft_sort_3(t_pushswap *ps)
 {
 	int	x;
 	int	y;
 	int	z;
 
-	x = a->head->next->n;
-	y = a->head->next->next->n;
-	z = a->head->next->next->next->n;
+	x = ps->stacks->a.head->next->n;
+	y = ps->stacks->a.head->next->next->n;
+	z = ps->stacks->a.head->next->next->next->n;
 	if (y < x && x < z)
-		ft_ss(a, NULL);
+		ft_ss(&ps->stacks->a, NULL, ps);
 	else if (z < y && y < x)
 	{
-		ft_ss(a, NULL);
-		ft_rrr(a, NULL);
+		ft_ss(&ps->stacks->a, NULL, ps);
+		ft_rrr(&ps->stacks->a, NULL, ps);
 	}
 	else if (y < z && z < x)
-		ft_rr(a, NULL);
+		ft_rr(&ps->stacks->a, NULL, ps);
 	else if (x < z && z < y)
 	{
-		ft_ss(a, NULL);
-		ft_rr(a, NULL);
+		ft_ss(&ps->stacks->a, NULL, ps);
+		ft_rr(&ps->stacks->a, NULL, ps);
 	}
 	else if (z < x && x < y)
-		ft_rrr(a, NULL);
+		ft_rrr(&ps->stacks->a, NULL, ps);
 }

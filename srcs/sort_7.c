@@ -6,90 +6,95 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:04 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/21 22:15:38 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/23 01:03:58 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 void
-	ft_rotate_a(t_stacks *stacks, int end_id)
+	ft_rotate_a(t_pushswap *ps, int end_id)
 {
+	t_dlist	*a;
 	size_t	idx;
 	size_t	size;
 
+	a = &ps->stacks->a;
 	if (end_id == -1)
 		return ;
-	size = cdl_size(&stacks->a);
+	size = cdl_size(a);
 	while (1)
 	{
-		idx = cdl_get_idx_by_id(&stacks->a, end_id);
+		idx = cdl_get_idx_by_id(a, end_id);
 		if (idx == 0)
 			return ;
 		else if (idx == size)
 			return ;
 		else if (idx == 1)
 		{
-			ft_rr(&stacks->a, NULL);
+			ft_rr(a, NULL, ps);
 			return ;
 		}
-		ft_rotate(stacks, idx + 1, 'a');
+		ft_rotate(ps, idx + 1, 'a');
 	}
 }
 
-static void	sort_b(t_stacks *stacks, int l, int r);
+static void	sort_b(t_pushswap *ps, int l, int r);
 
 static void
-	sort_a(t_stacks *stacks, int l, int r, t_bool is_first)
+	sort_a(t_pushswap *ps, int l, int r, t_bool is_first)
 {
 	int	ret;
 
 	if (l == r)
 		return ;
-	if (cdl_is_asc_order_range(&stacks->a, l, r))
+	if (cdl_is_asc_order_range(&ps->stacks->a, l, r))
 		return ;
-	ret = ft_pb_and_rotate_a(stacks, &l, r, is_first);
+	ret = ft_pb_and_rotate_a(ps, &l, r, is_first);
 	if (!ret)
-		return (ft_exit_failure(stacks));
-	sort_b(stacks, l, r);
+		return (ft_exit_failure(ps->stacks));
+	sort_b(ps, l, r);
 }
 
 static void
-	sort_b(t_stacks *stacks, int l, int r)
+	sort_b(t_pushswap *ps, int l, int r)
 {
 	int	pivot_id;
 	int	ret;
 
-	if (cdl_is_empty(&stacks->b))
+	if (cdl_is_empty(&ps->stacks->b))
 		return ;
-	ft_rotate_a(stacks, l - 1);
+	ft_rotate_a(ps, l - 1);
 	pivot_id = (l + r) / 2;
-	ret = ft_pa_and_rotate_b(stacks, l, r, pivot_id);
+	ret = ft_pa_and_rotate_b(ps, l, r, pivot_id);
 	if (!ret)
-		return (ft_exit_failure(stacks));
+		return (ft_exit_failure(ps->stacks));
 	if (l == r || ret == SORTED)
 		return ;
-	sort_a(stacks, pivot_id, r, FALSE);
+	sort_a(ps, pivot_id, r, FALSE);
 }
 
 static void
-	sort_7(t_stacks *stacks, int l, int r)
+	sort_7(t_pushswap *ps, int l, int r)
 {
 	int	pivot_id;
 
 	if (l == r)
 		return ;
 	pivot_id = (l + r) / 2;
-	sort_a(stacks, l, pivot_id, TRUE);
-	sort_a(stacks, pivot_id, r, FALSE);
+	sort_a(ps, l, pivot_id, TRUE);
+	sort_a(ps, pivot_id, r, FALSE);
 }
 
 void
-	ft_sort_7(t_stacks *stacks)
+	ft_sort_7(t_pushswap *ps)
 {
+	t_dlist	*a;
+
+	a = &ps->stacks->a;
 	if (cdl_is_sorted(
-			stacks->a.head, stacks->a.head->next, ft_is_ascending_order))
+			a->head, a->head->next, ft_is_ascending_order))
 		return ;
-	sort_7(stacks, 0, cdl_size(&stacks->a) - 1);
-	ft_rotate_a_until_min(stacks);
+	sort_7(ps, 0, cdl_size(a) - 1);
+	ft_rotate_a_until_min(ps);
 }

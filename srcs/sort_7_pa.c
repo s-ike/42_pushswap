@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 22:44:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/22 21:51:31 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/23 01:26:23 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,50 +63,55 @@ static char
 }
 
 static int
-	pa_and_rotate_a(t_stacks *stacks, int *l)
+	pa_and_rotate_a(t_pushswap *ps, int *l)
 {
-	if (!ft_pa(&stacks->a, &stacks->b))
+	t_dlist	*a;
+	t_dlist	*b;
+
+	a = &ps->stacks->a;
+	b = &ps->stacks->b;
+	if (!ft_pa(a, b, ps))
 		return (0);
 	(*l)++;
-	if (stacks->b.head->next->id == *l)
-		ft_rr(&stacks->a, NULL);
-	else if (!ft_strcmp(rotate_b(&stacks->b, *l), OP_RB))
-		ft_rr(&stacks->a, &stacks->b);
+	if (b->head->next->id == *l)
+		ft_rr(a, NULL, ps);
+	else if (!ft_strcmp(rotate_b(b, *l), OP_RB))
+		ft_rr(a, b, ps);
 	else
-		ft_rr(&stacks->a, NULL);
+		ft_rr(a, NULL, ps);
 	return (1);
 }
 
 static int
-	split_b(t_stacks *stacks)
+	split_b(t_pushswap *ps)
 {
 	int	min_id;
 	int	max_id;
 	int	pivot_id;
 	int	ret;
 
-	min_id = cdl_get_min_node(&stacks->b)->id;
-	max_id = cdl_get_max_node(&stacks->b)->id;
+	min_id = cdl_get_min_node(&ps->stacks->b)->id;
+	max_id = cdl_get_max_node(&ps->stacks->b)->id;
 	ret = 1;
 	while (ret != SORTED && ret)
 	{
 		pivot_id = (min_id + max_id) / 2;
-		ret = ft_pa_and_rotate_b(stacks, min_id, max_id, pivot_id);
+		ret = ft_pa_and_rotate_b(ps, min_id, max_id, pivot_id);
 		if (ret != SORTED)
-			ft_pb_and_rotate_a(stacks, &pivot_id, max_id, FALSE);
+			ft_pb_and_rotate_a(ps, &pivot_id, max_id, FALSE);
 		else if (!ret)
 			return (0);
 		if (ret != SORTED)
-			ft_rotate_a(stacks, pivot_id - 1);
+			ft_rotate_a(ps, pivot_id - 1);
 		else
-			ft_rotate_a(stacks, max_id);
+			ft_rotate_a(ps, max_id);
 		min_id = pivot_id;
 	}
 	return (1);
 }
 
 int
-	ft_pa_and_rotate_b(t_stacks *stacks, int l, int r, int pivot_id)
+	ft_pa_and_rotate_b(t_pushswap *ps, int l, int r, int pivot_id)
 {
 	size_t	size;
 	t_dnode	*ptr;
@@ -118,37 +123,37 @@ int
 		size = r - l + 1;
 	if (size < SORTSIZE)
 	{
-		ft_sort_6_b(stacks);
+		ft_sort_6_b(ps);
 		return (SORTED);
 	}
 	not_targets = r - pivot_id + 1;
 	not_targets_flag = FALSE;
 	if (not_targets == 0)
 		not_targets_flag = TRUE;
-	ptr = stacks->b.head->next;
-	while (ptr != stacks->b.head
+	ptr = ps->stacks->b.head->next;
+	while (ptr != ps->stacks->b.head
 		&& ((not_targets_flag == FALSE && not_targets)
 			|| not_targets_flag == TRUE))
 	{
 		if (ptr->id < pivot_id && ptr->id == l)
 		{
-			if (!pa_and_rotate_a(stacks, &l))
+			if (!pa_and_rotate_a(ps, &l))
 				return (0);
 		}
 		else if (pivot_id <= ptr->id)
 		{
-			if (!ft_pa(&stacks->a, &stacks->b))
+			if (!ft_pa(&ps->stacks->a, &ps->stacks->b, ps))
 				return (0);
 			not_targets--;
 		}
-		else if (stacks->b.head->prev->id == l)
-			ft_rrr(NULL, &stacks->b);
+		else if (ps->stacks->b.head->prev->id == l)
+			ft_rrr(NULL, &ps->stacks->b, ps);
 		else
-			ft_rotate_by_op(stacks, rotate_b(&stacks->b, l));
-		ptr = stacks->b.head->next;
+			ft_rotate_by_op(ps, rotate_b(&ps->stacks->b, l));
+		ptr = ps->stacks->b.head->next;
 	}
-	if (not_targets_flag == FALSE && not_targets == 0 && cdl_size(&stacks->b))
-		if (!split_b(stacks))
+	if (not_targets_flag == FALSE && not_targets == 0 && cdl_size(&ps->stacks->b))
+		if (!split_b(ps))
 			return (0);
 	return (1);
 }

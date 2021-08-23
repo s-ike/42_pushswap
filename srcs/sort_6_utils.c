@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:09:57 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/23 01:35:22 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,18 +35,18 @@ int
 }
 
 int
-	ft_rotate_a_until_min(t_stacks *stacks)
+	ft_rotate_a_until_min(t_pushswap *ps)
 {
 	t_dlist	*a;
 	size_t	min_node_idx;
 
-	a = &stacks->a;
+	a = &ps->stacks->a;
 	min_node_idx = cdl_get_min_node_idx(a);
 	if (min_node_idx == 0)
 		return (0);
 	while (min_node_idx != 1)
 	{
-		ft_rotate(stacks, min_node_idx, 'a');
+		ft_rotate(ps, min_node_idx, 'a');
 		min_node_idx = cdl_get_min_node_idx(a);
 		if (min_node_idx == 0)
 			return (0);
@@ -55,36 +55,43 @@ int
 }
 
 int
-	ft_push_max(t_stacks *stacks)
+	ft_pb_max(t_pushswap *ps)
 {
-	size_t	max_node_idx;
 	int		ret;
+	size_t	max_node_idx;
+	t_dlist	*a;
+	t_dlist	*b;
 
-	max_node_idx = cdl_get_max_node_idx(&stacks->a);
+	a = &ps->stacks->a;
+	b = &ps->stacks->b;
+	max_node_idx = cdl_get_max_node_idx(a);
 	if (max_node_idx == 0)
 		return (0);
 	while (max_node_idx != 1)
 	{
-		ft_rotate(stacks, max_node_idx, 'a');
-		max_node_idx = cdl_get_max_node_idx(&stacks->a);
+		ft_rotate(ps, max_node_idx, 'a');
+		max_node_idx = cdl_get_max_node_idx(a);
 		if (max_node_idx == 0)
 			return (0);
 	}
-	ret = ft_pb(&stacks->a, &stacks->b);
+	ret = ft_pb(a, b, ps);
 	return (ret);
 }
 
 int
-	ft_push_min(t_stacks *stacks)
+	ft_pb_min(t_pushswap *ps)
 {
 	int	ret;
+	t_dlist	*a;
+	t_dlist	*b;
 
-	if (!ft_rotate_a_until_min(stacks))
+	a = &ps->stacks->a;
+	b = &ps->stacks->b;
+	if (!ft_rotate_a_until_min(ps))
 		return (0);
-	if (!cdl_is_sorted(
-			stacks->a.head, stacks->a.head->next, ft_is_ascending_order))
+	if (!cdl_is_sorted(a->head, a->head->next, ft_is_ascending_order))
 	{
-		ret = ft_pb(&stacks->a, &stacks->b);
+		ret = ft_pb(a, b, ps);
 		return (ret);
 	}
 	return (SORTED);

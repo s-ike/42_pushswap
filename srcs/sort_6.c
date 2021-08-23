@@ -6,65 +6,70 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:00 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/21 14:25:30 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/23 01:54:39 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 static void
-	swap_first_value(t_stacks *stacks, size_t size)
+	swap_first_value(t_pushswap *ps, size_t size)
 {
+	t_dlist	*a;
+
+	a = &ps->stacks->a;
 	if (4 < size
 		&& !cdl_is_sorted(
-			stacks->a.head, stacks->a.head->next, ft_is_ascending_order)
+			a->head, a->head->next, ft_is_ascending_order)
 		&& cdl_is_sorted(
-			stacks->a.head, stacks->a.head->next->next, ft_is_ascending_order))
-		ft_ss(&stacks->a, NULL);
+			a->head, a->head->next->next, ft_is_ascending_order))
+		ft_ss(a, NULL, ps);
 }
 
 static int
-	pb_and_rotate(t_stacks *stacks, size_t size)
+	pb_and_rotate(t_pushswap *ps, size_t size)
 {
-	int	ret;
+	int		ret;
+	t_dlist	*a;
 
 	ret = 1;
-	if (4 < size && !ft_check_circular_sorted(&stacks->a, NULL)
-		&& ft_check_circular_sorted(&stacks->a, cdl_get_max_node(&stacks->a)))
+	a = &ps->stacks->a;
+	if (4 < size && !ft_check_circular_sorted(a, NULL)
+		&& ft_check_circular_sorted(a, cdl_get_max_node(a)))
 	{
-		ret = ft_push_max(stacks);
+		ret = ft_pb_max(ps);
 		if (!ret)
 			return (ret);
-		return (ft_rotate_a_until_min(stacks));
+		return (ft_rotate_a_until_min(ps));
 	}
 	while (ret != SORTED && ret)
 	{
-		size = cdl_size(&stacks->a);
+		size = cdl_size(a);
 		if (size <= 3)
 			break ;
 		if (size == 4)
-			ft_sort_4(&stacks->a);
-		ret = ft_push_min(stacks);
+			ft_sort_4(a, ps);
+		ret = ft_pb_min(ps);
 		if (!ret)
 			return (ret);
 	}
 	if (ret != SORTED && ret)
-		ft_sort_3(&stacks->a);
+		ft_sort_3(ps);
 	return (ret);
 }
 
 void
-	ft_sort_6(t_stacks *stacks)
+	ft_sort_6(t_pushswap *ps)
 {
 	size_t	size;
 	int		ret;
 
 	ret = 1;
-	size = cdl_size(&stacks->a);
-	swap_first_value(stacks, size);
-	ret = pb_and_rotate(stacks, size);
-	while (ret && !cdl_is_empty(&stacks->b))
-		ret = ft_pa(&stacks->a, &stacks->b);
-	if (!ret || !ft_rotate_a_until_min(stacks))
-		ft_exit_failure(stacks);
+	size = cdl_size(&ps->stacks->a);
+	swap_first_value(ps, size);
+	ret = pb_and_rotate(ps, size);
+	while (ret && !cdl_is_empty(&ps->stacks->b))
+		ret = ft_pa(&ps->stacks->a, &ps->stacks->b, ps);
+	if (!ret || !ft_rotate_a_until_min(ps))
+		ft_exit_failure(ps->stacks);
 }
