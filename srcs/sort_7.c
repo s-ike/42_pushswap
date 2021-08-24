@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:04 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:11:15 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:44:53 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static void
 		return ;
 	ret = ft_pb_and_rotate_a(ps, &l, r, is_first);
 	if (!ret)
-		return (ft_exit_failure(&ps->stacks));
+		return (ft_exit_failure(ps));
 	sort_b(ps, l, r);
 }
 
@@ -68,7 +68,7 @@ static void
 	pivot_id = (l + r) / 2;
 	ret = ft_pa_and_rotate_b(ps, l, r, pivot_id);
 	if (!ret)
-		return (ft_exit_failure(&ps->stacks));
+		return (ft_exit_failure(ps));
 	if (l == r || ret == SORTED)
 		return ;
 	sort_a(ps, pivot_id, r, FALSE);

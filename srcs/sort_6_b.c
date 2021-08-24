@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 01:02:15 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:10:51 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:44:32 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,5 +74,5 @@ void
 	size = cdl_size(&ps->stacks.a);
 	ret = pa_and_rotate(ps, size);
 	if (!ret)
-		ft_exit_failure(&ps->stacks);
+		ft_exit_failure(ps);
 }

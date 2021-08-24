@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:34 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:27:15 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 01:59:11 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,19 +68,17 @@ int
 		ft_putendl_fd(MSG_ERR, STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
-	if (!ft_make_sort_list(&sort_list, argc, argv))
+	if (ft_make_sort_list(&sort_list, argc, argv))
 	{
 		ft_lstclear(&sort_list, free);
-		ft_exit_failure(&ps.stacks);
+		ft_exit_failure(&ps);
 	}
 	if (!make_stack_a(&ps.stacks, &sort_list))
-		ft_exit_failure(&ps.stacks);
+		ft_exit_failure(&ps);
 	ft_sort(&ps);
 	ft_optimize_ans(ps.ans);
 	print_ans(ps.ans);
 	if (0)
 		test_print(&ps.stacks);
-	ft_exit_success(&ps.stacks);
-	// TODO:
-	// ft_lstclear(&ps.ans, free);
+	ft_exit_success(&ps);
 }
