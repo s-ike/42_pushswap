@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 01:02:15 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/24 21:38:13 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:10:51 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ static int
 	size_t	min_node_idx;
 	t_dlist	*b;
 
-	b = &ps->stacks->b;
+	b = &ps->stacks.b;
 	min_node_idx = cdl_get_min_node_idx(b);
 	if (min_node_idx == 0)
 		return (0);
@@ -36,7 +36,7 @@ static int
 		if (min_node_idx == 0)
 			return (0);
 	}
-	ret = ft_pa(&ps->stacks->a, b, ps);
+	ret = ft_pa(&ps->stacks.a, b, ps);
 	return (ret);
 }
 
@@ -46,7 +46,7 @@ static int
 	int		ret;
 	t_dlist	*b;
 
-	b = &ps->stacks->b;
+	b = &ps->stacks.b;
 	size = cdl_size(b);
 	ret = 1;
 	while (size)
@@ -71,8 +71,8 @@ void
 	int		ret;
 	size_t	size;
 
-	size = cdl_size(&ps->stacks->a);
+	size = cdl_size(&ps->stacks.a);
 	ret = pa_and_rotate(ps, size);
 	if (!ret)
-		ft_exit_failure(ps->stacks);
+		ft_exit_failure(&ps->stacks);
 }

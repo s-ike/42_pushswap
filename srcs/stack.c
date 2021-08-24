@@ -6,28 +6,12 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:20 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 01:43:07 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:10:13 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int
-	ft_init_stacks(t_stacks *stacks)
-{
-	if (cdl_init_dlist(&stacks->a))
-		return (cdl_init_dlist(&stacks->b));
-	cdl_terminate(&stacks->a);
-	return (0);
-}
-
-void
-	ft_terminate_stacks(t_stacks *stacks)
-{
-	cdl_terminate(&stacks->a);
-	cdl_terminate(&stacks->b);
-	return ;
-}
 // 返り値voidにしていくかどうか
 int
 	ft_ra_or_rr(t_pushswap *ps, int target)
@@ -35,8 +19,8 @@ int
 	t_dlist	*a;
 	t_dlist	*b;
 
-	a = &ps->stacks->a;
-	b = &ps->stacks->b;
+	a = &ps->stacks.a;
+	b = &ps->stacks.b;
 	if (b->head->next->id == target)
 		return (ft_rr(a, NULL, ps));
 	else if (2 < cdl_size(b) && b->head->prev->id == target)
@@ -76,8 +60,8 @@ void
 	t_dlist	*a;
 	t_dlist	*b;
 
-	a = &ps->stacks->a;
-	b = &ps->stacks->b;
+	a = &ps->stacks.a;
+	b = &ps->stacks.b;
 	if (!ft_strcmp(op, OP_RA))
 		ft_rr(a, NULL, ps);
 	else if (!ft_strcmp(op, OP_RB))
@@ -98,8 +82,8 @@ void
 	char	*op;
 
 	if (stack_name == 'a')
-		op = ft_get_rotate_op(&ps->stacks->a, target_node_idx, stack_name);
+		op = ft_get_rotate_op(&ps->stacks.a, target_node_idx, stack_name);
 	else
-		op = ft_get_rotate_op(&ps->stacks->b, target_node_idx, stack_name);
+		op = ft_get_rotate_op(&ps->stacks.b, target_node_idx, stack_name);
 	ft_rotate_by_op(ps, op);
 }

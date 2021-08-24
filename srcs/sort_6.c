@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:00 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/24 22:21:54 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:10:34 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void
 {
 	t_dlist	*a;
 
-	a = &ps->stacks->a;
+	a = &ps->stacks.a;
 	if (4 < size
 		&& !cdl_is_sorted(
 			a->head, a->head->next, ft_is_ascending_order)
@@ -33,7 +33,7 @@ static int
 	t_dlist	*a;
 
 	ret = 1;
-	a = &ps->stacks->a;
+	a = &ps->stacks.a;
 	while (ret != SORTED && ret)
 	{
 		size = cdl_size(a);
@@ -57,7 +57,7 @@ static int
 	t_dlist	*a;
 
 	ret = 1;
-	a = &ps->stacks->a;
+	a = &ps->stacks.a;
 	if (4 < size && !ft_check_circular_sorted(a, NULL)
 		&& ft_check_circular_sorted(a, cdl_get_max_node(a)))
 	{
@@ -76,11 +76,11 @@ void
 	int		ret;
 
 	ret = 1;
-	size = cdl_size(&ps->stacks->a);
+	size = cdl_size(&ps->stacks.a);
 	swap_first_value(ps, size);
 	ret = pb_and_rotate(ps, size);
-	while (ret && !cdl_is_empty(&ps->stacks->b))
-		ret = ft_pa(&ps->stacks->a, &ps->stacks->b, ps);
+	while (ret && !cdl_is_empty(&ps->stacks.b))
+		ret = ft_pa(&ps->stacks.a, &ps->stacks.b, ps);
 	if (!ret || !ft_rotate_a_until_min(ps))
-		ft_exit_failure(ps->stacks);
+		ft_exit_failure(&ps->stacks);
 }

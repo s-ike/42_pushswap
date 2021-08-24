@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:38 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/22 23:59:47 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:06:20 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@ void
 	int	x;
 	int	y;
 
-	x = ps->stacks->a.head->next->n;
-	y = ps->stacks->a.head->next->next->n;
+	x = ps->stacks.a.head->next->n;
+	y = ps->stacks.a.head->next->next->n;
 	if (y < x)
-		ft_ss(&ps->stacks->a, NULL, ps);
+		ft_ss(&ps->stacks.a, NULL, ps);
 }

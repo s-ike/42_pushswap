@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 22:44:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 01:26:23 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:10:13 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ static int
 	t_dlist	*a;
 	t_dlist	*b;
 
-	a = &ps->stacks->a;
-	b = &ps->stacks->b;
+	a = &ps->stacks.a;
+	b = &ps->stacks.b;
 	if (!ft_pa(a, b, ps))
 		return (0);
 	(*l)++;
@@ -90,8 +90,8 @@ static int
 	int	pivot_id;
 	int	ret;
 
-	min_id = cdl_get_min_node(&ps->stacks->b)->id;
-	max_id = cdl_get_max_node(&ps->stacks->b)->id;
+	min_id = cdl_get_min_node(&ps->stacks.b)->id;
+	max_id = cdl_get_max_node(&ps->stacks.b)->id;
 	ret = 1;
 	while (ret != SORTED && ret)
 	{
@@ -130,8 +130,8 @@ int
 	not_targets_flag = FALSE;
 	if (not_targets == 0)
 		not_targets_flag = TRUE;
-	ptr = ps->stacks->b.head->next;
-	while (ptr != ps->stacks->b.head
+	ptr = ps->stacks.b.head->next;
+	while (ptr != ps->stacks.b.head
 		&& ((not_targets_flag == FALSE && not_targets)
 			|| not_targets_flag == TRUE))
 	{
@@ -142,17 +142,17 @@ int
 		}
 		else if (pivot_id <= ptr->id)
 		{
-			if (!ft_pa(&ps->stacks->a, &ps->stacks->b, ps))
+			if (!ft_pa(&ps->stacks.a, &ps->stacks.b, ps))
 				return (0);
 			not_targets--;
 		}
-		else if (ps->stacks->b.head->prev->id == l)
-			ft_rrr(NULL, &ps->stacks->b, ps);
+		else if (ps->stacks.b.head->prev->id == l)
+			ft_rrr(NULL, &ps->stacks.b, ps);
 		else
-			ft_rotate_by_op(ps, rotate_b(&ps->stacks->b, l));
-		ptr = ps->stacks->b.head->next;
+			ft_rotate_by_op(ps, rotate_b(&ps->stacks.b, l));
+		ptr = ps->stacks.b.head->next;
 	}
-	if (not_targets_flag == FALSE && not_targets == 0 && cdl_size(&ps->stacks->b))
+	if (not_targets_flag == FALSE && not_targets == 0 && cdl_size(&ps->stacks.b))
 		if (!split_b(ps))
 			return (0);
 	return (1);

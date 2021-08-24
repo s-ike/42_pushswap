@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:04 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 01:03:58 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:11:15 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void
 	size_t	idx;
 	size_t	size;
 
-	a = &ps->stacks->a;
+	a = &ps->stacks.a;
 	if (end_id == -1)
 		return ;
 	size = cdl_size(a);
@@ -48,11 +48,11 @@ static void
 
 	if (l == r)
 		return ;
-	if (cdl_is_asc_order_range(&ps->stacks->a, l, r))
+	if (cdl_is_asc_order_range(&ps->stacks.a, l, r))
 		return ;
 	ret = ft_pb_and_rotate_a(ps, &l, r, is_first);
 	if (!ret)
-		return (ft_exit_failure(ps->stacks));
+		return (ft_exit_failure(&ps->stacks));
 	sort_b(ps, l, r);
 }
 
@@ -62,13 +62,13 @@ static void
 	int	pivot_id;
 	int	ret;
 
-	if (cdl_is_empty(&ps->stacks->b))
+	if (cdl_is_empty(&ps->stacks.b))
 		return ;
 	ft_rotate_a(ps, l - 1);
 	pivot_id = (l + r) / 2;
 	ret = ft_pa_and_rotate_b(ps, l, r, pivot_id);
 	if (!ret)
-		return (ft_exit_failure(ps->stacks));
+		return (ft_exit_failure(&ps->stacks));
 	if (l == r || ret == SORTED)
 		return ;
 	sort_a(ps, pivot_id, r, FALSE);
@@ -91,7 +91,7 @@ void
 {
 	t_dlist	*a;
 
-	a = &ps->stacks->a;
+	a = &ps->stacks.a;
 	if (cdl_is_sorted(
 			a->head, a->head->next, ft_is_ascending_order))
 		return ;

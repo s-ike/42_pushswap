@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 00:58:25 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/24 01:55:54 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:10:13 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ static int
 	t_dlist	*a;
 	t_dlist	*b;
 
-	a = &ps->stacks->a;
-	b = &ps->stacks->b;
+	a = &ps->stacks.a;
+	b = &ps->stacks.b;
 	if (n <= 0)
 		return (1);
 	ret = 1;
@@ -36,8 +36,8 @@ static int
 	t_dlist	*a;
 	t_dlist	*b;
 
-	a = &ps->stacks->a;
-	b = &ps->stacks->b;
+	a = &ps->stacks.a;
+	b = &ps->stacks.b;
 	ret = 1;
 	while (n-- && ret)
 	{
@@ -56,7 +56,7 @@ static int
 	int		x;
 	int		y;
 
-	b = &ps->stacks->b;
+	b = &ps->stacks.b;
 	x = b->head->next->n;
 	y = b->head->next->next->n;
 	if (x < y)
@@ -77,7 +77,7 @@ static int
 	int		n[3];
 	t_dlist	*b;
 
-	b = &ps->stacks->b;
+	b = &ps->stacks.b;
 	n[0] = b->head->next->n;
 	n[1] = b->head->next->next->n;
 	n[2] = b->head->next->next->next->n;
@@ -102,7 +102,7 @@ int
 {
 	size_t	size;
 
-	size = cdl_size(&ps->stacks->b);
+	size = cdl_size(&ps->stacks.b);
 	if (size == 2)
 		return (sort_2_and_pa(ps));
 	else

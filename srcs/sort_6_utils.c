@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/24 22:25:41 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:10:13 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int
 	t_dlist	*a;
 	size_t	min_node_idx;
 
-	a = &ps->stacks->a;
+	a = &ps->stacks.a;
 	min_node_idx = cdl_get_min_node_idx(a);
 	if (min_node_idx == 0)
 		return (0);
@@ -62,8 +62,8 @@ int
 	t_dlist	*a;
 	t_dlist	*b;
 
-	a = &ps->stacks->a;
-	b = &ps->stacks->b;
+	a = &ps->stacks.a;
+	b = &ps->stacks.b;
 	max_node_idx = cdl_get_max_node_idx(a);
 	if (max_node_idx == 0)
 		return (0);
@@ -85,8 +85,8 @@ int
 	t_dlist	*a;
 	t_dlist	*b;
 
-	a = &ps->stacks->a;
-	b = &ps->stacks->b;
+	a = &ps->stacks.a;
+	b = &ps->stacks.b;
 	if (!ft_rotate_a_until_min(ps))
 		return (0);
 	if (!cdl_is_sorted(a->head, a->head->next, ft_is_ascending_order))

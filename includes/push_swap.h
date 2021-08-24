@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/24 21:54:27 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:24:10 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_sort
 
 typedef struct s_pushswap
 {
-	t_stacks	*stacks;
+	t_stacks	stacks;
 	t_list		*ans;
 }	t_pushswap;
 
@@ -67,6 +67,9 @@ int		ft_optimize_ans(t_list *ans);
 /* exit.c */
 void	ft_exit_failure(t_stacks *stacks);
 void	ft_exit_success(t_stacks *stacks);
+/* init.c */
+int		ft_init_pushswap(t_pushswap *ps);
+void	ft_terminate_stacks(t_stacks *stacks);
 /* op_push.c */
 int		ft_pa(t_dlist *a, t_dlist *b, t_pushswap *ps);
 int		ft_pb(t_dlist *a, t_dlist *b, t_pushswap *ps);
@@ -107,8 +110,6 @@ int		ft_pb_min(t_pushswap *ps);
 /* sort.c */
 void	ft_sort(t_pushswap *ps);
 /* stack.c */
-int		ft_init_stacks(t_stacks *stacks);
-void	ft_terminate_stacks(t_stacks *stacks);
 int		ft_ra_or_rr(t_pushswap *ps, int target);
 char	*ft_get_rotate_op(t_dlist *dlist, size_t target_node_idx, char stack);
 void	ft_rotate_by_op(t_pushswap *ps, const char *op);

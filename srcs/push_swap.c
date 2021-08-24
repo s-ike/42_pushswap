@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:34 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/24 22:00:58 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:27:15 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,12 +59,11 @@ int
 	main(int argc, char **argv)
 {
 	t_pushswap	ps;
-	t_stacks	stacks;
 	t_list		*sort_list;
 
 	if (argc < 2)
 		exit(EXIT_SUCCESS);
-	if (!ft_is_valid_args(argc, argv) || !ft_init_stacks(&stacks))
+	if (!ft_is_valid_args(argc, argv) || !ft_init_pushswap(&ps))
 	{
 		ft_putendl_fd(MSG_ERR, STDERR_FILENO);
 		exit(EXIT_FAILURE);
@@ -72,18 +71,16 @@ int
 	if (!ft_make_sort_list(&sort_list, argc, argv))
 	{
 		ft_lstclear(&sort_list, free);
-		ft_exit_failure(&stacks);
+		ft_exit_failure(&ps.stacks);
 	}
-	if (!make_stack_a(&stacks, &sort_list))
-		ft_exit_failure(&stacks);
-	ps.stacks = &stacks;
-	ps.ans = NULL;
+	if (!make_stack_a(&ps.stacks, &sort_list))
+		ft_exit_failure(&ps.stacks);
 	ft_sort(&ps);
 	ft_optimize_ans(ps.ans);
 	print_ans(ps.ans);
 	if (0)
-		test_print(ps.stacks);
-	ft_exit_success(&stacks);
+		test_print(&ps.stacks);
+	ft_exit_success(&ps.stacks);
 	// TODO:
 	// ft_lstclear(&ps.ans, free);
 }

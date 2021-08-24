@@ -1,31 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/08/20 11:10:11 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:27:27 by sikeda           ###   ########.fr       */
+/*   Created: 2021/08/24 22:53:56 by sikeda            #+#    #+#             */
+/*   Updated: 2021/08/25 00:03:50 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void
-	ft_sort(t_pushswap *ps)
+static int
+	init_stacks(t_stacks *stacks)
 {
-	size_t	size;
+	if (cdl_init_dlist(&stacks->a))
+		return (cdl_init_dlist(&stacks->b));
+	cdl_terminate(&stacks->a);
+	return (0);
+}
 
-	size = cdl_size(&ps->stacks.a);
-	if (size <= 1)
-		return ;
-	if (size == 2)
-		ft_sort_2(ps);
-	else if (size == 3)
-		ft_sort_3(ps);
-	else if (size <= 6)
-		ft_sort_6(ps);
-	else
-		ft_sort_7(ps);
+void
+	ft_terminate_stacks(t_stacks *stacks)
+{
+	cdl_terminate(&stacks->a);
+	cdl_terminate(&stacks->b);
+	return ;
+}
+
+int
+	ft_init_pushswap(t_pushswap *ps)
+{
+	if (init_stacks(&ps->stacks))
+	{
+		ps->ans = NULL;
+		return (1);
+	}
+	return (0);
 }

@@ -4,6 +4,7 @@ SRCSDIR		:= ./srcs/
 SRCS		:= push_swap.c \
 				ans_list.c \
 				exit.c \
+				init.c \
 				op_push.c \
 				op_rotate.c \
 				op_rrotate.c \

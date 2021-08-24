@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 22:01:25 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/24 22:25:12 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 00:30:05 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,8 @@ int
 	int		flag;
 	t_list	*ptr;
 
+	if (!ans)
+		return (1);
 	flag = 1;
 	while (flag)
 	{
