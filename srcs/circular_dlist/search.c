@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:45:52 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:25:55 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 21:42:45 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ t_dnode
 	while (ptr != dlist->head)
 	{
 		if (compare(ptr->id, id) == 0)
-		{
-			dlist->crnt = ptr;
 			return (ptr);
-		}
 		ptr = ptr->next;
 	}
 	return (NULL);

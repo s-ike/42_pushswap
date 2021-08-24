@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:45:37 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/14 03:45:38 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 21:46:31 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int
 		return (0);
 	dummy_node->id = -1;
 	dlist->head = dummy_node;
-	dlist->crnt = dummy_node;
 	dummy_node->prev = dummy_node;
 	dummy_node->next = dummy_node;
 	return (1);

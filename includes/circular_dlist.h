@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:44:45 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 00:31:34 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 21:39:41 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_dnode
 typedef struct s_dlist
 {
 	t_dnode	*head;
-	t_dnode	*crnt;
 }	t_dlist;
 
 /* add.c */
