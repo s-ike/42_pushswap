@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 01:02:15 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 01:45:22 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 21:38:13 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,8 @@ static int
 	ret = 1;
 	while (size)
 	{
+		if (size <= 3)
+			return (ft_sort_3_b_and_pa(ps));
 		ret = pa_min(ps);
 		if (!ret)
 			return (ret);
@@ -62,7 +64,7 @@ static int
 	}
 	return (ret);
 }
-// ft_sort_3_b_and_paを使っていない
+
 void
 	ft_sort_6_b(t_pushswap *ps)
 {

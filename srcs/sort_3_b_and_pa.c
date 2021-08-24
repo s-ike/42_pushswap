@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 00:58:25 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 01:53:19 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 01:55:54 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 static int
 	pa(t_pushswap *ps, size_t n)
 {
-	int	ret;
+	int		ret;
 	t_dlist	*a;
 	t_dlist	*b;
 
@@ -23,10 +23,29 @@ static int
 	b = &ps->stacks->b;
 	if (n <= 0)
 		return (1);
-	ret = ft_pa(a, b, ps);
-	n--;
+	ret = 1;
 	while (n-- && ret)
 		ret = ft_pa(a, b, ps);
+	return (ret);
+}
+
+static int
+	pa_and_ra(t_pushswap *ps, size_t n)
+{
+	int		ret;
+	t_dlist	*a;
+	t_dlist	*b;
+
+	a = &ps->stacks->a;
+	b = &ps->stacks->b;
+	ret = 1;
+	while (n-- && ret)
+	{
+		ret = ft_pa(a, b, ps);
+		if (!ret)
+			break ;
+		ft_rr(a, NULL, ps);
+	}
 	return (ret);
 }
 
@@ -55,7 +74,7 @@ else if (n[1] < n[2] && n[2] < n[0]) // 3,1,2
 static int
 	sort_3_and_pa(t_pushswap *ps)
 {
-	int	n[3];
+	int		n[3];
 	t_dlist	*b;
 
 	b = &ps->stacks->b;
@@ -65,20 +84,15 @@ static int
 	if (n[1] < n[0] && n[0] < n[2])
 		ft_rrr(NULL, b, ps);
 	else if (n[0] < n[1] && n[1] < n[2])
-	{
-		ft_ss(NULL, b, ps);
-		ft_rrr(NULL, b, ps);
-	}
+		return (pa_and_ra(ps, 3));
 	else if (n[0] < n[2] && n[2] < n[1])
 		ft_rr(NULL, b, ps);
 	else if (n[2] < n[0] && n[0] < n[1])
 		ft_ss(NULL, b, ps);
 	else if (n[1] < n[2] && n[2] < n[0])
 	{
-		if (ft_pa(&ps->stacks->a, b, ps))
-			ft_ss(NULL, b, ps);
-		else
-			return (0);
+		ft_rr(NULL, b, ps);
+		return (pa_and_ra(ps, 3));
 	}
 	return (pa(ps, cdl_size(b)));
 }
