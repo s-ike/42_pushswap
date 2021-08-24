@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 01:35:22 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 22:25:41 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ int
 int
 	ft_pb_min(t_pushswap *ps)
 {
-	int	ret;
+	int		ret;
 	t_dlist	*a;
 	t_dlist	*b;
 

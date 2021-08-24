@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:00 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 01:54:39 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 22:21:54 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,30 @@ static void
 }
 
 static int
+	pb_and_rotate2(t_pushswap *ps, size_t size)
+{
+	int		ret;
+	t_dlist	*a;
+
+	ret = 1;
+	a = &ps->stacks->a;
+	while (ret != SORTED && ret)
+	{
+		size = cdl_size(a);
+		if (size <= 3)
+			break ;
+		if (size == 4)
+			ft_sort_4(a, ps);
+		ret = ft_pb_min(ps);
+		if (!ret)
+			return (ret);
+	}
+	if (ret != SORTED && ret)
+		ft_sort_3(ps);
+	return (ret);
+}
+
+static int
 	pb_and_rotate(t_pushswap *ps, size_t size)
 {
 	int		ret;
@@ -42,20 +66,7 @@ static int
 			return (ret);
 		return (ft_rotate_a_until_min(ps));
 	}
-	while (ret != SORTED && ret)
-	{
-		size = cdl_size(a);
-		if (size <= 3)
-			break ;
-		if (size == 4)
-			ft_sort_4(a, ps);
-		ret = ft_pb_min(ps);
-		if (!ret)
-			return (ret);
-	}
-	if (ret != SORTED && ret)
-		ft_sort_3(ps);
-	return (ret);
+	return (pb_and_rotate2(ps, size));
 }
 
 void

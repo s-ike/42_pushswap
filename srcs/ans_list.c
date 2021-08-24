@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 22:01:25 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 23:42:25 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 22:25:12 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,12 @@ static int
 	if (first_ptr->next == NULL)
 		return (0);
 	second_ptr = first_ptr->next;
-	if ((!ft_strcmp(first_ptr->content, OP_PA) && !ft_strcmp(second_ptr->content, OP_PB))
-		|| (!ft_strcmp(first_ptr->content, OP_PB) && !ft_strcmp(second_ptr->content, OP_PA))
-		|| (!ft_strcmp(first_ptr->content, OP_RB) && !ft_strcmp(second_ptr->content, OP_RRB)))
+	if ((!ft_strcmp(first_ptr->content, OP_PA)
+			&& !ft_strcmp(second_ptr->content, OP_PB))
+		|| (!ft_strcmp(first_ptr->content, OP_PB)
+			&& !ft_strcmp(second_ptr->content, OP_PA))
+		|| (!ft_strcmp(first_ptr->content, OP_RB)
+			&& !ft_strcmp(second_ptr->content, OP_RRB)))
 	{
 		ans_crnt->next = second_ptr->next;
 		ft_lstdelone(first_ptr, free);
@@ -67,10 +70,16 @@ static void
 	if (first_ptr->next == NULL)
 		return ;
 	second_ptr = first_ptr->next;
-	if (!ft_strcmp(first_ptr->content, OP_RA) && !ft_strcmp(second_ptr->content, OP_RB))
+	if (!ft_strcmp(first_ptr->content, OP_RA)
+		&& !ft_strcmp(second_ptr->content, OP_RB))
+	{
 		replace_and_cut_ans(first_ptr, OP_RR);
-	else if (!ft_strcmp(first_ptr->content, OP_RB) && !ft_strcmp(second_ptr->content, OP_RA))
+	}
+	else if (!ft_strcmp(first_ptr->content, OP_RB)
+		&& !ft_strcmp(second_ptr->content, OP_RA))
+	{
 		replace_and_cut_ans(first_ptr, OP_RR);
+	}
 }
 
 int

@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 16:32:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/24 00:27:58 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 22:37:07 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,12 @@ static void
 	skip_target(t_stacks *stacks, int *l, int *targets, t_bool *flag)
 {
 	t_dnode	*a_top;
-	t_dnode *a_btm;
+	t_dnode	*a_btm;
 
 	a_top = stacks->a.head->next;
 	a_btm = stacks->a.head->prev;
 	if ((a_top->id == *l && (a_btm->id == *l - 1 || *flag == FALSE))
-	|| (a_btm->id == *l && (a_btm->prev->id == *l - 1 || *flag == FALSE)))
+		|| (a_btm->id == *l && (a_btm->prev->id == *l - 1 || *flag == FALSE)))
 	{
 		(*l)++;
 		(*targets)--;

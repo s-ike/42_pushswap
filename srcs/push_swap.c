@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:34 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 22:43:01 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/24 22:00:58 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ static int
 	}
 	ft_lstclear(sort_list, free);
 	return (1);
+}
+
+static void
+	print_ans(t_list *ans)
+{
+	t_list	*ans_ptr;
+
+	ans_ptr = ans;
+	while (ans_ptr)
+	{
+		ft_putendl_fd(ans_ptr->content, STDOUT_FILENO);
+		ans_ptr = ans_ptr->next;
+	}
 }
 
 static void
@@ -67,13 +80,7 @@ int
 	ps.ans = NULL;
 	ft_sort(&ps);
 	ft_optimize_ans(ps.ans);
-	t_list	*ans_ptr;
-	ans_ptr = ps.ans;
-	while (ans_ptr)
-	{
-		ft_putendl_fd(ans_ptr->content, STDOUT_FILENO);
-		ans_ptr = ans_ptr->next;
-	}
+	print_ans(ps.ans);
 	if (0)
 		test_print(ps.stacks);
 	ft_exit_success(&stacks);
