@@ -6,21 +6,21 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 22:01:25 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:30:05 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:05:24 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
 int
-	ft_add_ans(t_list **ans, char *op)
+	ft_add_ans(t_pushswap *ps, char *op)
 {
 	t_list	*op_node;
 
 	op_node = ft_lstnew(op);
 	if (!op_node)
 		return (0);
-	ft_lstadd_back(ans, op_node);
+	ft_lstadd_back(&ps->ans, op_node);
 	return (1);
 }
 

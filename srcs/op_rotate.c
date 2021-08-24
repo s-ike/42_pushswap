@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:08:49 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 22:01:02 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:06:07 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,5 @@ int
 	}
 	if (!op)
 		return (0);
-	return (ft_add_ans(&ps->ans, op));
+	return (ft_add_ans(ps, op));
 }
