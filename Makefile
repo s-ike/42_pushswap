@@ -1,8 +1,12 @@
 NAME		:= push_swap
 
 SRCSDIR		:= ./srcs/
-SRCS		:= push_swap.c \
-				ans_list.c \
+
+MAIN_SRCS	:= $(NAME).c
+MAIN_SRCS	:= $(addprefix $(SRCSDIR), $(MAIN_SRCS))
+MAIN_OBJS	:= $(MAIN_SRCS:.c=.o)
+
+SRCS		:= ans_list.c \
 				exit.c \
 				init.c \
 				op_push.c \
@@ -38,6 +42,11 @@ SRCS		:= push_swap.c \
 SRCS		:= $(addprefix $(SRCSDIR), $(SRCS))
 OBJS		:= $(SRCS:.c=.o)
 
+BONUS_NAME	:= checker
+BONUS_SRCS	:= checker.c
+BONUS_SRCS	:= $(addprefix $(SRCSDIR), $(BONUS_SRCS))
+BONUS_OBJS	:= $(BONUS_SRCS:.c=.o)
+
 INCLUDE		:= -I./includes/ -I./libft/
 
 LIBDIR		:= ./libft
@@ -65,8 +74,8 @@ C_RESET		:= "\x1b[0m"
 
 all:		$(NAME)
 
-$(NAME):	$(OBJS) $(LIBPATH)
-			$(CC) $(CFLAGS) $(DEBUG) $(DEBUG2) $(OBJS) $(LFLAGS) -o $@
+$(NAME):	$(MAIN_OBJS) $(OBJS) $(LIBPATH)
+			$(CC) $(CFLAGS) $(DEBUG) $(DEBUG2) $(MAIN_OBJS) $(OBJS) $(LFLAGS) -o $@
 			@echo $(C_GREEN)"=== Make Done ==="$(C_DEFAULT)$(C_REST)
 
 $(LIBPATH):	init
@@ -79,16 +88,21 @@ leaks:		$(LIBPATH)	## For leak check
 			$(MAKE) CFLAGS="$(CFLAGS) -D LEAKS=1" LEAKS=TRUE
 
 clean:
-			$(RM) $(OBJS)
+			$(RM) $(OBJS) $(MAIN_OBJS) $(BONUS_OBJS)
 			$(MAKE) clean -C $(LIBDIR)
 
 fclean:		clean
-			$(RM) $(NAME)
+			$(RM) $(NAME) $(BONUS_NAME)
 			$(MAKE) fclean -C $(LIBDIR)
 
 re:			fclean $(NAME)
 
-bonus:		$(NAME)
+bonus:		$(NAME) $(BONUS_OBJS) $(OBJS) $(LIBPATH)
+			$(CC) $(CFLAGS) $(DEBUG) $(DEBUG2) $(BONUS_OBJS) $(OBJS) $(LFLAGS) -o $(BONUS_NAME)
+			@echo $(C_GREEN)"=== Bonus Make Done ==="$(C_DEFAULT)$(C_REST)
+
+bleaks:		$(LIBPATH)
+			$(MAKE) bonus CFLAGS="$(CFLAGS) -D LEAKS=1" LEAKS=TRUE
 
 .PHONY:		all clean fclean re bonus
-.PHONY:		init leaks
+.PHONY:		init leaks bleaks

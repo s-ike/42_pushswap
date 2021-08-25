@@ -6,14 +6,14 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 22:53:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:43:50 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/26 01:40:18 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int
-	init_stacks(t_stacks *stacks)
+int
+	ft_init_stacks(t_stacks *stacks)
 {
 	if (cdl_init_dlist(&stacks->a))
 		return (cdl_init_dlist(&stacks->b));
@@ -32,7 +32,7 @@ void
 int
 	ft_init_pushswap(t_pushswap *ps)
 {
-	if (init_stacks(&ps->stacks))
+	if (ft_init_stacks(&ps->stacks))
 	{
 		ps->ans = NULL;
 		return (1);

@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 00:06:14 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/26 01:40:41 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ int		ft_optimize_ans(t_list *ans);
 void	ft_exit_failure(t_pushswap *ps);
 void	ft_exit_success(t_pushswap *ps);
 /* init.c */
+int		ft_init_stacks(t_stacks *stacks);
 int		ft_init_pushswap(t_pushswap *ps);
 void	ft_terminate_stacks(t_stacks *stacks);
 /* op_push.c */
