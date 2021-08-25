@@ -6,22 +6,25 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/23 22:01:25 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 02:05:24 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:17:38 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int
+void
 	ft_add_ans(t_pushswap *ps, char *op)
 {
 	t_list	*op_node;
 
 	op_node = ft_lstnew(op);
 	if (!op_node)
-		return (0);
+	{
+		if (op)
+			free(op);
+		ft_exit_failure(ps);
+	}
 	ft_lstadd_back(&ps->ans, op_node);
-	return (1);
 }
 
 static int

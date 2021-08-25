@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 01:02:15 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:44:32 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:33:08 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 static int
 	pa_min(t_pushswap *ps)
 {
-	int		ret;
 	size_t	min_node_idx;
 	t_dlist	*b;
 
@@ -36,8 +35,8 @@ static int
 		if (min_node_idx == 0)
 			return (0);
 	}
-	ret = ft_pa(&ps->stacks.a, b, ps);
-	return (ret);
+	ft_pa(&ps->stacks.a, b, ps);
+	return (1);
 }
 
 static int
@@ -52,7 +51,10 @@ static int
 	while (size)
 	{
 		if (size <= 3)
-			return (ft_sort_3_b_and_pa(ps));
+		{
+			ft_sort_3_b_and_pa(ps);
+			return (1);
+		}
 		ret = pa_min(ps);
 		if (!ret)
 			return (ret);

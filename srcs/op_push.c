@@ -6,13 +6,13 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:08:45 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 02:05:59 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:23:46 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int
+void
 	ft_pa(t_dlist *a, t_dlist *b, t_pushswap *ps)
 {
 	int		ret;
@@ -26,11 +26,11 @@ int
 		op = ft_strdup(OP_PA);
 	}
 	if (!op)
-		return (0);
-	return (ft_add_ans(ps, op));
+		ft_exit_failure(ps);
+	ft_add_ans(ps, op);
 }
 
-int
+void
 	ft_pb(t_dlist *a, t_dlist *b, t_pushswap *ps)
 {
 	int		ret;
@@ -44,6 +44,6 @@ int
 		op = ft_strdup(OP_PB);
 	}
 	if (!op)
-		return (0);
-	return (ft_add_ans(ps, op));
+		ft_exit_failure(ps);
+	ft_add_ans(ps, op);
 }

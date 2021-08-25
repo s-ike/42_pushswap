@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:04 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:44:53 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:48:30 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,11 @@ static void	sort_b(t_pushswap *ps, int l, int r);
 static void
 	sort_a(t_pushswap *ps, int l, int r, t_bool is_first)
 {
-	int	ret;
-
 	if (l == r)
 		return ;
 	if (cdl_is_asc_order_range(&ps->stacks.a, l, r))
 		return ;
-	ret = ft_pb_and_rotate_a(ps, &l, r, is_first);
-	if (!ret)
-		return (ft_exit_failure(ps));
+	ft_pb_and_rotate_a(ps, &l, r, is_first);
 	sort_b(ps, l, r);
 }
 

@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:04 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 02:06:22 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:25:14 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static void
 	sa_or_sb(b);
 }
 
-int
+void
 	ft_ss(t_dlist *a, t_dlist *b, t_pushswap *ps)
 {
 	char	*op;
@@ -54,6 +54,6 @@ int
 		op = ft_strdup(OP_SS);
 	}
 	if (!op)
-		return (0);
-	return (ft_add_ans(ps, op));
+		ft_exit_failure(ps);
+	ft_add_ans(ps, op);
 }

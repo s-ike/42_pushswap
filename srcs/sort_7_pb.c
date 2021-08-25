@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 16:32:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:11:56 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:47:02 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ static int
 	return (0);
 }
 
-static int
+static void
 	rb(t_pushswap *ps, int l, int r)
 {
 	t_dnode	*b_top;
@@ -59,46 +59,39 @@ static int
 		&& (b_top->id == l || b_top->id < (r - l + 1) / RB_SIZE + l + 1))
 	{
 		ft_rr(NULL, &ps->stacks.b, ps);
-		return (1);
 	}
-	return (0);
 }
 
-static int
+static void
 	pb(t_pushswap *ps, int l, int r, int *targets)
 {
-	if (!ft_pb(&ps->stacks.a, &ps->stacks.b, ps))
-		return (0);
+	ft_pb(&ps->stacks.a, &ps->stacks.b, ps);
 	(*targets)--;
 	rb(ps, l, r);
-	return (1);
 }
 
-int
+void
 	ft_pb_and_rotate_a(t_pushswap *ps, int *l, int r, t_bool is_first)
 {
-	int		ret;
 	int		targets;
 	t_dnode	*a_top;
 	t_bool	flag;
 
-	ret = 1;
 	targets = 0;
 	if (*l <= r)
 		targets = r - *l + 1;
 	a_top = ps->stacks.a.head->next;
 	flag = FALSE;
-	while (ret && targets && a_top != ps->stacks.a.head)
+	while (targets && a_top != ps->stacks.a.head)
 	{
 		if (is_first == FALSE)
 			skip_target(&ps->stacks, l, &targets, &flag);
 		if (sa(ps, r))
 			;
 		else if (*l <= a_top->id && a_top->id <= r)
-			ret = pb(ps, *l, r, &targets);
+			pb(ps, *l, r, &targets);
 		else if (targets)
 			ft_rr(&ps->stacks.a, NULL, ps);
 		a_top = ps->stacks.a.head->next;
 	}
-	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:10:13 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:36:31 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,6 @@ int
 int
 	ft_pb_max(t_pushswap *ps)
 {
-	int		ret;
 	size_t	max_node_idx;
 	t_dlist	*a;
 	t_dlist	*b;
@@ -74,14 +73,13 @@ int
 		if (max_node_idx == 0)
 			return (0);
 	}
-	ret = ft_pb(a, b, ps);
-	return (ret);
+	ft_pb(a, b, ps);
+	return (1);
 }
 
 int
 	ft_pb_min(t_pushswap *ps)
 {
-	int		ret;
 	t_dlist	*a;
 	t_dlist	*b;
 
@@ -91,8 +89,8 @@ int
 		return (0);
 	if (!cdl_is_sorted(a->head, a->head->next, ft_is_ascending_order))
 	{
-		ret = ft_pb(a, b, ps);
-		return (ret);
+		ft_pb(a, b, ps);
+		return (1);
 	}
 	return (SORTED);
 }

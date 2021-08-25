@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:00 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:44:39 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:35:04 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void
 	swap_first_value(ps, size);
 	ret = pb_and_rotate(ps, size);
 	while (ret && !cdl_is_empty(&ps->stacks.b))
-		ret = ft_pa(&ps->stacks.a, &ps->stacks.b, ps);
+		ft_pa(&ps->stacks.a, &ps->stacks.b, ps);
 	if (!ret || !ft_rotate_a_until_min(ps))
 		ft_exit_failure(ps);
 }

@@ -6,14 +6,13 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:20 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:10:13 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:52:08 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-// 返り値voidにしていくかどうか
-int
+void
 	ft_ra_or_rr(t_pushswap *ps, int target)
 {
 	t_dlist	*a;
@@ -22,15 +21,14 @@ int
 	a = &ps->stacks.a;
 	b = &ps->stacks.b;
 	if (b->head->next->id == target)
-		return (ft_rr(a, NULL, ps));
+		ft_rr(a, NULL, ps);
 	else if (2 < cdl_size(b) && b->head->prev->id == target)
 	{
 		ft_rr(a, NULL, ps);
-		return (ft_rrr(NULL, b, ps));
+		ft_rrr(NULL, b, ps);
 	}
 	else if (1 < cdl_size(b))
-		return (ft_rr(a, b, ps));
-	return (1);
+		ft_rr(a, b, ps);
 }
 
 char

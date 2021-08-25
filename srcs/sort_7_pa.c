@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 22:44:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 00:10:13 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/25 02:41:07 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,7 @@ static char
 		return (OP_RB);
 }
 
-static int
+static void
 	pa_and_rotate_a(t_pushswap *ps, int *l)
 {
 	t_dlist	*a;
@@ -70,8 +70,7 @@ static int
 
 	a = &ps->stacks.a;
 	b = &ps->stacks.b;
-	if (!ft_pa(a, b, ps))
-		return (0);
+	ft_pa(a, b, ps);
 	(*l)++;
 	if (b->head->next->id == *l)
 		ft_rr(a, NULL, ps);
@@ -79,7 +78,6 @@ static int
 		ft_rr(a, b, ps);
 	else
 		ft_rr(a, NULL, ps);
-	return (1);
 }
 
 static int
@@ -136,14 +134,10 @@ int
 			|| not_targets_flag == TRUE))
 	{
 		if (ptr->id < pivot_id && ptr->id == l)
-		{
-			if (!pa_and_rotate_a(ps, &l))
-				return (0);
-		}
+			pa_and_rotate_a(ps, &l);
 		else if (pivot_id <= ptr->id)
 		{
-			if (!ft_pa(&ps->stacks.a, &ps->stacks.b, ps))
-				return (0);
+			ft_pa(&ps->stacks.a, &ps->stacks.b, ps);
 			not_targets--;
 		}
 		else if (ps->stacks.b.head->prev->id == l)
