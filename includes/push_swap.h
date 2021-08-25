@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 23:24:30 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/26 00:06:14 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@
 
 # define SORTED -1
 # define SORTSIZE 7
-# define RB_SIZE 8
+# define RB_SIZE 9
 
 # define LR 2
 # define L 0
