@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:20 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 02:52:08 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/26 18:01:38 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void
 }
 
 char
-	*ft_get_rotate_op(t_dlist *dlist, size_t target_node_idx, char stack)
+	*ft_get_rotate_op(t_dlist *dlist, size_t target_node_idx, char stack_name)
 {
 	size_t	proximity;
 	size_t	size;
@@ -43,11 +43,11 @@ char
 		proximity = (size + 1) / 2;
 	if (proximity < target_node_idx)
 	{
-		if (stack == 'a')
+		if (stack_name == 'a')
 			return (OP_RRA);
 		return (OP_RRB);
 	}
-	if (stack == 'a')
+	if (stack_name == 'a')
 		return (OP_RA);
 	return (OP_RB);
 }

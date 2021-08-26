@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 01:40:41 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/26 18:02:02 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,8 @@ int		ft_pb_min(t_pushswap *ps);
 void	ft_sort(t_pushswap *ps);
 /* stack.c */
 void	ft_ra_or_rr(t_pushswap *ps, int target);
-char	*ft_get_rotate_op(t_dlist *dlist, size_t target_node_idx, char stack);
+char	*ft_get_rotate_op(
+			t_dlist *dlist, size_t target_node_idx, char stack_name);
 void	ft_rotate_by_op(t_pushswap *ps, const char *op);
 void	ft_rotate(t_pushswap *ps, size_t target_node_idx, char stack_name);
 /* validator.c */
