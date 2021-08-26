@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 18:02:02 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/26 18:22:28 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <stdint.h>
 # include "libft.h"
 # include "circular_dlist.h"
+# include "get_next_line.h"
 # include "t_bool.h"
 
 # define MSG_ERR "Error"
@@ -68,6 +69,7 @@ int		ft_optimize_ans(t_list *ans);
 void	ft_exit_failure(t_pushswap *ps);
 void	ft_exit_success(t_pushswap *ps);
 /* init.c */
+int		ft_make_stack_a(t_stacks *stacks, t_list **sort_list);
 int		ft_init_stacks(t_stacks *stacks);
 int		ft_init_pushswap(t_pushswap *ps);
 void	ft_terminate_stacks(t_stacks *stacks);

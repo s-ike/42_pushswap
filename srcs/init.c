@@ -6,11 +6,32 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 22:53:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 01:40:18 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/26 18:07:53 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
+
+int
+	ft_make_stack_a(t_stacks *stacks, t_list **sort_list)
+{
+	t_list	*ptr;
+	t_sort	*sort_info;
+
+	ptr = *sort_list;
+	while (ptr)
+	{
+		sort_info = ptr->content;
+		if (!cdl_add_back_dlist(&stacks->a, sort_info->n, sort_info->id))
+		{
+			ft_lstclear(sort_list, free);
+			return (0);
+		}
+		ptr = ptr->next;
+	}
+	ft_lstclear(sort_list, free);
+	return (1);
+}
 
 int
 	ft_init_stacks(t_stacks *stacks)

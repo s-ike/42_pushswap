@@ -37,6 +37,7 @@ SRCS		:= ans_list.c \
 				circular_dlist/remove.c \
 				circular_dlist/search.c \
 				circular_dlist/search_idx.c \
+				utils/get_next_line.c \
 				utils/tlist_sort.c \
 				utils/utils.c
 SRCS		:= $(addprefix $(SRCSDIR), $(SRCS))

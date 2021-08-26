@@ -6,32 +6,11 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:34 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 02:07:13 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/26 18:08:38 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-static int
-	make_stack_a(t_stacks *stacks, t_list **sort_list)
-{
-	t_list	*ptr;
-	t_sort	*sort_info;
-
-	ptr = *sort_list;
-	while (ptr)
-	{
-		sort_info = ptr->content;
-		if (!cdl_add_back_dlist(&stacks->a, sort_info->n, sort_info->id))
-		{
-			ft_lstclear(sort_list, free);
-			return (0);
-		}
-		ptr = ptr->next;
-	}
-	ft_lstclear(sort_list, free);
-	return (1);
-}
 
 static void
 	print_ans(t_list *ans)
@@ -73,7 +52,7 @@ int
 		ft_lstclear(&sort_list, free);
 		ft_exit_failure(&ps);
 	}
-	if (!make_stack_a(&ps.stacks, &sort_list))
+	if (!ft_make_stack_a(&ps.stacks, &sort_list))
 		ft_exit_failure(&ps);
 	ft_sort(&ps);
 	ft_optimize_ans(ps.ans);
