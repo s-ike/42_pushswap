@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/27 02:32:39 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 21:12:04 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int
 	b = &ps->stacks.b;
 	if (!ft_rotate_a_until_min(ps))
 		return (0);
-	if (!cdl_is_sorted(a->head, a->head->next, ft_is_ascending_order))
+	if (!cdl_is_sorted(a->head, a->head->next, ft_is_asc_order))
 	{
 		ft_pb(a, b, ps, TRUE);
 		return (1);

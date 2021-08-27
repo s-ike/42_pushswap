@@ -6,12 +6,12 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:08 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 11:09:08 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 21:12:04 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int
-	ft_is_ascending_order(int x, int y)
+	ft_is_asc_order(int x, int y)
 {
 	if (x < y)
 		return (1);

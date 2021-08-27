@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:00 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/27 02:29:47 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 21:12:57 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,11 @@ static void
 
 	a = &ps->stacks.a;
 	if (4 < size
-		&& !cdl_is_sorted(
-			a->head, a->head->next, ft_is_ascending_order)
-		&& cdl_is_sorted(
-			a->head, a->head->next->next, ft_is_ascending_order))
+		&& !cdl_is_sorted(a->head, a->head->next, ft_is_asc_order)
+		&& cdl_is_sorted(a->head, a->head->next->next, ft_is_asc_order))
+	{
 		ft_ss(a, NULL, ps, TRUE);
+	}
 }
 
 static int

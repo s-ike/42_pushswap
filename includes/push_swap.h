@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/27 01:58:56 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 21:12:04 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,7 +82,7 @@ void	ft_rrr(t_dlist *a, t_dlist *b, t_pushswap *ps, t_bool should_store_ans);
 /* op_swap.c */
 void	ft_ss(t_dlist *a, t_dlist *b, t_pushswap *ps, t_bool should_store_ans);
 /* order.c */
-int		ft_is_ascending_order(int x, int y);
+int		ft_is_asc_order(int x, int y);
 /* presort_list.c */
 int		ft_make_sort_list(t_list **sort_list, int argc, char **argv);
 /* sort_2.c */
