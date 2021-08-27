@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 22:53:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 22:38:42 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 21:29:53 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,10 +51,11 @@ void
 }
 
 int
-	ft_init_pushswap(t_pushswap *ps)
+	ft_init_pushswap(t_pushswap *ps, t_prg_name prg_name)
 {
 	if (init_stacks(&ps->stacks))
 	{
+		ps->prg = prg_name;
 		ps->ans = NULL;
 		return (1);
 	}

@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 22:47:02 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/27 21:12:04 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 21:41:13 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,10 +106,10 @@ static void
 			ps->stacks.a.head, ps->stacks.a.head->next, ft_is_asc_order)
 		&& cdl_is_empty(&ps->stacks.b))
 	{
-		ft_putendl_fd("OK", STDOUT_FILENO);
+		ft_putendl_fd(MSG_CHECKER_OK, STDOUT_FILENO);
 	}
 	else
-		ft_putendl_fd("KO", STDOUT_FILENO);
+		ft_putendl_fd(MSG_CHECKER_KO, STDOUT_FILENO);
 }
 
 int
@@ -120,7 +120,7 @@ int
 
 	if (argc < 2)
 		exit(EXIT_SUCCESS);
-	if (!ft_is_valid_args(argc, argv) || !ft_init_pushswap(&ps))
+	if (!ft_is_valid_args(argc, argv) || !ft_init_pushswap(&ps, PG_CHECKER))
 	{
 		ft_putendl_fd(MSG_ERR, STDERR_FILENO);
 		exit(EXIT_FAILURE);
@@ -134,8 +134,5 @@ int
 		ft_exit_failure(&ps);
 	read_ans(&ps);
 	checker(&ps);
-#ifdef LEAKS
-	system("leaks checker");
-#endif
 	ft_exit_success(&ps);
 }

@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:34 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 18:08:38 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 21:29:18 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int
 
 	if (argc < 2)
 		exit(EXIT_SUCCESS);
-	if (!ft_is_valid_args(argc, argv) || !ft_init_pushswap(&ps))
+	if (!ft_is_valid_args(argc, argv) || !ft_init_pushswap(&ps, PG_PUSHSWAP))
 	{
 		ft_putendl_fd(MSG_ERR, STDERR_FILENO);
 		exit(EXIT_FAILURE);

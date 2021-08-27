@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:31:21 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 01:43:55 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 21:33:40 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,10 @@ void
 	if (ps->ans)
 		ft_lstclear(&ps->ans, free);
 	ft_putendl_fd(MSG_ERR, STDERR_FILENO);
-	system("leaks push_swap");
+	if (ps->prg == PG_PUSHSWAP)
+		system("leaks push_swap");
+	else if (ps->prg == PG_CHECKER)
+		system("leaks checker");
 	exit(EXIT_FAILURE);
 }
 
@@ -31,7 +34,10 @@ void
 	ft_terminate_stacks(&ps->stacks);
 	if (ps->ans)
 		ft_lstclear(&ps->ans, free);
-	system("leaks push_swap");
+	if (ps->prg == PG_PUSHSWAP)
+		system("leaks push_swap");
+	else if (ps->prg == PG_CHECKER)
+		system("leaks checker");
 	exit(EXIT_SUCCESS);
 }
 #else

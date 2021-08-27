@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/27 21:12:04 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 21:40:54 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@
 # include "t_bool.h"
 
 # define MSG_ERR "Error"
+# define MSG_CHECKER_OK "OK"
+# define MSG_CHECKER_KO "KO"
 
 # define OP_SA "sa"
 # define OP_SB "sb"
@@ -43,6 +45,12 @@
 # define L 0
 # define R 1
 
+typedef enum
+{
+	PG_PUSHSWAP,
+	PG_CHECKER
+}	t_prg_name;
+
 typedef struct s_stacks
 {
 	t_dlist	a;
@@ -58,6 +66,7 @@ typedef struct s_sort
 
 typedef struct s_pushswap
 {
+	t_prg_name	prg;
 	t_stacks	stacks;
 	t_list		*ans;
 }	t_pushswap;
@@ -71,7 +80,7 @@ void	ft_exit_success(t_pushswap *ps);
 /* init.c */
 int		ft_make_stack_a(t_stacks *stacks, t_list **sort_list);
 void	ft_terminate_stacks(t_stacks *stacks);
-int		ft_init_pushswap(t_pushswap *ps);
+int		ft_init_pushswap(t_pushswap *ps, t_prg_name prg_name);
 /* op_push.c */
 void	ft_pa(t_dlist *a, t_dlist *b, t_pushswap *ps, t_bool should_store_ans);
 void	ft_pb(t_dlist *a, t_dlist *b, t_pushswap *ps, t_bool should_store_ans);
