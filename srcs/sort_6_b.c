@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 01:02:15 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 02:33:08 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 02:29:59 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static int
 	if (min_node_idx == 2
 		&& b->head->next->next->id + 1 == b->head->next->id)
 	{
-		ft_ss(NULL, b, ps);
+		ft_ss(NULL, b, ps, TRUE);
 		min_node_idx = cdl_get_min_node_idx(b);
 	}
 	while (min_node_idx != 1)
@@ -35,7 +35,7 @@ static int
 		if (min_node_idx == 0)
 			return (0);
 	}
-	ft_pa(&ps->stacks.a, b, ps);
+	ft_pa(&ps->stacks.a, b, ps, TRUE);
 	return (1);
 }
 

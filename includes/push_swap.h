@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 18:22:28 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 01:58:56 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,18 +70,17 @@ void	ft_exit_failure(t_pushswap *ps);
 void	ft_exit_success(t_pushswap *ps);
 /* init.c */
 int		ft_make_stack_a(t_stacks *stacks, t_list **sort_list);
-int		ft_init_stacks(t_stacks *stacks);
-int		ft_init_pushswap(t_pushswap *ps);
 void	ft_terminate_stacks(t_stacks *stacks);
+int		ft_init_pushswap(t_pushswap *ps);
 /* op_push.c */
-void	ft_pa(t_dlist *a, t_dlist *b, t_pushswap *ps);
-void	ft_pb(t_dlist *a, t_dlist *b, t_pushswap *ps);
+void	ft_pa(t_dlist *a, t_dlist *b, t_pushswap *ps, t_bool should_store_ans);
+void	ft_pb(t_dlist *a, t_dlist *b, t_pushswap *ps, t_bool should_store_ans);
 /* op_rotate.c */
-void	ft_rr(t_dlist *a, t_dlist *b, t_pushswap *ps);
+void	ft_rr(t_dlist *a, t_dlist *b, t_pushswap *ps, t_bool should_store_ans);
 /* op_rrotate.c */
-void	ft_rrr(t_dlist *a, t_dlist *b, t_pushswap *ps);
+void	ft_rrr(t_dlist *a, t_dlist *b, t_pushswap *ps, t_bool should_store_ans);
 /* op_swap.c */
-void	ft_ss(t_dlist *a, t_dlist *b, t_pushswap *ps);
+void	ft_ss(t_dlist *a, t_dlist *b, t_pushswap *ps, t_bool should_store_ans);
 /* order.c */
 int		ft_is_ascending_order(int x, int y);
 /* presort_list.c */

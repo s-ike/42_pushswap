@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:08:59 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 02:24:45 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 02:57:35 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,26 +35,30 @@ static void
 }
 
 void
-	ft_rrr(t_dlist *a, t_dlist *b, t_pushswap *ps)
+	ft_rrr(t_dlist *a, t_dlist *b, t_pushswap *ps, t_bool should_store_ans)
 {
 	char	*op;
 
 	if (b == NULL)
 	{
 		rra_or_rrb(a);
-		op = ft_strdup(OP_RRA);
+		if (should_store_ans == TRUE)
+			op = ft_strdup(OP_RRA);
 	}
 	else if (a == NULL)
 	{
 		rra_or_rrb(b);
-		op = ft_strdup(OP_RRB);
+		if (should_store_ans == TRUE)
+			op = ft_strdup(OP_RRB);
 	}
 	else
 	{
 		rrr(a, b);
-		op = ft_strdup(OP_RRR);
+		if (should_store_ans == TRUE)
+			op = ft_strdup(OP_RRR);
 	}
-	if (!op)
+	if (should_store_ans == TRUE && !op)
 		ft_exit_failure(ps);
-	ft_add_ans(ps, op);
+	else if (should_store_ans == TRUE)
+		ft_add_ans(ps, op);
 }

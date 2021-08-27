@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:04 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 02:48:30 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 02:32:57 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void
 			return ;
 		else if (idx == 1)
 		{
-			ft_rr(a, NULL, ps);
+			ft_rr(a, NULL, ps, TRUE);
 			return ;
 		}
 		ft_rotate(ps, idx + 1, 'a');

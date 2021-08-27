@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 16:32:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 00:06:03 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 02:34:17 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ static int
 		&& a_top->next->id == a_btm->id + 1
 		&& a_top->id == a_top->next->id + 1)
 	{
-		ft_ss(&ps->stacks.a, NULL, ps);
+		ft_ss(&ps->stacks.a, NULL, ps, TRUE);
 		return (1);
 	}
 	return (0);
@@ -58,14 +58,14 @@ static void
 	if (2 <= cdl_size(&ps->stacks.b)
 		&& (b_top->id == l || b_top->id < (r - l + 1) / RB_SIZE + l + 1))
 	{
-		ft_rr(NULL, &ps->stacks.b, ps);
+		ft_rr(NULL, &ps->stacks.b, ps, TRUE);
 	}
 }
 
 static void
 	pb(t_pushswap *ps, int l, int r, int *targets)
 {
-	ft_pb(&ps->stacks.a, &ps->stacks.b, ps);
+	ft_pb(&ps->stacks.a, &ps->stacks.b, ps, TRUE);
 	(*targets)--;
 	rb(ps, l, r);
 }
@@ -91,7 +91,7 @@ void
 		else if (*l <= a_top->id && a_top->id <= r)
 			pb(ps, *l, r, &targets);
 		else if (targets)
-			ft_rr(&ps->stacks.a, NULL, ps);
+			ft_rr(&ps->stacks.a, NULL, ps, TRUE);
 		a_top = ps->stacks.a.head->next;
 	}
 }

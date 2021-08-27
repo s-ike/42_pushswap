@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/26 22:25:28 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 22:25:35 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 02:59:49 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,13 @@ static void
 	if (*ptr)
 		free(*ptr);
 	*ptr = NULL;
+}
+
+static void
+	w_safe_free(char **ptr1, char **ptr2)
+{
+	safe_free(ptr1);
+	safe_free(ptr2);
 }
 
 static void
@@ -53,7 +60,7 @@ static int
 	int		result;
 
 	result = GNL_EXIST;
-	if (*find)
+	if (find)
 	{
 		tmp = *str;
 		*line = ft_substr(*str, 0, find - *str);
@@ -70,8 +77,7 @@ static int
 	}
 	if (!*line || result == GNL_ERROR)
 	{
-		safe_free(line);
-		safe_free(str);
+		w_safe_free(line, str);
 		result = GNL_ERROR;
 	}
 	return (result);
@@ -95,7 +101,9 @@ int
 		safe_free(&buff);
 		return (GNL_ERROR);
 	}
-	find = ft_strchr(strs[fd], '\n');
+	find = NULL;
+	if (strs[fd])
+		find = ft_strchr(strs[fd], '\n');
 	if (!find)
 		read_fd(fd, &buff, &strs[fd], &find);
 	safe_free(&buff);

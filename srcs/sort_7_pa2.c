@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/25 23:18:09 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 23:24:40 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 02:34:01 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,14 @@ static void
 
 	a = &ps->stacks.a;
 	b = &ps->stacks.b;
-	ft_pa(a, b, ps);
+	ft_pa(a, b, ps, TRUE);
 	(id[L])++;
 	if (b->head->next->id == id[L])
-		ft_rr(a, NULL, ps);
+		ft_rr(a, NULL, ps, TRUE);
 	else if (!ft_strcmp(rotate_b(b, id[L]), OP_RB))
-		ft_rr(a, b, ps);
+		ft_rr(a, b, ps, TRUE);
 	else
-		ft_rr(a, NULL, ps);
+		ft_rr(a, NULL, ps, TRUE);
 }
 
 void
@@ -95,11 +95,11 @@ void
 			pa_and_rotate_a(ps, id);
 		else if (id[R] <= ptr->id)
 		{
-			ft_pa(&ps->stacks.a, &ps->stacks.b, ps);
+			ft_pa(&ps->stacks.a, &ps->stacks.b, ps, TRUE);
 			(*not_targets)--;
 		}
 		else if (ps->stacks.b.head->prev->id == id[L])
-			ft_rrr(NULL, &ps->stacks.b, ps);
+			ft_rrr(NULL, &ps->stacks.b, ps, TRUE);
 		else
 			ft_rotate_by_op(ps, rotate_b(&ps->stacks.b, id[L]));
 		ptr = ps->stacks.b.head->next;

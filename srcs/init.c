@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/24 22:53:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 18:07:53 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/26 22:38:42 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ int
 	return (1);
 }
 
-int
-	ft_init_stacks(t_stacks *stacks)
+static int
+	init_stacks(t_stacks *stacks)
 {
 	if (cdl_init_dlist(&stacks->a))
 		return (cdl_init_dlist(&stacks->b));
@@ -53,7 +53,7 @@ void
 int
 	ft_init_pushswap(t_pushswap *ps)
 {
-	if (ft_init_stacks(&ps->stacks))
+	if (init_stacks(&ps->stacks))
 	{
 		ps->ans = NULL;
 		return (1);

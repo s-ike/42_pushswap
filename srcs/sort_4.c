@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:50 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/23 00:57:08 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 02:32:14 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,13 @@ static void
 {
 	if (n[2] < n[3] && n[3] < n[1])
 	{
-		ft_ss(a, NULL, ps);
-		ft_rr(a, NULL, ps);
+		ft_ss(a, NULL, ps, TRUE);
+		ft_rr(a, NULL, ps, TRUE);
 	}
 	else if (n[3] < n[1] && n[1] < n[2])
 	{
-		ft_rrr(a, NULL, ps);
-		ft_ss(a, NULL, ps);
+		ft_rrr(a, NULL, ps, TRUE);
+		ft_ss(a, NULL, ps, TRUE);
 	}
 }
 
@@ -39,12 +39,12 @@ static void
 	sort_4_minidx2(t_dlist *a, int *n, t_pushswap *ps)
 {
 	if (n[0] < n[2] && n[2] < n[3])
-		ft_ss(a, NULL, ps);
+		ft_ss(a, NULL, ps, TRUE);
 	else if (n[3] < n[0] && n[0] < n[2])
 	{
-		ft_rr(a, NULL, ps);
-		ft_ss(a, NULL, ps);
-		ft_rr(a, NULL, ps);
+		ft_rr(a, NULL, ps, TRUE);
+		ft_ss(a, NULL, ps, TRUE);
+		ft_rr(a, NULL, ps, TRUE);
 	}
 }
 
@@ -57,15 +57,15 @@ static void
 {
 	if (n[0] < n[1] && n[1] < n[3])
 	{
-		ft_rrr(a, NULL, ps);
-		ft_rrr(a, NULL, ps);
-		ft_ss(a, NULL, ps);
-		ft_rr(a, NULL, ps);
+		ft_rrr(a, NULL, ps, TRUE);
+		ft_rrr(a, NULL, ps, TRUE);
+		ft_ss(a, NULL, ps, TRUE);
+		ft_rr(a, NULL, ps, TRUE);
 	}
 	else if (n[1] < n[3] && n[3] < n[0])
 	{
-		ft_rr(a, NULL, ps);
-		ft_ss(a, NULL, ps);
+		ft_rr(a, NULL, ps, TRUE);
+		ft_ss(a, NULL, ps, TRUE);
 	}
 }
 
@@ -78,15 +78,15 @@ static void
 {
 	if (n[2] < n[0] && n[0] < n[1])
 	{
-		ft_rrr(a, NULL, ps);
-		ft_rrr(a, NULL, ps);
-		ft_ss(a, NULL, ps);
+		ft_rrr(a, NULL, ps, TRUE);
+		ft_rrr(a, NULL, ps, TRUE);
+		ft_ss(a, NULL, ps, TRUE);
 	}
 	else if (n[1] < n[2] && n[2] < n[0])
 	{
-		ft_rrr(a, NULL, ps);
-		ft_ss(a, NULL, ps);
-		ft_rr(a, NULL, ps);
+		ft_rrr(a, NULL, ps, TRUE);
+		ft_ss(a, NULL, ps, TRUE);
+		ft_rr(a, NULL, ps, TRUE);
 	}
 }
 

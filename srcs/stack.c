@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:20 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/26 18:01:38 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 02:35:15 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,14 @@ void
 	a = &ps->stacks.a;
 	b = &ps->stacks.b;
 	if (b->head->next->id == target)
-		ft_rr(a, NULL, ps);
+		ft_rr(a, NULL, ps, TRUE);
 	else if (2 < cdl_size(b) && b->head->prev->id == target)
 	{
-		ft_rr(a, NULL, ps);
-		ft_rrr(NULL, b, ps);
+		ft_rr(a, NULL, ps, TRUE);
+		ft_rrr(NULL, b, ps, TRUE);
 	}
 	else if (1 < cdl_size(b))
-		ft_rr(a, b, ps);
+		ft_rr(a, b, ps, TRUE);
 }
 
 char
@@ -61,17 +61,17 @@ void
 	a = &ps->stacks.a;
 	b = &ps->stacks.b;
 	if (!ft_strcmp(op, OP_RA))
-		ft_rr(a, NULL, ps);
+		ft_rr(a, NULL, ps, TRUE);
 	else if (!ft_strcmp(op, OP_RB))
-		ft_rr(NULL, b, ps);
+		ft_rr(NULL, b, ps, TRUE);
 	else if (!ft_strcmp(op, OP_RRA))
-		ft_rrr(a, NULL, ps);
+		ft_rrr(a, NULL, ps, TRUE);
 	else if (!ft_strcmp(op, OP_RRB))
-		ft_rrr(NULL, b, ps);
+		ft_rrr(NULL, b, ps, TRUE);
 	else if (!ft_strcmp(op, OP_RR))
-		ft_rr(a, b, ps);
+		ft_rr(a, b, ps, TRUE);
 	else if (!ft_strcmp(op, OP_RRR))
-		ft_rrr(a, b, ps);
+		ft_rrr(a, b, ps, TRUE);
 }
 
 void

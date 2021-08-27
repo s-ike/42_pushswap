@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:09:56 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 02:36:31 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 02:32:39 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ int
 		if (max_node_idx == 0)
 			return (0);
 	}
-	ft_pb(a, b, ps);
+	ft_pb(a, b, ps, TRUE);
 	return (1);
 }
 
@@ -89,7 +89,7 @@ int
 		return (0);
 	if (!cdl_is_sorted(a->head, a->head->next, ft_is_ascending_order))
 	{
-		ft_pb(a, b, ps);
+		ft_pb(a, b, ps, TRUE);
 		return (1);
 	}
 	return (SORTED);

@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/15 00:58:25 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 02:30:21 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 02:30:53 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static void
 	if (n <= 0)
 		return ;
 	while (n--)
-		ft_pa(a, b, ps);
+		ft_pa(a, b, ps, TRUE);
 }
 
 static void
@@ -36,8 +36,8 @@ static void
 	b = &ps->stacks.b;
 	while (n--)
 	{
-		ft_pa(a, b, ps);
-		ft_rr(a, NULL, ps);
+		ft_pa(a, b, ps, TRUE);
+		ft_rr(a, NULL, ps, TRUE);
 	}
 }
 
@@ -52,7 +52,7 @@ static void
 	x = b->head->next->n;
 	y = b->head->next->next->n;
 	if (x < y)
-		ft_ss(NULL, b, ps);
+		ft_ss(NULL, b, ps, TRUE);
 	pa(ps, 2);
 }
 
@@ -74,16 +74,16 @@ static void
 	n[1] = b->head->next->next->n;
 	n[2] = b->head->next->next->next->n;
 	if (n[1] < n[0] && n[0] < n[2])
-		ft_rrr(NULL, b, ps);
+		ft_rrr(NULL, b, ps, TRUE);
 	else if (n[0] < n[1] && n[1] < n[2])
 		return (pa_and_ra(ps, 3));
 	else if (n[0] < n[2] && n[2] < n[1])
-		ft_rr(NULL, b, ps);
+		ft_rr(NULL, b, ps, TRUE);
 	else if (n[2] < n[0] && n[0] < n[1])
-		ft_ss(NULL, b, ps);
+		ft_ss(NULL, b, ps, TRUE);
 	else if (n[1] < n[2] && n[2] < n[0])
 	{
-		ft_rr(NULL, b, ps);
+		ft_rr(NULL, b, ps, TRUE);
 		return (pa_and_ra(ps, 3));
 	}
 	pa(ps, cdl_size(b));
