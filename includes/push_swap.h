@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/27 21:40:54 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/27 22:11:52 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@
 # define L 0
 # define R 1
 
-typedef enum
+typedef enum e_prg_name
 {
 	PG_PUSHSWAP,
 	PG_CHECKER

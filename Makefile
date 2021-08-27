@@ -75,7 +75,7 @@ C_RESET		:= "\x1b[0m"
 
 all:		$(NAME)
 
-$(NAME):	$(MAIN_OBJS) $(OBJS) $(LIBPATH)
+$(NAME):	$(LIBPATH) $(MAIN_OBJS) $(OBJS)
 			$(CC) $(CFLAGS) $(DEBUG) $(DEBUG2) $(MAIN_OBJS) $(OBJS) $(LFLAGS) -o $@
 			@echo $(C_GREEN)"=== Make Done ==="$(C_DEFAULT)$(C_REST)
 
