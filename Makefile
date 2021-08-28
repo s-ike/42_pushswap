@@ -1,20 +1,12 @@
 NAME		:= push_swap
+BONUS_NAME	:= checker
 
 SRCSDIR		:= ./srcs/
+PS_DIR		:= $(SRCSDIR)$(NAME)_srcs/
+BONUS_DIR	:= $(SRCSDIR)$(BONUS_NAME)_srcs/
+COMMON_DIR	:= $(SRCSDIR)common_srcs/
 
-MAIN_SRCS	:= $(NAME).c
-MAIN_SRCS	:= $(addprefix $(SRCSDIR), $(MAIN_SRCS))
-MAIN_OBJS	:= $(MAIN_SRCS:.c=.o)
-
-SRCS		:= ans_list.c \
-				exit.c \
-				init.c \
-				op_push.c \
-				op_rotate.c \
-				op_rrotate.c \
-				op_swap.c \
-				order.c \
-				presort_list.c \
+PS_SRCS		:= $(NAME).c \
 				sort_2.c \
 				sort_3.c \
 				sort_3_b_and_pa.c \
@@ -27,7 +19,19 @@ SRCS		:= ans_list.c \
 				sort_7_pa2.c \
 				sort_7_pb.c \
 				sort.c \
-				stack.c \
+				stack.c
+PS_SRCS		:= $(addprefix $(PS_DIR), $(PS_SRCS))
+PS_OBJS		:= $(PS_SRCS:.c=.o)
+
+COMMON_SRCS	:= exit.c \
+				ans_list.c \
+				init.c \
+				op_push.c \
+				op_rotate.c \
+				op_rrotate.c \
+				op_swap.c \
+				order.c \
+				presort_list.c \
 				validator.c \
 				circular_dlist/add.c \
 				circular_dlist/comp.c \
@@ -40,12 +44,11 @@ SRCS		:= ans_list.c \
 				utils/get_next_line.c \
 				utils/tlist_sort.c \
 				utils/utils.c
-SRCS		:= $(addprefix $(SRCSDIR), $(SRCS))
-OBJS		:= $(SRCS:.c=.o)
+COMMON_SRCS	:= $(addprefix $(COMMON_DIR), $(COMMON_SRCS))
+COMMON_OBJS	:= $(COMMON_SRCS:.c=.o)
 
-BONUS_NAME	:= checker
-BONUS_SRCS	:= checker.c
-BONUS_SRCS	:= $(addprefix $(SRCSDIR), $(BONUS_SRCS))
+BONUS_SRCS	:= $(BONUS_NAME).c
+BONUS_SRCS	:= $(addprefix $(BONUS_DIR), $(BONUS_SRCS))
 BONUS_OBJS	:= $(BONUS_SRCS:.c=.o)
 
 INCLUDE		:= -I./includes/ -I./libft/
@@ -75,8 +78,8 @@ C_RESET		:= "\x1b[0m"
 
 all:		$(NAME)
 
-$(NAME):	$(LIBPATH) $(MAIN_OBJS) $(OBJS)
-			$(CC) $(CFLAGS) $(DEBUG) $(DEBUG2) $(MAIN_OBJS) $(OBJS) $(LFLAGS) -o $@
+$(NAME):	$(LIBPATH) $(PS_OBJS) $(COMMON_OBJS)
+			$(CC) $(CFLAGS) $(DEBUG) $(DEBUG2) $(PS_OBJS) $(COMMON_OBJS) $(LFLAGS) -o $@
 			@echo $(C_GREEN)"=== Make Done ==="$(C_DEFAULT)$(C_REST)
 
 $(LIBPATH):	init
@@ -89,7 +92,7 @@ leaks:		$(LIBPATH)	## For leak check
 			$(MAKE) CFLAGS="$(CFLAGS) -D LEAKS=1" LEAKS=TRUE
 
 clean:
-			$(RM) $(OBJS) $(MAIN_OBJS) $(BONUS_OBJS)
+			$(RM) $(COMMON_OBJS) $(PS_OBJS) $(BONUS_OBJS)
 			$(MAKE) clean -C $(LIBDIR)
 
 fclean:		clean
@@ -98,8 +101,8 @@ fclean:		clean
 
 re:			fclean $(NAME)
 
-bonus:		$(NAME) $(BONUS_OBJS) $(OBJS) $(LIBPATH)
-			$(CC) $(CFLAGS) $(DEBUG) $(DEBUG2) $(BONUS_OBJS) $(OBJS) $(LFLAGS) -o $(BONUS_NAME)
+bonus:		$(NAME) $(BONUS_OBJS) $(COMMON_OBJS) $(LIBPATH)
+			$(CC) $(CFLAGS) $(DEBUG) $(DEBUG2) $(BONUS_OBJS) $(COMMON_OBJS) $(LFLAGS) -o $(BONUS_NAME)
 			@echo $(C_GREEN)"=== Bonus Make Done ==="$(C_DEFAULT)$(C_REST)
 
 bleaks:		$(LIBPATH)
