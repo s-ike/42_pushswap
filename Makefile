@@ -22,6 +22,7 @@ PS_SRCS		:= $(NAME).c \
 				stack.c
 PS_SRCS		:= $(addprefix $(PS_DIR), $(PS_SRCS))
 PS_OBJS		:= $(PS_SRCS:.c=.o)
+PS_DEPS		:= $(PS_SRCS:.c=.d)
 
 COMMON_SRCS	:= exit.c \
 				ans_list.c \
@@ -46,10 +47,12 @@ COMMON_SRCS	:= exit.c \
 				utils/utils.c
 COMMON_SRCS	:= $(addprefix $(COMMON_DIR), $(COMMON_SRCS))
 COMMON_OBJS	:= $(COMMON_SRCS:.c=.o)
+COMMON_DEPS	:= $(COMMON_SRCS:.c=.d)
 
 BONUS_SRCS	:= $(BONUS_NAME).c
 BONUS_SRCS	:= $(addprefix $(BONUS_DIR), $(BONUS_SRCS))
 BONUS_OBJS	:= $(BONUS_SRCS:.c=.o)
+BONUS_DEPS	:= $(BONUS_SRCS:.c=.d)
 
 INCLUDE		:= -I./includes/ -I./libft/
 
@@ -58,7 +61,7 @@ LIBPATH		:= $(LIBDIR)/libft.a
 LFLAGS		:= -L${LIBDIR} -lft
 
 CC			:= gcc
-CFLAGS		:= -Wall -Wextra -Werror
+CFLAGS		:= -Wall -Wextra -Werror -MMD -MP
 
 DEBUG		:= -g
 ifdef LEAKS
@@ -93,6 +96,7 @@ leaks:		$(LIBPATH)	## For leak check
 
 clean:
 			$(RM) $(COMMON_OBJS) $(PS_OBJS) $(BONUS_OBJS)
+			$(RM) $(COMMON_DEPS) $(PS_DEPS) $(BONUS_DEPS)
 			$(MAKE) clean -C $(LIBDIR)
 
 fclean:		clean
@@ -107,6 +111,8 @@ bonus:		$(NAME) $(BONUS_OBJS) $(COMMON_OBJS) $(LIBPATH)
 
 bleaks:		$(LIBPATH)
 			$(MAKE) bonus CFLAGS="$(CFLAGS) -D LEAKS=1" LEAKS=TRUE
+
+-include	$(PS_DEPS) $(COMMON_DEPS) $(BONUS_DEPS)
 
 .PHONY:		all clean fclean re bonus
 .PHONY:		init leaks bleaks
