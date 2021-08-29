@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:46:02 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/20 23:57:59 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/28 17:22:36 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ static void
 		t_list **left,
 		t_list **right,
 		t_list **next,
-		int f(t_list *left, t_list *right))
+		int64_t f(t_list *left, t_list *right))
 {
-	int	comp;
+	int64_t	comp;
 
 	comp = f(*left, *right);
 	if (comp <= 0)
@@ -40,7 +40,7 @@ static t_list
 	*merge(
 		t_list *left,
 		t_list *right,
-		int f(t_list *left, t_list *right))
+		int64_t f(t_list *left, t_list *right))
 {
 	t_list	head;
 	t_list	*next;
@@ -56,7 +56,7 @@ static t_list
 }
 
 static t_list
-	*merge_sort_rec(t_list *lst, int f(t_list *left, t_list *right))
+	*merge_sort_rec(t_list *lst, int64_t f(t_list *left, t_list *right))
 {
 	t_list	*left;
 	t_list	*right;
@@ -81,7 +81,7 @@ static t_list
 }
 
 void
-	ft_sort_list(t_list **lst, int f(t_list *left, t_list *right))
+	ft_sort_list(t_list **lst, int64_t f(t_list *left, t_list *right))
 {
 	if (!lst)
 		return ;

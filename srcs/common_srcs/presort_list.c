@@ -6,32 +6,32 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:40:50 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/21 00:12:44 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/28 17:49:50 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-static int
+static int64_t
 	sort_list_n_order(t_list *left, t_list *right)
 {
-	t_sort	*l;
-	t_sort	*r;
+	int64_t	ln;
+	int64_t	rn;
 
-	l = (t_sort *)left->content;
-	r = (t_sort *)right->content;
-	return (l->n - r->n);
+	ln = ((t_sort *)left->content)->n;
+	rn = ((t_sort *)right->content)->n;
+	return (ln - rn);
 }
 
-static int
+static int64_t
 	sort_list_org_order(t_list *left, t_list *right)
 {
-	t_sort	*l;
-	t_sort	*r;
+	int64_t	li;
+	int64_t	ri;
 
-	l = (t_sort *)left->content;
-	r = (t_sort *)right->content;
-	return (l->org_idx - r->org_idx);
+	li = ((t_sort *)left->content)->org_idx;
+	ri = ((t_sort *)right->content)->org_idx;
+	return (li - ri);
 }
 
 static t_sort

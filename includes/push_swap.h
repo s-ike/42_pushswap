@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/14 03:43:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/27 22:11:52 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/28 16:46:54 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	ft_rotate(t_pushswap *ps, size_t target_node_idx, char stack_name);
 int		ft_check_dup_n(t_list **sort_list);
 int		ft_is_valid_args(int argc, char **argv);
 /* utils/tlist_sort.c */
-void	ft_sort_list(t_list **lst, int f(t_list *left, t_list *right));
+void	ft_sort_list(t_list **lst, int64_t f(t_list *left, t_list *right));
 /* utils/utils.c */
 int		ft_isspace(char c);
 

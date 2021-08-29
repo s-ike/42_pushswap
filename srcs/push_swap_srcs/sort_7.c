@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/20 11:10:04 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/27 21:13:29 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/29 22:53:38 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void
 	if (cdl_is_empty(&ps->stacks.b))
 		return ;
 	ft_rotate_a(ps, l - 1);
-	pivot_id = (l + r) / 2;
+	pivot_id = ((int64_t)l + (int64_t)r) / 2;
 	ret = ft_pa_and_rotate_b(ps, l, r, pivot_id);
 	if (!ret)
 		return (ft_exit_failure(ps));
@@ -77,7 +77,7 @@ static void
 
 	if (l == r)
 		return ;
-	pivot_id = (l + r) / 2;
+	pivot_id = ((int64_t)l + (int64_t)r) / 2;
 	sort_a(ps, l, pivot_id, TRUE);
 	sort_a(ps, pivot_id, r, FALSE);
 }
@@ -86,10 +86,13 @@ void
 	ft_sort_7(t_pushswap *ps)
 {
 	t_dlist	*a;
+	size_t	size;
 
 	a = &ps->stacks.a;
 	if (cdl_is_sorted(a->head, a->head->next, ft_is_asc_order))
 		return ;
-	sort_7(ps, 0, cdl_size(a) - 1);
+	size = cdl_size(a);
+	if (size)
+		sort_7(ps, 0, size - 1);
 	ft_rotate_a_until_min(ps);
 }

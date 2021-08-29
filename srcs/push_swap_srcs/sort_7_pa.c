@@ -6,7 +6,7 @@
 /*   By: sikeda <sikeda@student.42tokyo.jp>         +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/21 22:44:35 by sikeda            #+#    #+#             */
-/*   Updated: 2021/08/25 23:24:24 by sikeda           ###   ########.fr       */
+/*   Updated: 2021/08/29 14:25:58 by sikeda           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int
 	ret = 1;
 	while (ret != SORTED && ret)
 	{
-		pivot_id = (min_id + max_id) / 2;
+		pivot_id = ((int64_t)min_id + (int64_t)max_id) / 2;
 		ret = ft_pa_and_rotate_b(ps, min_id, max_id, pivot_id);
 		if (ret != SORTED)
 			ft_pb_and_rotate_a(ps, &pivot_id, max_id, FALSE);
